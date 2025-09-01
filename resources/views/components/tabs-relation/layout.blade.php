@@ -15,9 +15,7 @@
             <flux:navlist-horizontal.item :href="route('user_roles')" :current="request()->routeIs(  'user_roles' )" wire:navigate>{{ __('User Role') }}</flux:navlist-horizontal.item>
         </flux:navlist>
     </div>
-
     {{-- <flux:separator class="md:hidden" /> --}}
-
     <div class=" p-2 ">
         <flux:heading>{{ $heading ?? '' }}</flux:heading>
         <flux:subheading size='xs'>{{ $subheading ?? '' }}</flux:subheading>
