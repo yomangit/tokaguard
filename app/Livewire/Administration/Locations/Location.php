@@ -5,7 +5,10 @@ namespace App\Livewire\Administration\Locations;
 use Flux\Flux;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Excel;
 use Livewire\WithFileUploads;
+use App\Imports\CompanyImport;
+use App\Imports\LocationsImport;
 use Livewire\Attributes\Validate;
 use Livewire\WithoutUrlPagination;
 use App\Models\Location as ModelsLocation;
@@ -71,6 +74,30 @@ class Location extends Component
             ]
         );
 
+    }
+     public function import()
+    {
+      $this->validate(
+            [
+                'upload_data' => 'required',
+                'upload_data' => 'mimes:csv,xlsx',
+            ],
+            [
+                'upload_data' => 'kolom ini tidak boleh kosong!!!',
+            ]);
+        Excel::import(new LocationsImport, $this->upload_data);
+        $this->dispatch(
+            'alert',
+            [
+                'text' => 'upload data sukses!!!',
+                'duration' => 5000,
+                'destination' => '/contact',
+                'newWindow' => true,
+                'close' => true,
+                'backgroundColor' => "linear-gradient(to right, #06b6d4, #22c55e)",
+            ]
+        );
+           $this->reset('upload_data');
     }
     public function showDelete(ModelsLocation $id)
     {
