@@ -5,7 +5,7 @@ namespace App\Livewire\Administration\Locations;
 use Flux\Flux;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Maatwebsite\Excel\Excel;
+use Maatwebsite\Excel\Facades\Excel;
 use Livewire\WithFileUploads;
 use App\Imports\CompanyImport;
 use App\Imports\LocationsImport;
