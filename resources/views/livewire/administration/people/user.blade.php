@@ -157,17 +157,36 @@
         <dialog class="modal" @if($showImportModal) open @endif>
             <div class="modal-box w-11/12 max-w-md">
                 <h3 class="font-bold text-lg">Import Users</h3>
+
                 <fieldset class="fieldset">
-                    <label class="block">Email</label>
+                    <label class="block">File Excel</label>
                     <input type="file" wire:model.live="file" class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+
+                    {{-- Error message --}}
                     <x-label-error :messages="$errors->get('file')" />
+
+                    {{-- Loading indicator saat pilih file --}}
+                    <div wire:loading wire:target="file" class="text-info text-sm mt-1">
+                        ⏳ Sedang mengunggah file...
+                    </div>
                 </fieldset>
+
                 <div class="modal-action">
-                    <flux:button wire:click="import" size="xs" icon:trailing="save" variant="primary"> {{ $userId ? 'Update' : 'Simpan' }}</flux:button>
-                    <flux:button size="xs" wire:click="$set('showImportModal', false)" icon:trailing="circle-x" variant="danger">Batal</flux:button>
+                    {{-- Tombol Import --}}
+                    <flux:button wire:click="import" size="xs" icon:trailing="save" variant="primary" wire:loading.attr="disabled" wire:target="import,file">
+
+                        <span wire:loading.remove wire:target="import,file">Import</span>
+                        <span wire:loading wire:target="import,file">Mengimpor...</span>
+                    </flux:button>
+
+                    {{-- Tombol Batal --}}
+                    <flux:button size="xs" wire:click="$set('showImportModal', false)" icon:trailing="circle-x" variant="danger">
+                        Batal
+                    </flux:button>
                 </div>
             </div>
         </dialog>
+
 
     </x-tabs-relation.layout>
 </section>
