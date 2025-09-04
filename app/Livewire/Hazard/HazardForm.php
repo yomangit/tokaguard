@@ -21,6 +21,7 @@ use App\Events\HazardSubmitted;
 use App\Models\RiskConsequence;
 use App\Models\UnsafeCondition;
 use Livewire\Attributes\Validate;
+use App\Services\StorageMirrorService;
 use App\Helpers\DateBeforeOrEqualToday;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\HazardSubmittedNotification;
@@ -285,9 +286,11 @@ class HazardForm extends Component
         $tanggal = Carbon::createFromFormat('d-m-Y H:i', $this->tanggal)->format('Y-m-d H:i:s');
         if ($this->doc_deskripsi) {
             $docDeskripsiPath = FileHelper::compressAndStore($this->doc_deskripsi, 'sebelum_perbaikan');
+             StorageMirrorService::mirror();
         }
         if ($this->doc_corrective) {
             $docCorrectivePath = FileHelper::compressAndStore($this->doc_corrective, 'sesudah_perbaikan');
+             StorageMirrorService::mirror();
         }
         // Hitung risk level (opsional: ambil dari RiskMatrixCell atau kalkulasi manual)
         $riskLevel = null;
