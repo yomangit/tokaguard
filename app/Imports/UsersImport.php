@@ -15,6 +15,9 @@ class UsersImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
+        if (empty($row['email']) || strtoupper($row['email']) === 'NULL') {
+            return null; // skip
+        }
         return new User([
             'name'              => $row['name'],
             'email'             => $row['email'],
