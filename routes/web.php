@@ -29,6 +29,7 @@ use App\Livewire\Administration\RiskConsequence\RiskConsequence;
 use App\Livewire\Administration\EventGeneral\ErmAssignmentManager;
 use App\Livewire\Administration\EventGeneral\ModeratorAssignmentManager;
 use App\Livewire\Administration\Locations\Location;
+use App\Livewire\Administration\People\User;
 use App\Livewire\Administration\RelasiContUser\ContractorUserManager;
 use App\Livewire\Administration\RelasiDeptUser\DepartmentUserManager;
 use App\Livewire\Administration\Roles\Role;
@@ -94,6 +95,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('administration/userManager/contractorUserManager', ContractorUserManager::class)->name('contractorUserManager');
     Route::get('administration/userManager/roles', Role::class)->name('roles');
     Route::get('administration/userManager/user_roles', UserRole::class)->name('user_roles');
+    Route::get('administration/userManager/people', User::class)->name('people');
 });
 
 require __DIR__ . '/auth.php';

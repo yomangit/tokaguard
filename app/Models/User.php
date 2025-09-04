@@ -3,10 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Role;
+use Illuminate\Support\Str;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -59,6 +60,17 @@ class User extends Authenticatable
             ->map(fn($word) => Str::substr($word, 0, 1))
             ->implode('');
     }
+    protected static function booted()
+    {
+        static::creating(function ($user) {
+            if (is_null($user->role_user_permit_id)) {
+                $roleUser = Role::where('name', 'User')->first();
+                if ($roleUser) {
+                    $user->role_user_permit_id = $roleUser->id;
+                }
+            }
+        });
+    }
     public function scopeSearch($query, $term)
     {
         return $query->where('name',  'like', '%' . $term . '%');
@@ -99,7 +111,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Contractor::class);
     }
-     public function roles()
+    public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
