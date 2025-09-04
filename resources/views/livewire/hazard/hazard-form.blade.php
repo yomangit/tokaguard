@@ -34,7 +34,7 @@
                     <x-label-error :messages="$errors->get('sub_tipe_bahaya')" />
                 </fieldset>
 
-                 <fieldset class="fieldset ">
+                <fieldset class="fieldset ">
                     <label class="block">Dilaporkan Oleh</label>
                     <div class="relative">
                         <!-- Input Search -->
@@ -160,7 +160,8 @@
                         flatpickr($refs.tanggalInput, {
                             disableMobile: true,       // aktifkan jam
                             enableTime: true,       // aktifkan jam
-                            dateFormat: 'd-m-Y H:i', // format untuk Livewire
+                            dateFormat: 'd-m-Y H:i',
+                            time_24hr: true, // format untuk Livewire
                             onChange: function(selectedDates, dateStr) {
                                 @this.set('tanggal', dateStr);
                             }
@@ -372,8 +373,8 @@
                 </div>
 
             </div>
-             <flux:button size="sm" type="submit" icon:trailing="send" variant="primary">Kirim Laporan</flux:button>
-           
+            <flux:button size="sm" type="submit" icon:trailing="send" variant="primary">Kirim Laporan</flux:button>
+
         </form>
     </x-manhours.layout>
 </section>
@@ -384,8 +385,8 @@
         ClassicEditor
             .create(document.querySelector('#ckeditor-description'), {
                 toolbar: [
-                   // 'heading', '|'
-                    , 'bold', 'italic',  'bulletedList', 'numberedList', '|'
+                    // 'heading', '|'
+                    , 'bold', 'italic', 'bulletedList', 'numberedList', '|'
                     , 'undo', 'redo'
                 ]
                 , removePlugins: ['ImageUpload', 'EasyImage', 'MediaEmbed'] // buang plugin gambar
@@ -412,7 +413,7 @@
             .create(document.querySelector('#ckeditor-immediate_corrective_action'), {
                 toolbar: [
                     // 'heading', '|'
-                    , 'bold', 'italic',  'bulletedList', 'numberedList', '|'
+                    , 'bold', 'italic', 'bulletedList', 'numberedList', '|'
                     , 'undo', 'redo'
                 ]
                 , removePlugins: ['ImageUpload', 'EasyImage', 'MediaEmbed'] // buang plugin gambar

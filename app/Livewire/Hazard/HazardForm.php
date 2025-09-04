@@ -21,6 +21,7 @@ use App\Events\HazardSubmitted;
 use App\Models\RiskConsequence;
 use App\Models\UnsafeCondition;
 use Livewire\Attributes\Validate;
+use App\Helpers\DateBeforeOrEqualToday;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\HazardSubmittedNotification;
 
@@ -81,7 +82,7 @@ class HazardForm extends Component
     public $kondisi_tidak_aman;
     #[Validate('required_without:kondisi_tidak_aman')]
     public $tindakan_tidak_aman;
-    #[Validate('required|date')]
+    #[Validate(['required', 'date', new DateBeforeOrEqualToday])]
     public $tanggal;
     protected $messages = [
 
