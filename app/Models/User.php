@@ -28,7 +28,8 @@ class User extends Authenticatable
         'employee_id',
         'date_commenced',
         'email',
-        'role_id'
+        'role_id',
+        'password'
 
     ];
 

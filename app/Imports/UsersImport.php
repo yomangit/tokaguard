@@ -19,12 +19,26 @@ class UsersImport implements ToModel, WithHeadingRow
             'name'              => $row['name'],
             'email'             => $row['email'],
             'gender'            => $row['gender'] ?? null,
-            'date_birth'        => $row['date_birth'] ?? null,
+            'date_birth'        => $this->parseDate($row['date_birth'] ?? null),
             'username'          => $row['username'] ?? null,
             'department_name'   => $row['department_name'] ?? null,
             'employee_id'       => $row['employee_id'] ?? null,
-            'date_commenced'    => $row['date_commenced'] ?? null,
+            'date_commenced'    => $this->parseDate($row['date_commenced'] ?? null),
             'role_id' => $row['role_id'] ?? null,
         ]);
+    }
+    private function parseDate($value)
+    {
+        // Kalau kosong atau string "NULL" -> return null
+        if (empty($value) || strtoupper($value) === 'NULL') {
+            return null;
+        }
+
+        try {
+            // Excel biasanya kirim dalam format yyyy-mm-dd atau numeric (serial Excel)
+            return \Carbon\Carbon::parse($value)->format('Y-m-d');
+        } catch (\Exception $e) {
+            return null; // fallback aman
+        }
     }
 }
