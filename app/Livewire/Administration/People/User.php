@@ -6,12 +6,13 @@ use App\Models\Role;
 use Livewire\Component;
 use App\Imports\UsersImport;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use App\Models\User as UserProfile;
 use Maatwebsite\Excel\Facades\Excel;
 
 class User extends Component
 {
-    use WithPagination;
+    use WithPagination,WithFileUploads;
 
     public $userId;
     public $name, $gender, $date_birth, $username, $department_name, $employee_id, $date_commenced, $email, $role_id;
