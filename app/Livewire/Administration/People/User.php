@@ -22,11 +22,11 @@ class User extends Component
             'name' => 'required|string|max:255',
             'gender' => 'nullable|in:L,P',
             'date_birth' => 'nullable|date',
-            'username' => 'required|string|max:255|unique:user_profiles,username,' . $this->userId,
+            'username' => 'required|string|max:255|unique:users,username,' . $this->userId,
             'department_name' => 'nullable|string|max:255',
-            'employee_id' => 'required|string|max:255|unique:user_profiles,employee_id,' . $this->userId,
+            'employee_id' => 'required|string|max:255|unique:users,employee_id,' . $this->userId,
             'date_commenced' => 'nullable|date',
-            'email' => 'required|email|max:255|unique:user_profiles,email,' . $this->userId,
+            'email' => 'required|email|max:255|unique:users,email,' . $this->userId,
         ];
     }
     protected function messages()
