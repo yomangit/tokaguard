@@ -4,9 +4,14 @@
         <div class="p-4">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-bold">User Management</h2>
-                <flux:tooltip content="tambah data" position="top">
-                    <flux:button size="xs" wire:click="create" icon="add-icon" variant="primary"></flux:button>
-                </flux:tooltip>
+                <div>
+                    <flux:tooltip content="tambah data" position="top">
+                        <flux:button size="xs" wire:click="create" icon="add-icon" variant="primary"></flux:button>
+                    </flux:tooltip>
+                    <flux:tooltip content="Import data" position="top">
+                        <flux:button size="xs" wire:click="$set('showImportModal', true)" icon="upload" variant="subtle"></flux:button>
+                    </flux:tooltip>
+                </div>
             </div>
 
             <div class="overflow-x-auto">
@@ -122,15 +127,15 @@
                                 <option value="">-- Pilih --</option>
                                 @foreach ($role as $role )
                                 <option value="{{ $role->id }}">{{$role->name}}</option>
-                              @endforeach
+                                @endforeach
                             </select>
                             <x-label-error :messages="$errors->get('role_id')" />
                         </fieldset>
                     </div>
 
                     <div class="modal-action">
-                        <button class="btn" wire:click="$set('showModal', false)">Cancel</button>
-                        <button class="btn btn-primary" wire:click="save">Save</button>
+                        <flux:button wire:click="save" size="xs" icon:trailing="save" variant="primary"> {{ $userId ? 'Update' : 'Simpan' }}</flux:button>
+                        <flux:button size="xs" wire:click="$set('showModal', false)" icon:trailing="circle-x" variant="danger">Batal</flux:button>
                     </div>
                 </div>
             </dialog>
@@ -148,6 +153,21 @@
                 </div>
             </dialog>
         </div>
+
+        <dialog class="modal" @if($showImportModal) open @endif>
+            <div class="modal-box w-11/12 max-w-md">
+                <h3 class="font-bold text-lg">Import Users</h3>
+                <fieldset class="fieldset">
+                    <label class="block">Email</label>
+                    <input type="file" wire:model.live="file" class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                    <x-label-error :messages="$errors->get('file')" />
+                </fieldset>
+                <div class="modal-action">
+                    <flux:button wire:click="import" size="xs" icon:trailing="save" variant="primary"> {{ $userId ? 'Update' : 'Simpan' }}</flux:button>
+                    <flux:button size="xs" wire:click="$set('showImportModal', false)" icon:trailing="circle-x" variant="danger">Batal</flux:button>
+                </div>
+            </div>
+        </dialog>
 
     </x-tabs-relation.layout>
 </section>

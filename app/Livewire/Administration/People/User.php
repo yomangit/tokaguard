@@ -3,19 +3,22 @@
 namespace App\Livewire\Administration\People;
 
 use App\Models\Role;
-use App\Models\User as UserProfile;
 use Livewire\Component;
+use App\Imports\UsersImport;
 use Livewire\WithPagination;
+use App\Models\User as UserProfile;
+use Maatwebsite\Excel\Facades\Excel;
 
 class User extends Component
 {
-     use WithPagination;
+    use WithPagination;
 
     public $userId;
-    public $name, $gender, $date_birth, $username, $department_name, $employee_id, $date_commenced, $email,$role_id;
-
+    public $name, $gender, $date_birth, $username, $department_name, $employee_id, $date_commenced, $email, $role_id;
     public $showModal = false;
     public $showDeleteModal = false;
+    public $showImportModal = false; // 🔹 untuk modal import
+    public $file;
 
     protected function rules()
     {
@@ -52,19 +55,38 @@ class User extends Component
         $this->validateOnly($propertyName);
     }
 
+    public function import()
+    {
+        $this->validate([
+            'file' => 'required|mimes:xlsx,csv,xls|max:2048',
+        ], [
+            'file.required' => 'File wajib diunggah.',
+            'file.mimes'    => 'Format file harus xlsx, csv, atau xls.',
+            'file.max'      => 'Ukuran file maksimal 2MB.',
+        ]);
+
+        Excel::import(new UsersImport, $this->file->getRealPath());
+
+        $this->reset('file');
+        $this->showImportModal = false;
+
+        session()->flash('success', 'Data user berhasil diimport!');
+    }
+
+
     public function render()
     {
-        return view('livewire.administration.people.user',[
-              'users' => UserProfile::paginate(10),
-              'role' => Role::all()
+        return view('livewire.administration.people.user', [
+            'users' => UserProfile::paginate(10),
+            'role' => Role::all()
         ]);
     }
-     public function create()
+    public function create()
     {
         $this->resetInput();
         $this->showModal = true;
     }
-     public function edit($id)
+    public function edit($id)
     {
         $user = UserProfile::findOrFail($id);
         $this->fill($user->toArray());
@@ -110,6 +132,6 @@ class User extends Component
 
     private function resetInput()
     {
-        $this->reset(['userId', 'name', 'gender', 'date_birth', 'username','role_id', 'department_name', 'employee_id', 'date_commenced', 'email']);
+        $this->reset(['userId', 'name', 'gender', 'date_birth', 'username', 'role_id', 'department_name', 'employee_id', 'date_commenced', 'email']);
     }
 }
