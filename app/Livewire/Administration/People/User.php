@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Administration\People;
 
+use App\Models\Role;
 use App\Models\User as UserProfile;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,7 +12,7 @@ class User extends Component
      use WithPagination;
 
     public $userId;
-    public $name, $gender, $date_birth, $username, $department_name, $employee_id, $date_commenced, $email;
+    public $name, $gender, $date_birth, $username, $department_name, $employee_id, $date_commenced, $email,$role_id;
 
     public $showModal = false;
     public $showDeleteModal = false;
@@ -22,6 +23,7 @@ class User extends Component
             'name' => 'required|string|max:255',
             'gender' => 'nullable|in:L,P',
             'date_birth' => 'nullable|date',
+            'role_id' => 'nullable',
             'username' => 'required|string|max:255|unique:users,username,' . $this->userId,
             'department_name' => 'nullable|string|max:255',
             'employee_id' => 'required|string|max:255|unique:users,employee_id,' . $this->userId,
@@ -54,6 +56,7 @@ class User extends Component
     {
         return view('livewire.administration.people.user',[
               'users' => UserProfile::paginate(10),
+              'role' => Role::all()
         ]);
     }
      public function create()
@@ -80,6 +83,7 @@ class User extends Component
                 'gender' => $this->gender,
                 'date_birth' => $this->date_birth,
                 'username' => $this->username,
+                'role_id' => $this->role_id,
                 'department_name' => $this->department_name,
                 'employee_id' => $this->employee_id,
                 'date_commenced' => $this->date_commenced,

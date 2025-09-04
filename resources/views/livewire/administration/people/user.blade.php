@@ -116,6 +116,16 @@
                             <input type="email" wire:model.live="email" class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                             <x-label-error :messages="$errors->get('email')" />
                         </fieldset>
+                        <fieldset class="fieldset">
+                            <label class="block">Jenis Kelamin</label>
+                            <select wire:model.live="role_id" class="select select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs">
+                                <option value="">-- Pilih --</option>
+                                @foreach ($role as $role )
+                                <option value="{{ $role->id }}">{{$role->name}}</option>
+                              @endforeach
+                            </select>
+                            <x-label-error :messages="$errors->get('role_id')" />
+                        </fieldset>
                     </div>
 
                     <div class="modal-action">
