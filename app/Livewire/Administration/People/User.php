@@ -69,8 +69,17 @@ class User extends Component
 
         $this->reset('file');
         $this->showImportModal = false;
-
-        session()->flash('success', 'Data user berhasil diimport!');
+        $this->dispatch(
+            'alert',
+            [
+                'text' => "Data user berhasil diimport!",
+                'duration' => 5000,
+                'destination' => '/contact',
+                'newWindow' => true,
+                'close' => true,
+                'backgroundColor' => "background: linear-gradient(135deg, #00c853, #00bfa5);",
+            ]
+        );
     }
 
 
@@ -115,6 +124,18 @@ class User extends Component
 
         $this->resetInput();
         $this->showModal = false;
+        $text = $this->userId?'user berhasil diupdate!':'user berhasil ditambahkan!';
+        $this->dispatch(
+            'alert',
+            [
+                'text' =>  $text,
+                'duration' => 5000,
+                'destination' => '/contact',
+                'newWindow' => true,
+                'close' => true,
+                'backgroundColor' => "background: linear-gradient(135deg, #00c853, #00bfa5);",
+            ]
+        );
     }
 
     public function confirmDelete($id)
@@ -128,6 +149,17 @@ class User extends Component
         UserProfile::findOrFail($this->userId)->delete();
         $this->resetInput();
         $this->showDeleteModal = false;
+         $this->dispatch(
+            'alert',
+            [
+                'text' => "User berhasil dihapus!",
+                'duration' => 5000,
+                'destination' => '/contact',
+                'newWindow' => true,
+                'close' => true,
+                'backgroundColor' => "background: linear-gradient(135deg, #f44336, #d32f2f);",
+            ]
+        );
     }
 
     private function resetInput()
