@@ -16,6 +16,7 @@ return new class extends Migration
             $table->date('date_commenced')->nullable()->after('employee_id');
             $table->unsignedBigInteger('role_user_permit_id')->nullable()->after('date_commenced');
             // kalau ada relasi ke tabel role_user_permits
+            $table->unsignedBigInteger('role_id')->nullable()->after('id');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('set null');
         });
     }
@@ -35,4 +36,3 @@ return new class extends Migration
         });
     }
 };
-
