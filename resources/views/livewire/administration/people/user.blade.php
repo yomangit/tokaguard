@@ -40,7 +40,7 @@
                                     <div class="tooltip-content ">
                                         <div class="animate-bounce text-warning text-xs font-black">Edit</div>
                                     </div>
-                                    <flux:button wire:click="edit({{ $user->id }})"" size=" xs" icon="pencil-square" variant="subtle"></flux:button>
+                                    <flux:button wire:click="edit({{ $user->id }})" size=" xs" icon="pencil-square" variant="subtle"></flux:button>
                                 </div>
                                 <!-- Delete -->
                                 <div class="tooltip tooltip-right ">
