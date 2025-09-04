@@ -170,7 +170,11 @@
                         ⏳ Sedang mengunggah file...
                     </div>
                 </fieldset>
-
+                @if (session()->has('success'))
+                <div class="alert alert-success my-2">
+                    {{ session('success') }}
+                </div>
+                @endif
                 <div class="modal-action">
                     {{-- Tombol Import --}}
                     <flux:button wire:click="import" size="xs" icon:trailing="save" variant="primary" wire:loading.attr="disabled" wire:target="import,file">

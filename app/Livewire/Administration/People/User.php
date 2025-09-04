@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class User extends Component
 {
-    use WithPagination,WithFileUploads;
+    use WithPagination, WithFileUploads;
 
     public $userId;
     public $name, $gender, $date_birth, $username, $department_name, $employee_id, $date_commenced, $email, $role_id;
@@ -20,7 +20,9 @@ class User extends Component
     public $showDeleteModal = false;
     public $showImportModal = false; // 🔹 untuk modal import
     public $file;
-
+    // Property untuk menampilkan hasil
+    public $importedCount = 0;
+    public $skippedCount = 0;
     protected function rules()
     {
         return [
@@ -65,11 +67,26 @@ class User extends Component
             'file.mimes'    => 'Format file harus xlsx, csv, atau xls.',
             'file.max'      => 'Ukuran file maksimal 2MB.',
         ]);
+        $imported = 0;
+        $skipped = 0;
+        $rows = Excel::toCollection(new UsersImport, $this->file->getRealPath());
+        foreach ($rows[0] as $row) {
+            $user = (new UsersImport)->model($row->toArray());
+            if ($user) {
+                $user->save();
+                $imported++;
+            } else {
+                $skipped++;
+            }
+        }
 
-        Excel::import(new UsersImport, $this->file->getRealPath());
+        $this->importedCount = $imported;
+        $this->skippedCount = $skipped;
 
         $this->reset('file');
         $this->showImportModal = false;
+
+        session()->flash('success', "$imported row berhasil diimport, $skipped row dilewati (kosong/duplikat).");
         $this->dispatch(
             'alert',
             [
@@ -125,7 +142,7 @@ class User extends Component
 
         $this->resetInput();
         $this->showModal = false;
-        $text = $this->userId?'user berhasil diupdate!':'user berhasil ditambahkan!';
+        $text = $this->userId ? 'user berhasil diupdate!' : 'user berhasil ditambahkan!';
         $this->dispatch(
             'alert',
             [
@@ -150,7 +167,7 @@ class User extends Component
         UserProfile::findOrFail($this->userId)->delete();
         $this->resetInput();
         $this->showDeleteModal = false;
-         $this->dispatch(
+        $this->dispatch(
             'alert',
             [
                 'text' => "User berhasil dihapus!",
