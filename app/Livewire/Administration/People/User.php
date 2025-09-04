@@ -20,7 +20,7 @@ class User extends Component
     {
         return [
             'name' => 'required|string|max:255',
-            'gender' => 'nullable|in:Male,Female',
+            'gender' => 'nullable|in:L,P',
             'date_birth' => 'nullable|date',
             'username' => 'required|string|max:255|unique:user_profiles,username,' . $this->userId,
             'department_name' => 'nullable|string|max:255',

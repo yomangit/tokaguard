@@ -83,7 +83,7 @@
 
                         <fieldset class="fieldset">
                             <label class="block">Tanggal Lahir</label>
-                            <input type="date" wire:model.live="date_birth" class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                            <input type="text" id="date_birth" wire:model="date_birth" class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih tanggal lahir" x-data x-init="flatpickr($refs.input, {dateFormat: 'Y-m-d'})" x-ref="input" />
                             <x-label-error :messages="$errors->get('date_birth')" />
                         </fieldset>
 
@@ -107,7 +107,7 @@
 
                         <fieldset class="fieldset">
                             <label class="block">Tanggal Masuk</label>
-                            <input type="date" wire:model.live="date_commenced" class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                            <input type="text" id="date_commenced" wire:model="date_commenced" class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih tanggal masuk" x-data x-init="flatpickr($refs.input, {dateFormat: 'Y-m-d'})" x-ref="input" />
                             <x-label-error :messages="$errors->get('date_commenced')" />
                         </fieldset>
 
