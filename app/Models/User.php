@@ -63,10 +63,10 @@ class User extends Authenticatable
     protected static function booted()
     {
         static::creating(function ($user) {
-            if (is_null($user->role_user_permit_id)) {
+            if (is_null($user->role_id)) {
                 $roleUser = Role::where('name', 'User')->first();
                 if ($roleUser) {
-                    $user->role_user_permit_id = $roleUser->id;
+                    $user->role_id = $roleUser->id;
                 }
             }
         });
