@@ -26,6 +26,8 @@ class FileHelper
                 ->encodeByExtension($extension, quality: $quality);
 
             Storage::disk($disk)->put($relativePath, (string) $image);
+            // Copy ke public/storage manual
+            copy(storage_path('app/public/' . $relativePath), public_path('storage/' . $relativePath));
         } else {
             $relativePath = $file->storeAs($folder, $filename, $disk);
         }
