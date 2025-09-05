@@ -481,15 +481,18 @@
                 if (isDisabled) {
                     editor.enableReadOnlyMode('hazard-description');
                 }
-
-                // Live update ketika status berubah
-                Livewire.on('hazardStatusChanged', (payload) => {
-                    if (payload.isDisabled) {
-                        editor.enableReadOnlyMode('hazard-description');
-                    } else {
-                        editor.disableReadOnlyMode('hazard-description');
-                    }
+                Livewire.on('hazardStatusChanged', event => {
+                    console.log(event);
+                    
                 });
+                // Live update ketika status berubah
+                // Livewire.on('hazardStatusChanged', (payload) => {
+                //     if (payload.isDisabled) {
+                //         editor.enableReadOnlyMode('hazard-description');
+                //     } else {
+                //         editor.disableReadOnlyMode('hazard-description');
+                //     }
+                // });
 
                 // Update hidden input dan Livewire
                 editor.model.document.on('change:data', () => {
