@@ -481,8 +481,8 @@
             .then(editor => {
                 // Atur CKEditor jadi read-only berdasarkan status dari Livewire
                 // editor.enableReadOnlyMode('ckeditor-description');
-                editor.isReadOnly = isDisabled;
-                if (isDisabled === 1) {
+             
+                if (isDisabled) {
                     editor.enableReadOnlyMode('ckeditor-description');
                 } else {
                     editor.disableReadOnlyMode('ckeditor-description');
