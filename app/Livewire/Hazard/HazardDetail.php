@@ -537,7 +537,7 @@ class HazardDetail extends Component
 
         Notification::send($ermUsers, new HazardSubmittedNotification($hazard));
     }
-     public function edit($likelihoodId, $consequenceId)
+    public function edit($likelihoodId, $consequenceId)
     {
         $this->likelihood_id = $likelihoodId;
         $this->consequence_id = $consequenceId;

@@ -13,7 +13,6 @@ use App\Livewire\Administration\RiskMatrix\Grid;
 use App\Livewire\Administration\Menu\ListSubMenu;
 use App\Livewire\Administration\Menu\ExtraSubMenu;
 use App\Livewire\Administration\Custodian\Custodian;
-use App\Livewire\Administration\RiskMatrix\RiskMatrix;
 use App\Livewire\Administration\Companies\CompanyIndex;
 use App\Livewire\Administration\Contractor\Contractors;
 use App\Livewire\Administration\Departement\Department;
@@ -43,12 +42,6 @@ use Illuminate\Support\Facades\Storage;
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
-
-Route::get('storage-link',function(){
-Artisan::call('storage:link');
-    return 'successfully';
-});
-
 Route::redirect('/', 'dashboard');
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');

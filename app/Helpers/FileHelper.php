@@ -3,33 +3,38 @@
 namespace App\Helpers;
 
 use Intervention\Image\ImageManager;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File; // ganti Storage jadi File
 use Intervention\Image\Drivers\Gd\Driver;
 
 class FileHelper
 {
     public static function compressAndStore($file, $folder, $width = 800, $quality = 75)
     {
-        $filename  = $file->getClientOriginalName();
+        $filename  = time() . '-' . $file->getClientOriginalName(); // supaya unik
         $extension = strtolower($file->getClientOriginalExtension());
-        $path      = $folder . '/' . $filename;
+        $folderPath = public_path('uploads/' . $folder);
 
-        $manager = new ImageManager(
-            new Driver()
-        ); // pilih driver // atau 'imagick'
+        // Buat folder jika belum ada
+        if (!File::exists($folderPath)) {
+            File::makeDirectory($folderPath, 0755, true);
+        }
+
+        $path = 'uploads/' . $folder . '/' . $filename;
+
+        $manager = new ImageManager(new Driver());
 
         if (in_array($extension, ['jpg', 'jpeg', 'png'])) {
             // Resize + kompres
             $image = $manager->read($file->getRealPath())
-                ->scale(width: $width) // resize ke lebar tertentu
+                ->scale(width: $width)
                 ->encodeByExtension($extension, quality: $quality);
 
-            Storage::disk('public')->put($path, (string) $image);
+            file_put_contents(public_path($path), (string) $image);
         } else {
             // kalau bukan gambar (misal PDF), simpan langsung
-            $path = $file->storeAs($folder, $filename, 'public');
+            $file->move($folderPath, $filename);
         }
 
-        return $path;
+        return $path; // simpan path relatif untuk database
     }
 }
