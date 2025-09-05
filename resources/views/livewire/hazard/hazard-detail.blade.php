@@ -271,7 +271,7 @@
                         <img src="{{ $new_doc_deskripsi->temporaryUrl() }}" class="h-24 rounded border mt-1">
                         @elseif($doc_deskripsi)
                         <div class="text-xs text-gray-600">File lama:</div>
-                        <img src="{{ asset('storage/' . $doc_deskripsi) }}" class="h-24 rounded border mt-1">
+                        <img src="{{ asset($doc_deskripsi) }}" class="h-24 rounded border mt-1">
                         @else
                         <span class="text-xs text-gray-400">Belum ada file</span>
                         @endif
@@ -309,7 +309,7 @@
                         <img src="{{ $new_doc_corrective->temporaryUrl() }}" class="h-24 rounded border mt-1">
                         @elseif($doc_corrective)
                         <div class="text-xs text-gray-600">File lama:</div>
-                        <img src="{{ asset('storage/' . $doc_corrective) }}" class="h-24 rounded border mt-1">
+                        <img src="{{ asset($doc_corrective) }}" class="h-24 rounded border mt-1">
                         @else
                         <span class="text-xs text-gray-400">Belum ada file</span>
                         @endif
