@@ -189,7 +189,7 @@
                     </fieldset>
                     <fieldset class="fieldset">
                         <label class="block">Penanggung Jawab Area</label>
-                        <select wire:model.live="penanggungJawab" class="select select-xs select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
+                        <select {{ $isDisabled ? 'disabled' : '' }} wire:model.live="penanggungJawab" class="select select-xs select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
                             <option value="">-- Pilih --</option>
                             @foreach($penanggungJawabOptions as $pj)
                             <option value="{{ $pj['id'] }}">{{ $pj['name'] }}</option>
@@ -330,7 +330,7 @@
                         <label for="tta" class="peer-checked/tta:text-primary">Tindakan Tidak Aman</label>
 
                         <div class="hidden peer-checked/kta:block mt-1">
-                            <select wire:model.live="kondisi_tidak_aman" class="select select-xs mb-1 select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
+                            <select {{ $isDisabled ? 'disabled' : '' }} wire:model.live="kondisi_tidak_aman" class="select select-xs mb-1 select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
                                 <option value="">-- Pilih Kondisi Tidak Aman --</option>
                                 @foreach ($ktas as $kta)
                                 <option value="{{ $kta->id }}">{{ $kta->name }}</option>
@@ -339,7 +339,7 @@
 
                         </div>
                         <div class="hidden peer-checked/tta:block mt-1">
-                            <select wire:model.live="tindakan_tidak_aman" class="select select-xs mb-1 select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
+                            <select {{ $isDisabled ? 'disabled' : '' }} wire:model.live="tindakan_tidak_aman" class="select select-xs mb-1 select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
                                 <option value="">-- Pilih Tindakan Tidak Aman --</option>
                                 @foreach ($ttas as $tta)
                                 <option value="{{ $tta->id }}">{{ $tta->name }}</option>
@@ -362,7 +362,7 @@
                         {{-- Consequence --}}
                         <fieldset class="fieldset ">
                             <label class="block ">Consequence</label>
-                            <select wire:model.live="consequence_id" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
+                            <select {{ $isDisabled ? 'disabled' : '' }} wire:model.live="consequence_id" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                                 <option value="">-- Pilih --</option>
                                 @foreach ($consequencess as $cons)
                                 <option value="{{ $cons->id }}">{{ $cons->name }}</option>
@@ -384,7 +384,7 @@
                         {{-- Likelihood --}}
                         <fieldset class="fieldset ">
                             <label class="block ">Likelihood</label>
-                            <select wire:model.live="likelihood_id" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
+                            <select {{ $isDisabled ? 'disabled' : '' }} wire:model.live="likelihood_id" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                                 <option value="">-- Pilih --</option>
                                 @foreach ($likelihoodss as $like)
                                 <option value="{{ $like->id }}">{{ $like->name }}</option>
