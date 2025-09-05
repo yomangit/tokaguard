@@ -14,7 +14,7 @@
                 </span>
             </div>
             @php
-            $isDisabled = in_array(optional($hazards)->status, ['cancel', 'closed']);
+            $isDisabled = in_array(optional($hazards)->status, ['cancelled', 'closed']);
             @endphp
             <div class="flex items-stretch gap-2">
                 {{-- PROCEED TO --}}
