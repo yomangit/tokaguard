@@ -13,14 +13,16 @@
                     {{ $hazards->status }}
                 </span>
             </div>
-
+            @php
+            $isDisabled = in_array(optional($hazards)->status, ['cancel', 'closed']);
+            @endphp
             <div class="flex items-stretch gap-2">
                 {{-- PROCEED TO --}}
                 <div class="max-w-sm">
                     <label class="label">
                         <span class="label-text text-xs font-semibold">Lanjutkan Ke</span>
                     </label>
-                    <select wire:model.live="proceedTo" class="select select-xs select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
+                    <select {{ $isDisabled ? 'disabled' : '' }} wire:model.live="proceedTo" class="select select-xs select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
                         <option value="">-- Pilih Aksi --</option>
                         @foreach ($availableTransitions as $label => $status)
                         <option value="{{ $status }}">
