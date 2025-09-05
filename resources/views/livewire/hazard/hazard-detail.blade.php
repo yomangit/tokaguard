@@ -259,7 +259,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 ">
                     <fieldset class=" fieldset">
                         <label class="block">Dokumentasi Sebelum Tindakan perbaikan langsung</label>
-                        <label wire:ignore for="upload-deskripsi" class="flex items-center gap-2 cursor-pointer border border-info rounded  hover:ring-1 hover:border-info hover:ring-info hover:outline-hidden">
+                        <label wire:ignore for="upload-deskripsi" class="flex items-center gap-2  {{ $isDisabled ? 'cursor-not-allowed' : 'cursor-pointer' }} border border-info rounded  hover:ring-1 hover:border-info hover:ring-info hover:outline-hidden">
                             <!-- Tombol custom -->
                             <span class="btn btn-info btn-xs">
                                 Pilih file atau gambar
@@ -296,7 +296,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 ">
                     <fieldset class=" fieldset">
                         <label class="block">Dokumentasi Sesudah Tindakan perbaikan langsung</label>
-                        <label wire:ignore for="upload-corrective" class="flex items-center gap-2 cursor-pointer border border-info rounded  hover:ring-1 hover:border-info hover:ring-info hover:outline-hidden">
+                        <label wire:ignore for="upload-corrective" class="flex items-center gap-2  {{ $isDisabled ? 'cursor-not-allowed' : 'cursor-pointer' }} border border-info rounded  hover:ring-1 hover:border-info hover:ring-info hover:outline-hidden">
                             <!-- Tombol custom -->
                             <span class="btn btn-info btn-xs">
                                 Pilih file atau gambar
@@ -316,7 +316,7 @@
                         <span class="text-xs text-gray-400">Belum ada file</span>
                         @endif
                         <!-- Input asli (disembunyikan) -->
-                        <input id="upload-corrective" wire:model.live='new_doc_corrective' type="file" class="hidden" onchange="document.getElementById('file-name-corrective').textContent = this.files[0]?.name ?? 'Belum ada file'" />
+                        <input {{ $isDisabled ? 'disabled' : '' }} id="upload-corrective" wire:model.live='new_doc_corrective' type="file" class="hidden" onchange="document.getElementById('file-name-corrective').textContent = this.files[0]?.name ?? 'Belum ada file'" />
                         <x-label-error :messages="$errors->get('doc_corrective')" />
                     </fieldset>
                 </div>
@@ -444,10 +444,9 @@
                                     default => 'bg-gray-100',
                                     };
                                     @endphp
-                                    <td class="border cursor-pointer w-4 {{ $color }}
-                                        @if($likelihood_id == $l->id && $consequence_id == $c->id) border-2 border-stone-500 @endif" wire:click="edit({{ $l->id }}, {{ $c->id }})">
-                                        <div class="text-[6px]">{{ Str::upper(substr($severity, 0, 1)) }}</div>
-
+                                    <td class="border cursor-pointer w-4 
+                                        @if($likelihood_id == $l->id && $consequence_id == $c->id) border-2 border-stone-500 @endif" >
+                                        <label wire:click="edit({{ $l->id }}, {{ $c->id }})" class="btn btn-square btn-xs {{ $color }}">{{ Str::upper(substr($severity, 0, 1)) }}</label>
                                     </td>
 
                                     @endforeach
