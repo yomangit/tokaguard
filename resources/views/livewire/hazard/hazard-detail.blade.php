@@ -487,7 +487,7 @@
                 // Atur CKEditor jadi read-only berdasarkan status dari Livewire
                 // Langsung konversi angka 1/0 dari PHP ke boolean di sini
                 const isDisabled = @json($isDisabled) === 1;
-                editor.enableReadOnlyMode = isDisabled;
+                editor.isReadOnly = isDisabled;
                 // if (isDisabled === 1) {
                 //     editor.enableReadOnlyMode('ckeditor-description');
                 // } else {
