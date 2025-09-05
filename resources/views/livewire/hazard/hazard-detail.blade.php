@@ -111,7 +111,7 @@
                         <label class="block">Dilaporkan Oleh</label>
                         <div class="relative">
                             <!-- Input Search -->
-                            <input type="text" wire:model.live.debounce.300ms="searchPelapor" placeholder="Cari Nama Pelapor..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                            <input {{ $isDisabled ? 'disabled' : '' }} type="text" wire:model.live.debounce.300ms="searchPelapor" placeholder="Cari Nama Pelapor..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                             <!-- Dropdown hasil search -->
                             @if($showPelaporDropdown && count($pelapors) > 0)
                             <ul class="absolute z-10 bg-base-100 border rounded-md w-full mt-1 max-h-60 overflow-auto shadow">
@@ -131,10 +131,10 @@
                     </fieldset>
 
                     <fieldset>
-                        <input id="department" value="department" wire:model="deptCont" class="peer/department radio radio-xs radio-accent" type="radio" name="deptCont" checked />
+                        <input {{ $isDisabled ? 'disabled' : '' }} id="department" value="department" wire:model="deptCont" class="peer/department radio radio-xs radio-accent" type="radio" name="deptCont" checked />
                         <label for="department" class="peer-checked/department:text-accent">Departemen</label>
 
-                        <input id="company" value="company" wire:model="deptCont" class="peer/company radio radio-xs radio-primary" type="radio" name="deptCont" />
+                        <input {{ $isDisabled ? 'disabled' : '' }} id="company" value="company" wire:model="deptCont" class="peer/company radio radio-xs radio-primary" type="radio" name="deptCont" />
                         <label for="company" class="peer-checked/company:text-primary">Kontraktor</label>
 
                         <div class="hidden peer-checked/department:block mt-0.5">
@@ -166,7 +166,7 @@
                             {{-- Contractor --}}
                             <div class="relative mb-1">
                                 <!-- Input Search -->
-                                <input type="text" wire:model.live.debounce.300ms="searchContractor" placeholder="Cari kontraktor..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                                <input {{ $isDisabled ? 'disabled' : '' }} type="text" wire:model.live.debounce.300ms="searchContractor" placeholder="Cari kontraktor..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                                 <!-- Dropdown hasil search -->
                                 @if($showContractorDropdown && count($contractors) > 0)
                                 <ul class="absolute z-10 bg-base-100 border rounded-md w-full mt-1 max-h-60 overflow-auto shadow">
@@ -202,7 +202,7 @@
                         <label class="block">Lokasi</label>
                         <div class="relative">
                             <!-- Input Search -->
-                            <input type="text" wire:model.live.debounce.300ms="searchLocation" placeholder="Cari Lokasi..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                            <input {{ $isDisabled ? 'disabled' : '' }} type="text" wire:model.live.debounce.300ms="searchLocation" placeholder="Cari Lokasi..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                             <!-- Dropdown hasil search -->
                             @if($showLocationDropdown && count($locations) > 0)
                             <ul class="absolute z-10 bg-base-100 border rounded-md w-full mt-1 max-h-60 overflow-auto shadow">
@@ -225,7 +225,7 @@
                     @if($location_id)
                     <fieldset class="fieldset">
                         <label class="block">Lokasi Spesifik</label>
-                        <input type="text" wire:model.live="location_specific" placeholder="Masukkan detail lokasi spesifik..." class=" input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                        <input {{ $isDisabled ? 'disabled' : '' }} type="text" wire:model.live="location_specific" placeholder="Masukkan detail lokasi spesifik..." class=" input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                         <x-label-error :messages="$errors->get('location_specific')" />
                     </fieldset>
                     @endif
@@ -241,7 +241,7 @@
                             });
                             ">
                         <label class="block">Tanggal dan Waktu</label>
-                        <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." wire:model.live='tanggal' readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                        <input {{ $isDisabled ? 'disabled' : '' }} type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." wire:model.live='tanggal' readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                         <x-label-error :messages="$errors->get('tanggal')" />
                     </fieldset>
 
@@ -279,7 +279,7 @@
                         <span class="text-xs text-gray-400">Belum ada file</span>
                         @endif
                         <!-- Input asli (disembunyikan) -->
-                        <input id="upload-deskripsi" wire:model.live='new_doc_deskripsi' type="file" class="hidden" onchange="document.getElementById('file-name').textContent = this.files[0]?.name ?? 'Belum ada file'" />
+                        <input {{ $isDisabled ? 'disabled' : '' }} id="upload-deskripsi" wire:model.live='new_doc_deskripsi' type="file" class="hidden" onchange="document.getElementById('file-name').textContent = this.files[0]?.name ?? 'Belum ada file'" />
                         <x-label-error :messages="$errors->get('new_doc_deskripsi')" />
                     </fieldset>
                 </div>
@@ -323,10 +323,10 @@
                 <div class="grid grid-cols-1 md:grid-cols-2  gap-4 mb-4 border border-gray-300 p-4 rounded">
                     {{-- KEY WORD --}}
                     <fieldset>
-                        <input id="kta" value="kta" wire:model.live="keyWord" class="peer/kta radio radio-xs radio-accent" type="radio" name="keyWord" checked />
+                        <input {{ $isDisabled ? 'disabled' : '' }} id="kta" value="kta" wire:model.live="keyWord" class="peer/kta radio radio-xs radio-accent" type="radio" name="keyWord" checked />
                         <label for="kta" class="peer-checked/kta:text-accent">Kondisi Tidak Aman</label>
 
-                        <input id="tta" value="tta" wire:model.live="keyWord" class="peer/tta radio radio-xs radio-primary" type="radio" name="keyWord" />
+                        <input {{ $isDisabled ? 'disabled' : '' }} id="tta" value="tta" wire:model.live="keyWord" class="peer/tta radio radio-xs radio-primary" type="radio" name="keyWord" />
                         <label for="tta" class="peer-checked/tta:text-primary">Tindakan Tidak Aman</label>
 
                         <div class="hidden peer-checked/kta:block mt-1">
