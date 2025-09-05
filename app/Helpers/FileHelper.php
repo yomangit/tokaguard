@@ -10,7 +10,7 @@ class FileHelper
 {
     public static function compressAndStore($file, $folder, $width = 800, $quality = 75)
     {
-        $filename  = time() . '-' . $file->getClientOriginalName(); // supaya unik
+        $filename  =$file->getClientOriginalName(); // supaya unik
         $extension = strtolower($file->getClientOriginalExtension());
         $folderPath = public_path('uploads/' . $folder);
 
@@ -19,7 +19,7 @@ class FileHelper
             File::makeDirectory($folderPath, 0755, true);
         }
 
-        $path = 'uploads/' . $folder . '/' . $filename;
+        $path =$folder . '/' . $filename;
 
         $manager = new ImageManager(new Driver());
 
