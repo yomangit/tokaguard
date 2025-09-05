@@ -14,7 +14,7 @@
                 </span>
             </div>
             @php
-            $isDisabled = in_array(optional($hazards)->status, ['cancelled', 'closed']);
+            $isDisabled = in_array(optional($hazards)->status, ['cancel', 'closed']);
             @endphp
             <div class="flex items-stretch gap-2">
                 {{-- PROCEED TO --}}
@@ -76,9 +76,7 @@
     </div>
     <form wire:submit.prevent="submit">
         <div class="w-full bg-base-200 p-1 rounded mb-2">
-            <flux:button size="xs" type="submit" icon:trailing="save" variant="primary" color="{{ $isDisabled ? 'filled' : 'teal' }}"   :disabled="true">
-                Simpan
-            </flux:button>
+            <flux:button size="xs" type="submit" icon:trailing="save" variant="primary">Simpan</flux:button>
             <flux:button size="xs" icon:trailing="trash" variant="danger">Hapus</flux:button>
         </div>
         <x-tab-hazard.layout>
@@ -254,7 +252,7 @@
                         <textarea id="ckeditor-description">{{ $description }}</textarea>
                     </div>
                     <!-- Hidden input untuk binding Livewire -->
-                    <input type="hidden" wire:model.live="description" id="description">
+                    <input  type="hidden" wire:model.live="description" id="description">
                     <x-label-error :messages="$errors->get('description')" />
                 </fieldset>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 ">
@@ -479,6 +477,7 @@
                 , removePlugins: ['ImageUpload', 'EasyImage', 'MediaEmbed'] // buang plugin gambar
             })
             .then(editor => {
+                 editor.isReadOnly = @json($isDisabled);
                 editor.model.document.on('change:data', () => {
                     // Update ke hidden input
                     const data = editor.getData();
@@ -506,6 +505,7 @@
                 , removePlugins: ['ImageUpload', 'EasyImage', 'MediaEmbed'] // buang plugin gambar
             })
             .then(editor => {
+                 editor.isReadOnly = @json($isDisabled);
                 editor.model.document.on('change:data', () => {
                     // Update ke hidden input
                     const data = editor.getData();
