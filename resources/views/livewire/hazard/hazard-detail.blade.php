@@ -74,7 +74,7 @@
 
         </div>
     </div>
-    {{  $isDisabled }}
+    {{ $isDisabled }}
     <form wire:submit.prevent="submit">
         <div class="w-full bg-base-200 p-1 rounded mb-2">
             <flux:button size="xs" type="submit" icon:trailing="save" variant="primary">Simpan</flux:button>
@@ -467,6 +467,7 @@
 @push('scripts')
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
+    const isDisabled = @json($isDisabled)===1;
     document.addEventListener('livewire:navigated', () => {
         ClassicEditor
             .create(document.querySelector('#ckeditor-description'), {
@@ -478,8 +479,12 @@
             })
             .then(editor => {
                 // Atur CKEditor jadi read-only berdasarkan status dari Livewire
-               editor.enableReadOnlyMode('ckeditor-description');
-
+                editor.enableReadOnlyMode('ckeditor-description');
+                if (isDisabled === "Closed" || a === "Cancelled") {
+                    editor.enableReadOnlyMode('ckeditor-description');
+                } else {
+                    editor.disableReadOnlyMode('ckeditor-description');
+                }
                 // Update value hanya jika tidak read-only
                 editor.model.document.on('change:data', () => {
                     if (!@json($isDisabled)) {
