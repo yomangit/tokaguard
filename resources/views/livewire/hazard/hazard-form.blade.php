@@ -344,12 +344,14 @@
                                 '2' => 'bg-yellow-500',
                                 '3' => 'bg-orange-500',
                                 '4' => 'bg-rose-500',
+                                '5' => 'bg-gray-100',
                                 };
                                 $nama = match($level) {
                                 '1' => 'Low',
                                 '2' => 'Moderate',
                                 '3' => 'Hight',
                                 '4' => 'Extrime',
+                                '5' => 'Default',
                                 };
                                 @endphp
                                 <th class="rotate_text border-1 {{ $colors }}">{{ $nama }}</th>
