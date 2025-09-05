@@ -494,8 +494,7 @@ class HazardDetail extends Component
                 ->where('risk_consequence_id', $this->consequence_id)
                 ->value('severity');
         }
-        $hazard = Hazard::findOrFail($this->hazards->id);
-        $hazard->update([
+        $updateData = [
             'event_type_id'          => $this->tipe_bahaya,
             'event_sub_type_id'      => $this->sub_tipe_bahaya,
             'status'                 => 'submitted',
@@ -505,18 +504,28 @@ class HazardDetail extends Component
             'penanggung_jawab_id'    => $this->penanggungJawab,
             'location_id'            => $this->location_id,
             'location_specific'      => $this->location_specific,
-            'tanggal'                => $tanggal, // ✅ sudah diformat
+            'tanggal'                => $tanggal,
             'description'            => $this->description,
-            'doc_deskripsi'          => $docDeskripsiPath,
             'immediate_corrective_action' => $this->immediate_corrective_action,
-            'doc_corrective'         => $docCorrectivePath,
             'key_word'               => $this->keyWord,
             'kondisi_tidak_aman_id'  => $this->kondisi_tidak_aman,
             'tindakan_tidak_aman_id' => $this->tindakan_tidak_aman,
             'consequence_id'         => $this->consequence_id,
             'likelihood_id'          => $this->likelihood_id,
             'risk_level'             => $riskLevel,
-        ]);
+        ];
+
+        // Hanya update kalau ada file baru
+        if ($docDeskripsiPath) {
+            $updateData['doc_deskripsi'] = $docDeskripsiPath;
+        }
+
+        if ($docCorrectivePath) {
+            $updateData['doc_corrective'] = $docCorrectivePath;
+        }
+
+        $hazard = Hazard::findOrFail($this->hazards->id);
+        $hazard->update($updateData);
 
         $ermUsers = ErmAssignment::where('department_id', $this->department_id)
             ->orWhere('contractor_id', $this->contractor_id)
@@ -537,7 +546,7 @@ class HazardDetail extends Component
 
         Notification::send($ermUsers, new HazardSubmittedNotification($hazard));
     }
-     public function edit($likelihoodId, $consequenceId)
+    public function edit($likelihoodId, $consequenceId)
     {
         $this->likelihood_id = $likelihoodId;
         $this->consequence_id = $consequenceId;
