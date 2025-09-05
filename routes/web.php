@@ -44,7 +44,7 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::get('storage',function(){
+Route::get('storage-link',function(){
 Artisan::call('storage:link');
     return 'successfully';
 });
