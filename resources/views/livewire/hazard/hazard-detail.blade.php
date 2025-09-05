@@ -22,7 +22,7 @@
                     <label class="label">
                         <span class="label-text text-xs font-semibold">Lanjutkan Ke</span>
                     </label>
-                    <select {{ $isDisabled ? 'disabled' : '' }} wire:model.live="proceedTo" class="select select-xs select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
+                    <select wire:model.live="proceedTo" class="select select-xs select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
                         <option value="">-- Pilih Aksi --</option>
                         @foreach ($availableTransitions as $label => $status)
                         <option value="{{ $status }}">
@@ -76,8 +76,8 @@
     </div>
     <form wire:submit.prevent="submit">
         <div class="w-full bg-base-200 p-1 rounded mb-2">
-            <flux:button size="xs" type="submit" icon:trailing="save" variant="primary">Simpan</flux:button>
-            <flux:button size="xs" icon:trailing="trash" variant="danger">Hapus</flux:button>
+            <flux:button  {{ $isDisabled ? 'disabled' : '' }} size="xs" type="submit" icon:trailing="save" variant="primary">Simpan</flux:button>
+            <flux:button  {{ $isDisabled ? 'disabled' : '' }} size="xs" icon:trailing="trash" variant="danger">Hapus</flux:button>
         </div>
         <x-tab-hazard.layout>
             <div wire:loading.class="skeleton animate-pulse" wire:target="submit">
