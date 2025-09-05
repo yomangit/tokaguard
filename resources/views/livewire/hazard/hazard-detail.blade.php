@@ -465,6 +465,10 @@
 
 </section>
 @push('scripts')
+    @php
+    $isDisable = in_array(optional($hazards)->status, ['cancelled', 'closed']) ? 1 : 0;
+    @endphp
+
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
     const isDisabled =  JSON.parse('<?php echo $isDisabled ?>');
@@ -481,11 +485,14 @@
             })
             .then(editor => {
                 // Atur CKEditor jadi read-only berdasarkan status dari Livewire
-                if (isDisabled === 1) {
-                    editor.enableReadOnlyMode('ckeditor-description');
-                } else {
-                    editor.disableReadOnlyMode('ckeditor-description');
-                }
+                // Langsung konversi angka 1/0 dari PHP ke boolean di sini
+                const isDisabled = @json($isDisabled) === 1;
+                editor.enableReadOnlyMode = isDisabled;
+                // if (isDisabled === 1) {
+                //     editor.enableReadOnlyMode('ckeditor-description');
+                // } else {
+                //     editor.disableReadOnlyMode('ckeditor-description');
+                // }
                 // Update value hanya jika tidak read-only
                 editor.model.document.on('change:data', () => {
                     if (!@json($isDisabled)) {
