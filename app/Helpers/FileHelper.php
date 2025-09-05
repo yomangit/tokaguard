@@ -10,28 +10,26 @@ class FileHelper
 {
     public static function compressAndStore($file, $folder, $width = 800, $quality = 75)
     {
-        $filename  = time() . '-' . $file->getClientOriginalName();
+        $filename  = $file->getClientOriginalName();
         $extension = strtolower($file->getClientOriginalExtension());
-        $relativePath = $folder . '/' . $filename;
+        $path      = $folder . '/' . $filename;
 
-        $manager = new ImageManager(new Driver());
+        $manager = new ImageManager(
+            new Driver()
+        ); // pilih driver // atau 'imagick'
 
-        // Tentukan disk default (cek apakah storage:link aktif)
-        $disk = is_link(public_path('storage')) ? 'public' : 'uploads';
-
-        // Jika gambar
         if (in_array($extension, ['jpg', 'jpeg', 'png'])) {
+            // Resize + kompres
             $image = $manager->read($file->getRealPath())
-                ->scale(width: $width)
+                ->scale(width: $width) // resize ke lebar tertentu
                 ->encodeByExtension($extension, quality: $quality);
 
-            Storage::disk($disk)->put($relativePath, (string) $image);
-            // Copy ke public/storage manual
+            Storage::disk('public')->put($path, (string) $image);
         } else {
-            $relativePath = $file->storeAs($folder, $filename, $disk);
+            // kalau bukan gambar (misal PDF), simpan langsung
+            $path = $file->storeAs($folder, $filename, 'public');
         }
 
-        // Return URL langsung (bukan path internal)
-        return Storage::disk($disk)->url($relativePath);
+        return $path;
     }
 }
