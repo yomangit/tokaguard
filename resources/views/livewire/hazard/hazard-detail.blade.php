@@ -470,21 +470,22 @@
         ClassicEditor
             .create(document.querySelector('#ckeditor-description'), {
                 toolbar: [
-                    // 'heading', '|'
-                    , 'bold', 'italic', 'bulletedList', 'numberedList', '|'
+                    'bold', 'italic', 'bulletedList', 'numberedList', '|'
                     , 'undo', 'redo'
                 ]
-                , removePlugins: ['ImageUpload', 'EasyImage', 'MediaEmbed'] // buang plugin gambar
+                , removePlugins: ['ImageUpload', 'EasyImage', 'MediaEmbed']
             })
             .then(editor => {
+                // Atur CKEditor jadi read-only berdasarkan status dari Livewire
                 editor.isReadOnly = @json($isDisabled);
-                editor.model.document.on('change:data', () => {
-                    // Update ke hidden input
-                    const data = editor.getData();
-                    document.querySelector('#description').value = data;
 
-                    // Kirim ke Livewire
-                    @this.set('description', data);
+                // Update value hanya jika tidak read-only
+                editor.model.document.on('change:data', () => {
+                    if (!@json($isDisabled)) {
+                        const data = editor.getData();
+                        document.querySelector('#description').value = data;
+                        @this.set('description', data);
+                    }
                 });
             })
             .catch(error => {
@@ -505,13 +506,6 @@
                 , removePlugins: ['ImageUpload', 'EasyImage', 'MediaEmbed'] // buang plugin gambar
             })
             .then(editor => {
-                const a = "{{ $hazard->status ?? '' }}";
-
-                if (a === "Closed" || a === "Cancelled") {
-                    newEditor1.enableReadOnlyMode('ckeditor-immediate_corrective_action');
-                } else {
-                    newEditor1.disableReadOnlyMode('ckeditor-immediate_corrective_action');
-                }
 
                 editor.model.document.on('change:data', () => {
                     // Update ke hidden input
