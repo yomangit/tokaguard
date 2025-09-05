@@ -482,7 +482,7 @@
                     editor.enableReadOnlyMode('hazard-description');
                 }
                 Livewire.on('hazardStatusChanged', event => {
-                    console.log(event);
+                    console.log(event[0]);
                     
                 });
                 // Live update ketika status berubah
