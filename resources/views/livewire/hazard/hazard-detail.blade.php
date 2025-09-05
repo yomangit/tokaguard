@@ -467,7 +467,7 @@
 @push('scripts')
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
-    const isDisabled = @json($isDisabled)===1;
+    const isDisabled = @json($isDisabled);
     document.addEventListener('livewire:navigated', () => {
         ClassicEditor
             .create(document.querySelector('#ckeditor-description'), {
@@ -480,7 +480,7 @@
             .then(editor => {
                 // Atur CKEditor jadi read-only berdasarkan status dari Livewire
                 editor.enableReadOnlyMode('ckeditor-description');
-                if (isDisabled === "Closed" || a === "Cancelled") {
+                if (isDisabled === 1) {
                     editor.enableReadOnlyMode('ckeditor-description');
                 } else {
                     editor.disableReadOnlyMode('ckeditor-description');
