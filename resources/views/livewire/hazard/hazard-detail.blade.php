@@ -76,8 +76,10 @@
     </div>
     <form wire:submit.prevent="submit">
         <div class="w-full bg-base-200 p-1 rounded mb-2">
-            <flux:button  {{ $isDisabled ? 'disabled' : '' }} size="xs" type="submit" icon:trailing="save" variant="primary">Simpan</flux:button>
-            <flux:button  {{ $isDisabled ? 'disabled' : '' }} size="xs" icon:trailing="trash" variant="danger">Hapus</flux:button>
+            <flux:button size="xs" type="submit" icon:trailing="save" variant="primary" {{ $isDisabled ? 'disabled' : '' }}>
+                Simpan
+            </flux:button>
+            <flux:button size="xs" icon:trailing="trash" variant="danger">Hapus</flux:button>
         </div>
         <x-tab-hazard.layout>
             <div wire:loading.class="skeleton animate-pulse" wire:target="submit">
