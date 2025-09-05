@@ -478,7 +478,7 @@
             })
             .then(editor => {
                 // Atur CKEditor jadi read-only berdasarkan status dari Livewire
-                editor.isReadOnly = JSON.parse('<?php echo $isDisabled; ?>'); === 1;
+                editor.isReadOnly = true;
 
                 // Update value hanya jika tidak read-only
                 editor.model.document.on('change:data', () => {
