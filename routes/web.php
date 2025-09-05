@@ -37,25 +37,17 @@ use App\Livewire\Administrator\UserRoleManager\UserRole;
 use App\Livewire\Hazard\HazardForm;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::post('/ckeditor/upload', function (Request $request) {
-    if ($request->hasFile('upload')) {
-        $file     = $request->file('upload');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $path     = $file->storeAs('uploads/ckeditor', $filename, 'public');
-
-        return response()->json([
-            'url' => asset('storage/' . $path) // URL gambar
-        ]);
-    }
-
-    return response()->json([], 400);
-})->name('ckeditor.upload');
+Route::get('storage',function(){
+Artisan::call('storage:link');
+    return 'successfully';
+});
 
 Route::redirect('/', 'dashboard');
 Route::middleware(['auth'])->group(function () {
