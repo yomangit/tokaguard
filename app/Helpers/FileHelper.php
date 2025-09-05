@@ -10,7 +10,7 @@ class FileHelper
 {
     public static function compressAndStore($file, $folder, $width = 800, $quality = 75)
     {
-        $filename  = time() . '-' . $file->getClientOriginalName();
+        $filename  = $file->getClientOriginalName();
         $extension = strtolower($file->getClientOriginalExtension());
         $path      = $folder . '/' . $filename;
 
