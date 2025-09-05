@@ -37,13 +37,12 @@ return [
             'throw' => false,
             'report' => false,
         ],
-        'disks' => [
-            'uploads' => [
-                'driver' => 'local',
-                'root' => public_path('uploads'),
-                'url' => env('APP_URL') . '/uploads',
-                'visibility' => 'public',
-            ],
+
+        'uploads' => [
+            'driver' => 'local',
+            'root' => public_path('uploads'),
+            'url' => env('APP_URL') . '/uploads',
+            'visibility' => 'public',
         ],
 
         'public' => [
