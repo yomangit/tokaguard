@@ -471,8 +471,6 @@
 
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
-    const isDisabled =  JSON.parse('<?php echo $isDisabled ?>');
-    console.log(isDisabled);
     
     document.addEventListener('livewire:navigated', () => {
         ClassicEditor
