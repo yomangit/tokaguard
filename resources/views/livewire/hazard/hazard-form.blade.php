@@ -332,15 +332,19 @@
 
                 {{-- Kolom Risk Matrix --}}
                 <div class="overflow-x-auto  flex-none ">
-                    <div role="tablist" class="tabs tabs-lift tabs-xs">
-                        <a role="tab" class="tab text-primary [--tab-bg:emerald] [--tab-border-color:red]">Low</a>
-                        <a role="tab" class="tab text-primary [--tab-bg:yellow] [--tab-border-color:red]">Moderate</a>
-                        <a role="tab" class="tab text-primary [--tab-bg:orange] [--tab-border-color:red]">High</a>
-                        <a role="tab" class="tab text-primary [--tab-bg:rose] [--tab-border-color:red]">Extreme</a>
+                    <div role="tablist" class="flex">
+
 
                     </div>
                     <table class="table table-xs w-60">
                         <thead>
+                            <tr>
+                                <td>Level</td>
+                                <td class="bg-emerald-500">Low</td>
+                                <td class="bg-yellow-500">Moderate</td>
+                                <td class="bg-orange-500">High</td>
+                                <td class="bg-rose-500">Extreme</td>
+                            </tr>
                             <tr class="text-center text-[9px]">
                                 <th class="border-1">Likelihooc ↓ / Consequence →</th>
                                 @foreach ($consequences as $c)
