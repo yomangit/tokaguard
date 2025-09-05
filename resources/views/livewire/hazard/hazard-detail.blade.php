@@ -427,8 +427,8 @@
                                     $severity = $cell?->severity ?? '';
                                     $color = match($severity) {
                                     'Low' => 'bg-emerald-500',
-                                    'Moderate' => 'bg-sky-500',
-                                    'High' => 'bg-orange-300',
+                                    'Moderate' => 'bg-yellow-500',
+                                    'High' => 'bg-orange-500',
                                     'Extreme' => 'bg-rose-500',
                                     default => 'bg-gray-100',
                                     };
