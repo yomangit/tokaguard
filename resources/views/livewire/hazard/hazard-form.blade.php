@@ -337,6 +337,22 @@
                             <tr class="text-center text-[9px]">
                                 <th class="border-1">Likelihooc ↓ / Consequence →</th>
                                 @foreach ($consequences as $c)
+                                @php
+                                $level = $c->level;
+                                $colors = match($level) {
+                                '1' => 'bg-emerald-500',
+                                '2' => 'bg-yellow-500',
+                                '3' => 'bg-orange-500',
+                                '4' => 'bg-rose-500',
+                                };
+                                $nama = match($level) {
+                                '1' => 'Low',
+                                '2' => 'Moderate',
+                                '3' => 'Hight',
+                                '4' => 'Extrime',
+                                };
+                                @endphp
+                                <th class="rotate_text border-1 {{ $colors }}">{{ $nama }}</th>
                                 <th class="rotate_text border-1">{{ $c->name }}</th>
                                 @endforeach
                             </tr>
