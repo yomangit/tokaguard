@@ -332,29 +332,18 @@
 
                 {{-- Kolom Risk Matrix --}}
                 <div class="overflow-x-auto  flex-none ">
+                    <div role="tablist" class="tabs tabs-lift">
+                        <a role="tab" class="tab tab-active text-primary [--tab-bg-emerald-500] [--tab-border-color:red]"> Low</a>
+                        <a role="tab" class="tab tab-active text-primary [--tab-bg-yellow-500] [--tab-border-color:red]"> Moderate</a>
+                        <a role="tab" class="tab tab-active text-primary [--tab-bg-orange-500] [--tab-border-color:red]"> Hight</a>
+                        <a role="tab" class="tab tab-active text-primary [--tab-bg-rose-500] [--tab-border-color:red]"> Extrime</a>
+                    </div>
                     <table class="table table-xs w-60">
                         <thead>
                             <tr class="text-center text-[9px]">
                                 <th class="border-1">Likelihooc ↓ / Consequence →</th>
                                 @foreach ($consequences as $c)
-                                @php
-                                $level = $c->level;
-                                $colors = match($level) {
-                                '1' => 'bg-emerald-500',
-                                '2' => 'bg-yellow-500',
-                                '3' => 'bg-orange-500',
-                                '4' => 'bg-rose-500',
-                                '5' => 'bg-gray-100',
-                                };
-                                $nama = match($level) {
-                                '1' => 'Low',
-                                '2' => 'Moderate',
-                                '3' => 'Hight',
-                                '4' => 'Extrime',
-                                '5' => 'Default',
-                                };
-                                @endphp
-                                <th class="rotate_text border-1 {{ $colors }}">{{ $nama }}</th>
+
                                 <th class="rotate_text border-1">{{ $c->name }}</th>
                                 @endforeach
                             </tr>
