@@ -252,7 +252,7 @@
                         <textarea id="ckeditor-description">{{ $description }}</textarea>
                     </div>
                     <!-- Hidden input untuk binding Livewire -->
-                    <input  type="hidden" wire:model.live="description" id="description">
+                    <input type="hidden" wire:model.live="description" id="description">
                     <x-label-error :messages="$errors->get('description')" />
                 </fieldset>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 ">
@@ -477,7 +477,7 @@
                 , removePlugins: ['ImageUpload', 'EasyImage', 'MediaEmbed'] // buang plugin gambar
             })
             .then(editor => {
-                 editor.isReadOnly = @json($isDisabled);
+                editor.isReadOnly = @json($isDisabled);
                 editor.model.document.on('change:data', () => {
                     // Update ke hidden input
                     const data = editor.getData();
@@ -505,7 +505,14 @@
                 , removePlugins: ['ImageUpload', 'EasyImage', 'MediaEmbed'] // buang plugin gambar
             })
             .then(editor => {
-                 editor.isReadOnly = @json($isDisabled);
+                const a = "{{ $hazard->status ?? '' }}";
+
+                if (a === "Closed" || a === "Cancelled") {
+                    newEditor1.enableReadOnlyMode('ckeditor-immediate_corrective_action');
+                } else {
+                    newEditor1.disableReadOnlyMode('ckeditor-immediate_corrective_action');
+                }
+
                 editor.model.document.on('change:data', () => {
                     // Update ke hidden input
                     const data = editor.getData();
