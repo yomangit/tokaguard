@@ -339,7 +339,7 @@
                     <table class="table table-xs w-60">
                         <thead>
                             <tr class="text-center text-[9px]">
-                                <td>Level</td>
+                                <td class=" border-1">Level</td>
                                 <td class="rotate_text border-1 bg-emerald-500">Low</td>
                                 <td class="rotate_text border-1 bg-yellow-500">Moderate</td>
                                 <td class="rotate_text border-1 bg-orange-500">High</td>
