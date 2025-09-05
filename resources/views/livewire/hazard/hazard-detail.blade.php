@@ -14,7 +14,7 @@
                 </span>
             </div>
             @php
-            $isDisabled = in_array(optional($hazards)->status, ['cancelled', 'closed']);
+            $isDisabled = in_array(optional($hazards)->status, ['cancel', 'closed']);
             @endphp
             <div class="flex items-stretch gap-2">
                 {{-- PROCEED TO --}}
@@ -465,13 +465,10 @@
 
 </section>
 @push('scripts')
-    @php
-    $isDisable = in_array(optional($hazards)->status, ['cancelled', 'closed']) ? 1 : 0;
-    @endphp
-
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
-    
+    const isDisabled = @json($isDisabled);
+    console.log(isDisabled);
     document.addEventListener('livewire:navigated', () => {
         ClassicEditor
             .create(document.querySelector('#ckeditor-description'), {
@@ -483,14 +480,12 @@
             })
             .then(editor => {
                 // Atur CKEditor jadi read-only berdasarkan status dari Livewire
-                // Langsung konversi angka 1/0 dari PHP ke boolean di sini
-                const isDisabled = @json($isDisable) === 1;
-                editor.isReadOnly = isDisabled;
-                // if (isDisabled === 1) {
-                //     editor.enableReadOnlyMode('ckeditor-description');
-                // } else {
-                //     editor.disableReadOnlyMode('ckeditor-description');
-                // }
+                editor.enableReadOnlyMode('ckeditor-description');
+                if (isDisabled === 1) {
+                    editor.enableReadOnlyMode('ckeditor-description');
+                } else {
+                    editor.disableReadOnlyMode('ckeditor-description');
+                }
                 // Update value hanya jika tidak read-only
                 editor.model.document.on('change:data', () => {
                     if (!@json($isDisabled)) {
