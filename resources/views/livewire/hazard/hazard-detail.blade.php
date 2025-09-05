@@ -409,6 +409,14 @@
                         <table class="table table-xs w-60">
                             <thead>
                                 <tr class="text-center text-[9px]">
+                                    <td class=" border-1">Level</td>
+                                    <td class="rotate_text border-1 bg-emerald-500">Low</td>
+                                    <td class="rotate_text border-1 bg-yellow-500">Moderate</td>
+                                    <td class="rotate_text border-1 bg-orange-500">High</td>
+                                    <td class="rotate_text border-1 bg-rose-500">Extreme</td>
+                                    <td class="rotate_text border-1 bg-gray-100">Closed</td>
+                                </tr>
+                                <tr class="text-center text-[9px]">
                                     <th class="border-1">Likelihooc ↓ / Consequence →</th>
                                     @foreach ($consequences as $c)
                                     <th class="rotate_text border-1">{{ $c->name }}</th>
