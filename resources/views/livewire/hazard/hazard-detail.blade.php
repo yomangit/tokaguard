@@ -142,7 +142,7 @@
                             <div class="relative mb-1">
                                 <!-- Input Search -->
 
-                                <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari departemen..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs " />
+                                <input {{ $isDisabled ? 'disabled' : '' }} type="text" wire:model.live.debounce.300ms="search" placeholder="Cari departemen..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs " />
                                 <!-- Dropdown hasil search -->
                                 @if($showDropdown && count($departments) > 0)
                                 <ul class="absolute z-10 bg-base-100 border rounded-md w-full mt-1 max-h-60 overflow-auto shadow">
