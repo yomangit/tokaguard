@@ -76,7 +76,7 @@
     </div>
     <form wire:submit.prevent="submit">
         <div class="w-full bg-base-200 p-1 rounded mb-2">
-            <flux:button size="xs" type="submit" icon:trailing="save" variant="primary"  @disabled($isDisabled)>
+            <flux:button size="xs" type="submit" icon:trailing="save" variant="primary"  :disabled="true">
                 Simpan
             </flux:button>
             <flux:button size="xs" icon:trailing="trash" variant="danger">Hapus</flux:button>
