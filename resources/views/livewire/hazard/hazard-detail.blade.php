@@ -468,42 +468,41 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script>
     const isDisabled = @json($isDisabled);
-    console.log(isDisabled);
+    console.log('Initial isDisabled:', isDisabled);
+
     document.addEventListener('livewire:navigated', () => {
         ClassicEditor
             .create(document.querySelector('#ckeditor-description'), {
-                toolbar: [
-                    'bold', 'italic', 'bulletedList', 'numberedList', '|'
-                    , 'undo', 'redo'
-                ]
+                toolbar: ['bold', 'italic', 'bulletedList', 'numberedList', '|', 'undo', 'redo']
                 , removePlugins: ['ImageUpload', 'EasyImage', 'MediaEmbed']
             })
             .then(editor => {
-                // Atur CKEditor jadi read-only berdasarkan status dari Livewire
-                // editor.enableReadOnlyMode('ckeditor-description');
+                // Set awal read-only jika isDisabled true
+                if (isDisabled) {
+                    editor.enableReadOnlyMode('hazard-description');
+                }
 
+                // Live update ketika status berubah
                 Livewire.on('hazardStatusChanged', (payload) => {
                     if (payload.isDisabled) {
-                        editor.enableReadOnlyMode('ckeditor-description');
+                        editor.enableReadOnlyMode('hazard-description');
                     } else {
-                        editor.disableReadOnlyMode('ckeditor-description');
+                        editor.disableReadOnlyMode('hazard-description');
                     }
                 });
-                // Update value hanya jika tidak read-only
+
+                // Update hidden input dan Livewire
                 editor.model.document.on('change:data', () => {
-                    if (!@json($isDisabled)) {
-                        const data = editor.getData();
-                        document.querySelector('#description').value = data;
-                        @this.set('description', data);
-                    }
+                    const data = editor.getData();
+                    document.querySelector('#description').value = data;
+                    @this.set('description', data);
                 });
             })
-            .catch(error => {
-                console.error(error);
-            });
+            .catch(error => console.error(error));
     });
 
 </script>
+
 <script>
     document.addEventListener('livewire:navigated', () => {
         ClassicEditor
