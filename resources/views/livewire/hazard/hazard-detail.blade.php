@@ -291,7 +291,6 @@
                     <x-label-error :messages="$errors->get('immediate_corrective_action')" />
                 </fieldset>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 ">
-
                     <fieldset class=" fieldset">
                         <label class="block">Dokumentasi Sesudah Tindakan perbaikan langsung</label>
                         <label wire:ignore for="upload-corrective" class="flex items-center gap-2 cursor-pointer border border-info rounded  hover:ring-1 hover:border-info hover:ring-info hover:outline-hidden">
