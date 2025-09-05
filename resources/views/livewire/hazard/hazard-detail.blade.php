@@ -482,12 +482,11 @@
                 // Atur CKEditor jadi read-only berdasarkan status dari Livewire
                 // editor.enableReadOnlyMode('ckeditor-description');
 
-                // Dengarkan event Livewire 3 untuk perubahan status
-                $wire.on('hazardStatusChanged', (isDisabled) => {
-                    if (isDisabled) {
-                        editor.enableReadOnlyMode('hazard-lock');
+                Livewire.on('hazardStatusChanged', (payload) => {
+                    if (payload.isDisabled) {
+                        editor.enableReadOnlyMode('ckeditor-description');
                     } else {
-                        editor.disableReadOnlyMode('hazard-lock');
+                        editor.disableReadOnlyMode('ckeditor-description');
                     }
                 });
                 // Update value hanya jika tidak read-only
