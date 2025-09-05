@@ -333,10 +333,10 @@
                 {{-- Kolom Risk Matrix --}}
                 <div class="overflow-x-auto  flex-none ">
                     <div role="tablist" class="tabs tabs-lift tabs-xs">
-                        <a role="tab" class="tab text-primary [--tab-bg:emerald-500] [--tab-border-color:red]">Low</a>
-                        <a role="tab" class="tab text-primary [--tab-bg:yellow-500] [--tab-border-color:red]">Moderate</a>
-                        <a role="tab" class="tab text-primary [--tab-bg:orange-500] [--tab-border-color:red]">High</a>
-                        <a role="tab" class="tab text-primary [--tab-bg:rose-500] [--tab-border-color:red]">Extreme</a>
+                        <a role="tab" class="tab text-primary [--tab-bg:emerald] [--tab-border-color:red]">Low</a>
+                        <a role="tab" class="tab text-primary [--tab-bg:yellow] [--tab-border-color:red]">Moderate</a>
+                        <a role="tab" class="tab text-primary [--tab-bg:orange] [--tab-border-color:red]">High</a>
+                        <a role="tab" class="tab text-primary [--tab-bg:rose] [--tab-border-color:red]">Extreme</a>
 
                     </div>
                     <table class="table table-xs w-60">
