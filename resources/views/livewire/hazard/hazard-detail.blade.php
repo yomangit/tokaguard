@@ -483,9 +483,13 @@
                 }
                 Livewire.on('hazardStatusChanged', event => {
                     data = event[0];
-                  const a =  data.isDisabled;
-                    console.log(a);
-                    
+                    const bekukan = data.isDisabled;
+                    if (bekukan === true) {
+                        editor.enableReadOnlyMode('hazard-description');
+                    } else {
+                        editor.disableReadOnlyMode('hazard-description');
+                    }
+
                 });
                 // Live update ketika status berubah
                 // Livewire.on('hazardStatusChanged', (payload) => {
