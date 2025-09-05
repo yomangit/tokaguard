@@ -290,6 +290,8 @@ class HazardDetail extends Component
         $this->hazards->status = $newStatus;
         $this->hazards->save();
         $this->loadAvailableTransitions();
+        $isDisabled = in_array($newStatus, ['cancelled', 'closed']);
+        $this->dispatch('hazardStatusChanged', ['isDisabled' => $isDisabled]);
         $this->dispatch(
             'alert',
             [

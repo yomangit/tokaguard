@@ -481,12 +481,15 @@
             .then(editor => {
                 // Atur CKEditor jadi read-only berdasarkan status dari Livewire
                 // editor.enableReadOnlyMode('ckeditor-description');
-             
-                if (isDisabled) {
-                    editor.enableReadOnlyMode('ckeditor-description');
-                } else {
-                    editor.disableReadOnlyMode('ckeditor-description');
-                }
+
+                // Dengarkan event Livewire 3 untuk perubahan status
+                $wire.on('hazardStatusChanged', (isDisabled) => {
+                    if (isDisabled) {
+                        editor.enableReadOnlyMode('hazard-lock');
+                    } else {
+                        editor.disableReadOnlyMode('hazard-lock');
+                    }
+                });
                 // Update value hanya jika tidak read-only
                 editor.model.document.on('change:data', () => {
                     if (!@json($isDisabled)) {
