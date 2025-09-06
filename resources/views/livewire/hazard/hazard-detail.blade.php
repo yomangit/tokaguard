@@ -428,7 +428,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($likelihoods as $l)
-                                <tr class="text-center text-xs w-32">
+                                 <tr class="text-center text-[9px] w-28">
 
                                     <td class=" font-bold w-1 border-1">{{ $l->name }}</td>
                                     @foreach ($consequences as $c)
