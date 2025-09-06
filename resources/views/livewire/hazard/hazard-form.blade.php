@@ -85,7 +85,7 @@
                     <input id="company" value="company" wire:model="deptCont" class="peer/company radio radio-xs radio-primary" type="radio" name="deptCont" />
                     <x-form.label for="company" class="peer-checked/company:text-primary" label="Kontraktor" required />
 
-                    <div class="hidden peer-checked/department:block mt-0.5">
+                    <div class="hidden peer-checked/department:block ">
                         {{-- Department --}}
                         <div class="relative mb-1">
                             <!-- Input Search -->
@@ -148,7 +148,6 @@
 
                 <fieldset class="fieldset ">
                     <x-form.label label="Lokasi" required />
-                    <label class="block"></label>
                     <div class="relative">
                         <!-- Input Search -->
                         <input type="text" wire:model.live.debounce.300ms="searchLocation" placeholder="Cari Lokasi..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
