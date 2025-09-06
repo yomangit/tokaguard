@@ -178,234 +178,232 @@
                 </fieldset>
                 @endif
                 <fieldset class=" fieldset" x-data x-init="
-                        flatpickr($refs.tanggalInput, {
-                            disableMobile: true,       // aktifkan jam
-                            enableTime: true,       // aktifkan jam
-                            dateFormat: 'd-m-Y H:i',
-                            time_24hr: true, // format untuk Livewire
-                            onChange: function(selectedDates, dateStr) {
-                                @this.set('tanggal', dateStr);
-                            }
-                        });
-                        ">
+                            flatpickr($refs.tanggalInput, {
+                                disableMobile: true,       // aktifkan jam
+                                enableTime: true,       // aktifkan jam
+                                dateFormat: 'd-m-Y H:i', // format untuk Livewire
+                                onChange: function(selectedDates, dateStr) {
+                                    @this.set('tanggal', dateStr);
+                                }
+                            });
+                            ">
                     <x-form.label label="Tanggal & Waktu" required />
-                    <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                    <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." wire:model.live='tanggal' readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                     <x-label-error :messages="$errors->get('tanggal')" />
                 </fieldset>
-            </div>
-            <fieldset class="fieldset mb-4">
-                <x-form.label label="Deskripsi" required />
-                <div wire:ignore>
-                    <textarea id="ckeditor-description"></textarea>
-                </div>
-                <!-- Hidden input untuk binding Livewire -->
-                <input type="hidden" wire:model.live="description" id="description">
-                <x-label-error :messages="$errors->get('description')" />
-            </fieldset>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 ">
-                <fieldset class=" fieldset">
-                    <x-form.label label="Dokumentasi Sebelum Tidakan perbaikan langsung" />
-                    <label wire:ignore for="upload-deskripsi" class="flex items-center gap-2 cursor-pointer border border-info rounded  hover:ring-1 hover:border-info hover:ring-info hover:outline-hidden">
-                        <!-- Tombol custom -->
-                        <span class="btn btn-info btn-xs">
-                            Pilih file atau gambar
-                        </span>
-                        <!-- Nama file -->
-                        <span id="file-name" class="text-xs text-gray-500">
-                            Belum ada file
-                        </span>
-                    </label>
-                    @if ($doc_deskripsi)
-                    @if (in_array($doc_deskripsi->getClientOriginalExtension(), ['jpg','jpeg','png']))
-                    <img src="{{ $doc_deskripsi->temporaryUrl() }}" class="mt-2 w-40 h-auto rounded border" />
-                    @else
-                    <p class="mt-2 text-sm text-gray-600">File: {{ $doc_deskripsi->getClientOriginalName() }}</p>
-                    @endif
-                    @endif
-                    <!-- Input asli (disembunyikan) -->
-                    <input id="upload-deskripsi" wire:model.live='doc_deskripsi' type="file" class="hidden" onchange="document.getElementById('file-name').textContent = this.files[0]?.name ?? 'Belum ada file'" />
-                    <x-label-error :messages="$errors->get('tanggal')" />
+                <fieldset class="fieldset mb-4">
+                    <x-form.label label="Deskripsi" required />
+                    <div wire:ignore>
+                        <textarea id="ckeditor-description"></textarea>
+                    </div>
+                    <!-- Hidden input untuk binding Livewire -->
+                    <input type="hidden" wire:model.live="description" id="description">
+                    <x-label-error :messages="$errors->get('description')" />
                 </fieldset>
-            </div>
-            <fieldset class="fieldset mb-4">
-                <label class="block"></label>
-                <x-form.label label="Tindakan perbaikan langsung" required />
-                <div wire:ignore>
-                    <textarea id="ckeditor-immediate_corrective_action"></textarea>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 ">
+                    <fieldset class=" fieldset">
+                        <x-form.label label="Dokumentasi Sebelum Tidakan perbaikan langsung" />
+                        <label wire:ignore for="upload-deskripsi" class="flex items-center gap-2 cursor-pointer border border-info rounded  hover:ring-1 hover:border-info hover:ring-info hover:outline-hidden">
+                            <!-- Tombol custom -->
+                            <span class="btn btn-info btn-xs">
+                                Pilih file atau gambar
+                            </span>
+                            <!-- Nama file -->
+                            <span id="file-name" class="text-xs text-gray-500">
+                                Belum ada file
+                            </span>
+                        </label>
+                        @if ($doc_deskripsi)
+                        @if (in_array($doc_deskripsi->getClientOriginalExtension(), ['jpg','jpeg','png']))
+                        <img src="{{ $doc_deskripsi->temporaryUrl() }}" class="mt-2 w-40 h-auto rounded border" />
+                        @else
+                        <p class="mt-2 text-sm text-gray-600">File: {{ $doc_deskripsi->getClientOriginalName() }}</p>
+                        @endif
+                        @endif
+                        <!-- Input asli (disembunyikan) -->
+                        <input id="upload-deskripsi" wire:model.live='doc_deskripsi' type="file" class="hidden" onchange="document.getElementById('file-name').textContent = this.files[0]?.name ?? 'Belum ada file'" />
+                        <x-label-error :messages="$errors->get('tanggal')" />
+                    </fieldset>
                 </div>
-                <!-- Hidden input untuk binding Livewire -->
-                <input type="hidden" wire:model.live="immediate_corrective_action" id="immediate_corrective_action">
-                <x-label-error :messages="$errors->get('immediate_corrective_action')" />
-            </fieldset>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 ">
-
-                <fieldset class=" fieldset">
-                    <x-form.label label="Dokumentasi Sesudah Tidakan perbaikan langsung" />
+                <fieldset class="fieldset mb-4">
                     <label class="block"></label>
-                    <label wire:ignore for="upload-corrective" class="flex items-center gap-2 cursor-pointer border border-info rounded  hover:ring-1 hover:border-info hover:ring-info hover:outline-hidden">
-                        <!-- Tombol custom -->
-                        <span class="btn btn-info btn-xs">
-                            Pilih file atau gambar
-                        </span>
-                        <!-- Nama file -->
-                        <span id="file-name-corrective" class="text-xs text-gray-500">
-                            Belum ada file
-                        </span>
-                    </label>
-                    @if ($doc_corrective)
-                    @if (in_array($doc_corrective->getClientOriginalExtension(), ['jpg','jpeg','png']))
-                    <img src="{{ $doc_corrective->temporaryUrl() }}" class="mt-2 w-40 h-auto rounded border" />
-                    @else
-                    <p class="mt-2 text-sm text-gray-600">File: {{ $doc_corrective->getClientOriginalName() }}</p>
-                    @endif
-                    @endif
-                    <!-- Input asli (disembunyikan) -->
-                    <input id="upload-corrective" wire:model.live='doc_corrective' type="file" class="hidden" onchange="document.getElementById('file-name-corrective').textContent = this.files[0]?.name ?? 'Belum ada file'" />
-                    <x-label-error :messages="$errors->get('tanggal')" />
-                </fieldset>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2  gap-4 mb-4 border border-gray-300 p-4 rounded">
-                {{-- KEY WORD --}}
-                <fieldset>
-                    <input id="kta" value="kta" wire:model.live="keyWord" class="peer/kta radio radio-xs radio-accent" type="radio" name="keyWord" checked />
-                    <x-form.label for="kta" class="peer-checked/kta:text-accent text-[10px]" label="Kondisi Tidak Aman" required />
-                    <input id="tta" value="tta" wire:model.live="keyWord" class="peer/tta radio radio-xs radio-primary" type="radio" name="keyWord" />
-                    <x-form.label for="tta" class="peer-checked/tta:text-primary text-[10px]" label="Tindakan Tidak Aman" required />
-                    <div class="hidden peer-checked/kta:block mt-1">
-                        <select wire:model.live="kondisi_tidak_aman" class="select select-xs mb-1 select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
-                            <option value="">-- Pilih Kondisi Tidak Aman --</option>
-                            @foreach ($ktas as $kta)
-                            <option value="{{ $kta->id }}">{{ $kta->name }}</option>
-                            @endforeach
-                        </select>
-
+                    <x-form.label label="Tindakan perbaikan langsung" required />
+                    <div wire:ignore>
+                        <textarea id="ckeditor-immediate_corrective_action"></textarea>
                     </div>
-                    <div class="hidden peer-checked/tta:block mt-1">
-                        <select wire:model.live="tindakan_tidak_aman" class="select select-xs mb-1 select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
-                            <option value="">-- Pilih Tidakan Tidak Aman --</option>
-                            @foreach ($ttas as $tta)
-                            <option value="{{ $tta->id }}">{{ $tta->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    @if($keyWord === 'kta')
-                    <x-label-error :messages="$errors->get('kondisi_tidak_aman')" />
-                    @endif
-                    @if($keyWord === 'tta')
-                    <x-label-error :messages="$errors->get('tindakan_tidak_aman')" />
-                    @endif
-
+                    <!-- Hidden input untuk binding Livewire -->
+                    <input type="hidden" wire:model.live="immediate_corrective_action" id="immediate_corrective_action">
+                    <x-label-error :messages="$errors->get('immediate_corrective_action')" />
                 </fieldset>
-            </div>
-            <div class="flex flex-col md:flex-row gap-2">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 ">
 
-                {{-- Kolom Likelihood & Consequence --}}
-                <div class=" space-y-4 md:grow">
-                    {{-- Consequence --}}
-                    <fieldset class="fieldset ">
-                        <x-form.label label="Consequence" required />
-                        <select wire:model.live="consequence_id" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
-                            <option value="">-- Pilih --</option>
-                            @foreach ($consequencess as $cons)
-                            <option value="{{ $cons->id }}">{{ $cons->name }}</option>
-                            @endforeach
-                        </select>
-                        <x-label-error :messages="$errors->get('consequence_id')" />
-
-                        @if($consequence_id)
-                        @php
-                        $selectedConsequence = $consequencess->firstWhere('id', $consequence_id);
-                        @endphp
-                        @if($selectedConsequence)
-                        <div class="mt-1 text-sm text-gray-600 h-20 overflow-y-auto border rounded p-2 bg-gray-50">
-                            {{ $selectedConsequence->description ?? 'Tidak ada deskripsi' }}
-                        </div>
+                    <fieldset class=" fieldset">
+                        <x-form.label label="Dokumentasi Sesudah Tidakan perbaikan langsung" />
+                        <label class="block"></label>
+                        <label wire:ignore for="upload-corrective" class="flex items-center gap-2 cursor-pointer border border-info rounded  hover:ring-1 hover:border-info hover:ring-info hover:outline-hidden">
+                            <!-- Tombol custom -->
+                            <span class="btn btn-info btn-xs">
+                                Pilih file atau gambar
+                            </span>
+                            <!-- Nama file -->
+                            <span id="file-name-corrective" class="text-xs text-gray-500">
+                                Belum ada file
+                            </span>
+                        </label>
+                        @if ($doc_corrective)
+                        @if (in_array($doc_corrective->getClientOriginalExtension(), ['jpg','jpeg','png']))
+                        <img src="{{ $doc_corrective->temporaryUrl() }}" class="mt-2 w-40 h-auto rounded border" />
+                        @else
+                        <p class="mt-2 text-sm text-gray-600">File: {{ $doc_corrective->getClientOriginalName() }}</p>
                         @endif
                         @endif
+                        <!-- Input asli (disembunyikan) -->
+                        <input id="upload-corrective" wire:model.live='doc_corrective' type="file" class="hidden" onchange="document.getElementById('file-name-corrective').textContent = this.files[0]?.name ?? 'Belum ada file'" />
+                        <x-label-error :messages="$errors->get('tanggal')" />
                     </fieldset>
-                    {{-- Likelihood --}}
-                    <fieldset class="fieldset ">
-                        <x-form.label label="Likelihood" required />
-                        <select wire:model.live="likelihood_id" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
-                            <option value="">-- Pilih --</option>
-                            @foreach ($likelihoodss as $like)
-                            <option value="{{ $like->id }}">{{ $like->name }}</option>
-                            @endforeach
-                        </select>
-                        <x-label-error :messages="$errors->get('likelihood_id')" />
-
-                        @if($likelihood_id)
-                        @php
-                        $selectedLikelihood = $likelihoodss->firstWhere('id', $likelihood_id);
-                        @endphp
-                        @if($selectedLikelihood)
-                        <div class="mt-1 text-sm text-gray-600 h-20 overflow-y-auto border rounded p-2 bg-gray-50">
-                            {{ $selectedLikelihood->description ?? 'Tidak ada deskripsi' }}
-                        </div>
-                        @endif
-                        @endif
-                    </fieldset>
-
-
                 </div>
+                <div class="grid grid-cols-1 md:grid-cols-2  gap-4 mb-4 border border-gray-300 p-4 rounded">
+                    {{-- KEY WORD --}}
+                    <fieldset>
+                        <input id="kta" value="kta" wire:model.live="keyWord" class="peer/kta radio radio-xs radio-accent" type="radio" name="keyWord" checked />
+                        <x-form.label for="kta" class="peer-checked/kta:text-accent text-[10px]" label="Kondisi Tidak Aman" required />
+                        <input id="tta" value="tta" wire:model.live="keyWord" class="peer/tta radio radio-xs radio-primary" type="radio" name="keyWord" />
+                        <x-form.label for="tta" class="peer-checked/tta:text-primary text-[10px]" label="Tindakan Tidak Aman" required />
+                        <div class="hidden peer-checked/kta:block mt-1">
+                            <select wire:model.live="kondisi_tidak_aman" class="select select-xs mb-1 select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
+                                <option value="">-- Pilih Kondisi Tidak Aman --</option>
+                                @foreach ($ktas as $kta)
+                                <option value="{{ $kta->id }}">{{ $kta->name }}</option>
+                                @endforeach
+                            </select>
 
-                {{-- Kolom Risk Matrix --}}
-                <div class="overflow-x-auto  flex-none ">
-                    <div role="tablist" class="flex">
+                        </div>
+                        <div class="hidden peer-checked/tta:block mt-1">
+                            <select wire:model.live="tindakan_tidak_aman" class="select select-xs mb-1 select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
+                                <option value="">-- Pilih Tidakan Tidak Aman --</option>
+                                @foreach ($ttas as $tta)
+                                <option value="{{ $tta->id }}">{{ $tta->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @if($keyWord === 'kta')
+                        <x-label-error :messages="$errors->get('kondisi_tidak_aman')" />
+                        @endif
+                        @if($keyWord === 'tta')
+                        <x-label-error :messages="$errors->get('tindakan_tidak_aman')" />
+                        @endif
+
+                    </fieldset>
+                </div>
+                <div class="flex flex-col md:flex-row gap-2">
+
+                    {{-- Kolom Likelihood & Consequence --}}
+                    <div class=" space-y-4 md:grow">
+                        {{-- Consequence --}}
+                        <fieldset class="fieldset ">
+                            <x-form.label label="Consequence" required />
+                            <select wire:model.live="consequence_id" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
+                                <option value="">-- Pilih --</option>
+                                @foreach ($consequencess as $cons)
+                                <option value="{{ $cons->id }}">{{ $cons->name }}</option>
+                                @endforeach
+                            </select>
+                            <x-label-error :messages="$errors->get('consequence_id')" />
+
+                            @if($consequence_id)
+                            @php
+                            $selectedConsequence = $consequencess->firstWhere('id', $consequence_id);
+                            @endphp
+                            @if($selectedConsequence)
+                            <div class="mt-1 text-sm text-gray-600 h-20 overflow-y-auto border rounded p-2 bg-gray-50">
+                                {{ $selectedConsequence->description ?? 'Tidak ada deskripsi' }}
+                            </div>
+                            @endif
+                            @endif
+                        </fieldset>
+                        {{-- Likelihood --}}
+                        <fieldset class="fieldset ">
+                            <x-form.label label="Likelihood" required />
+                            <select wire:model.live="likelihood_id" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
+                                <option value="">-- Pilih --</option>
+                                @foreach ($likelihoodss as $like)
+                                <option value="{{ $like->id }}">{{ $like->name }}</option>
+                                @endforeach
+                            </select>
+                            <x-label-error :messages="$errors->get('likelihood_id')" />
+
+                            @if($likelihood_id)
+                            @php
+                            $selectedLikelihood = $likelihoodss->firstWhere('id', $likelihood_id);
+                            @endphp
+                            @if($selectedLikelihood)
+                            <div class="mt-1 text-sm text-gray-600 h-20 overflow-y-auto border rounded p-2 bg-gray-50">
+                                {{ $selectedLikelihood->description ?? 'Tidak ada deskripsi' }}
+                            </div>
+                            @endif
+                            @endif
+                        </fieldset>
 
 
                     </div>
-                    <table class="table table-xs w-60">
-                        <thead>
-                            <tr class="text-center text-[9px]">
-                                <td class=" border-1">Level</td>
-                                <td class="rotate_text border-1 bg-emerald-500">Low</td>
-                                <td class="rotate_text border-1 bg-yellow-500">Moderate</td>
-                                <td class="rotate_text border-1 bg-orange-500">High</td>
-                                <td class="rotate_text border-1 bg-rose-500">Extreme</td>
-                                <td class="rotate_text border-1 bg-gray-100">Closed</td>
-                            </tr>
-                            <tr class="text-center text-[9px]">
-                                <th class="border-1">Likelihooc ↓ / Consequence →</th>
-                                @foreach ($consequences as $c)
 
-                                <th class="rotate_text border-1">{{ $c->name }}</th>
-                                @endforeach
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($likelihoods as $l)
-                            <tr class="text-center text-xs w-32">
+                    {{-- Kolom Risk Matrix --}}
+                    <div class="overflow-x-auto  flex-none ">
+                        <div role="tablist" class="flex">
 
-                                <td class=" font-bold w-1 border-1">{{ $l->name }}</td>
-                                @foreach ($consequences as $c)
-                                @php
-                                $cell = App\Models\RiskMatrixCell::where('likelihood_id', $l->id)->where('risk_consequence_id', $c->id)->first() ?? null;
-                                $score = $l->level * $c->level;
-                                $severity = $cell?->severity ?? '';
-                                $color = match($severity) {
-                                'Low' => 'bg-emerald-500',
-                                'Moderate' => 'bg-yellow-500',
-                                'High' => 'bg-orange-500',
-                                'Extreme' => 'bg-rose-500',
-                                default => 'bg-gray-100',
-                                };
-                                @endphp
-                                <td class="border cursor-pointer w-4 {{ $color }}
+
+                        </div>
+                        <table class="table table-xs w-60">
+                            <thead>
+                                <tr class="text-center text-[9px]">
+                                    <td class=" border-1">Level</td>
+                                    <td class="rotate_text border-1 bg-emerald-500">Low</td>
+                                    <td class="rotate_text border-1 bg-yellow-500">Moderate</td>
+                                    <td class="rotate_text border-1 bg-orange-500">High</td>
+                                    <td class="rotate_text border-1 bg-rose-500">Extreme</td>
+                                    <td class="rotate_text border-1 bg-gray-100">Closed</td>
+                                </tr>
+                                <tr class="text-center text-[9px]">
+                                    <th class="border-1">Likelihooc ↓ / Consequence →</th>
+                                    @foreach ($consequences as $c)
+
+                                    <th class="rotate_text border-1">{{ $c->name }}</th>
+                                    @endforeach
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($likelihoods as $l)
+                                <tr class="text-center text-xs w-32">
+
+                                    <td class=" font-bold w-1 border-1">{{ $l->name }}</td>
+                                    @foreach ($consequences as $c)
+                                    @php
+                                    $cell = App\Models\RiskMatrixCell::where('likelihood_id', $l->id)->where('risk_consequence_id', $c->id)->first() ?? null;
+                                    $score = $l->level * $c->level;
+                                    $severity = $cell?->severity ?? '';
+                                    $color = match($severity) {
+                                    'Low' => 'bg-emerald-500',
+                                    'Moderate' => 'bg-yellow-500',
+                                    'High' => 'bg-orange-500',
+                                    'Extreme' => 'bg-rose-500',
+                                    default => 'bg-gray-100',
+                                    };
+                                    @endphp
+                                    <td class="border cursor-pointer w-4 {{ $color }}
                                     @if($likelihood_id == $l->id && $consequence_id == $c->id) border-2 border-stone-500 @endif" wire:click="edit({{ $l->id }}, {{ $c->id }})">
-                                    <div class="text-[6px]">{{ Str::upper(substr($severity, 0, 1)) }}</div>
+                                        <div class="text-[6px]">{{ Str::upper(substr($severity, 0, 1)) }}</div>
 
-                                </td>
+                                    </td>
 
+                                    @endforeach
+                                </tr>
                                 @endforeach
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                            </tbody>
+                        </table>
+                    </div>
 
-            </div>
-            <flux:button size="xs" type="submit" icon:trailing="send" variant="primary">Kirim Laporan</flux:button>
+                </div>
+                <flux:button size="xs" type="submit" icon:trailing="send" variant="primary">Kirim Laporan</flux:button>
         </form>
     </x-manhours.layout>
 </section>
