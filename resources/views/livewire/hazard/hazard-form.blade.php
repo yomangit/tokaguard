@@ -21,7 +21,7 @@
                     <x-label-error :messages="$errors->get('tipe_bahaya')" />
                 </fieldset>
                 <fieldset class="fieldset">
-                    <label class="block">Sub Tipe Bahaya</label>
+                     <x-form.label label="Sub Tipe Bahaya" required />
                     <select wire:model.live="sub_tipe_bahaya" class="select select-xs select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
                         <option value="">-- Pilih --</option>
                         @if ($tipe_bahaya)
@@ -35,7 +35,7 @@
                 </fieldset>
 
                 <fieldset class="fieldset">
-                    <label class="block">Dilaporkan Oleh</label>
+                     <x-form.label label="Dilaporkan Oleh" required />
                     <div class="relative">
                         <!-- Input Search -->
                         <input type="text" wire:model.live.debounce.300ms="searchPelapor" placeholder="Cari Nama Pelapor..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
@@ -81,10 +81,10 @@
 
                 <fieldset>
                     <input id="department" value="department" wire:model="deptCont" class="peer/department radio radio-xs radio-accent" type="radio" name="deptCont" checked />
-                    <label for="department" class="peer-checked/department:text-accent">Departemen</label>
-
+                    <x-form.label for="department" class="peer-checked/department:text-accent" label="PT. MSM & PT. TTN" required />
                     <input id="company" value="company" wire:model="deptCont" class="peer/company radio radio-xs radio-primary" type="radio" name="deptCont" />
-                    <label for="company" class="peer-checked/company:text-primary">Kontraktor</label>
+                     <x-form.label for="company" class="peer-checked/company:text-primary" label="Kontraktor" required />
+                    <label >Kontraktor</label>
 
                     <div class="hidden peer-checked/department:block mt-0.5">
                         {{-- Department --}}
