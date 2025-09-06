@@ -365,7 +365,7 @@
                                 <td class="rotate_text border-1 bg-gray-100">Closed</td>
                             </tr>
                             <tr class="text-center text-[9px]">
-                                <th class="border-1">Likelihooc ↓ / Consequence →</th>
+                                <th class="border-1">Likelihood ↓ / Consequence →</th>
                                 @foreach ($consequences as $c)
 
                                 <th class="rotate_text border-1">{{ $c->name }}</th>
