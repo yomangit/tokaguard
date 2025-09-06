@@ -60,12 +60,14 @@
                                 Tidak ditemukan, tambah pelapor manual
                             </li>
                             @endif
+                            @if($manualPelaporMode)
+                            <li>
+                                <input type="text" wire:model="manualPelaporName" placeholder="Masukkan nama pelapor..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                            </li>
+                            @endif
                         </ul>
                         @endif
                         <!-- Input manual jika mode manual aktif -->
-                        @if($manualPelaporMode)
-                        <input type="text" wire:model="manualPelaporName" placeholder="Masukkan nama pelapor..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
-                        @endif
                     </div>
 
 
