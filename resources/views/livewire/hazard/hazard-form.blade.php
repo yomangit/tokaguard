@@ -305,7 +305,7 @@
                 <div class=" space-y-4 md:grow">
                     {{-- Consequence --}}
                     <fieldset class="fieldset ">
-                        <label class="block ">Consequence</label>
+                        <x-form.label label="Consequence" required />
                         <select wire:model.live="consequence_id" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                             <option value="">-- Pilih --</option>
                             @foreach ($consequencess as $cons)
@@ -327,7 +327,7 @@
                     </fieldset>
                     {{-- Likelihood --}}
                     <fieldset class="fieldset ">
-                        <label class="block ">Likelihood</label>
+                        <x-form.label label="Likelihood" required />
                         <select wire:model.live="likelihood_id" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                             <option value="">-- Pilih --</option>
                             @foreach ($likelihoodss as $like)
@@ -407,8 +407,7 @@
                 </div>
 
             </div>
-            <flux:button size="sm" type="submit" icon:trailing="send" variant="primary">Kirim Laporan</flux:button>
-
+            <flux:button size="xs" type="submit" icon:trailing="send" variant="primary">Kirim Laporan</flux:button>
         </form>
     </x-manhours.layout>
 </section>
