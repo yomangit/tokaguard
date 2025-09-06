@@ -62,7 +62,7 @@
                             @endif
                             @if($manualPelaporMode)
                             <li class="p-2 gap-2">
-                                <input type="text" wire:model="manualPelaporName" placeholder="Masukkan nama pelapor..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                                <input type="text" wire:model="manualPelaporName" placeholder="Masukkan nama pelapor..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs mb-2" />
                                  <flux:button size="xs" wire:click='open_modal' icon="add-icon" variant="primary">tambahkan pelapor</flux:button>
                             </li>
                             @endif
