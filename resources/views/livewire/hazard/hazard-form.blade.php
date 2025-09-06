@@ -136,7 +136,7 @@
                     </div>
                 </fieldset>
                 <fieldset class="fieldset">
-                    <label class="block">Penanggung Jawab Area</label>
+                    <x-form.label label="Penanggung Jawab Area" required />
                     <select wire:model.live="penanggungJawab" class="select select-xs select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
                         <option value="">-- Pilih --</option>
                         @foreach($penanggungJawabOptions as $pj)
@@ -147,7 +147,8 @@
                 </fieldset>
 
                 <fieldset class="fieldset ">
-                    <label class="block">Lokasi</label>
+                    <x-form.label label="Lokasi" required />
+                    <label class="block"></label>
                     <div class="relative">
                         <!-- Input Search -->
                         <input type="text" wire:model.live.debounce.300ms="searchLocation" placeholder="Cari Lokasi..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
@@ -172,7 +173,7 @@
                 {{-- Lokasi spesifik muncul hanya jika lokasi utama sudah dipilih --}}
                 @if($location_id)
                 <fieldset class="fieldset">
-                    <label class="block">Lokasi Spesifik</label>
+                    <x-form.label label="Lokasi Spesifik" required />
                     <input type="text" wire:model.live="location_specific" placeholder="Masukkan detail lokasi spesifik..." class=" input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                     <x-label-error :messages="$errors->get('location_specific')" />
                 </fieldset>
@@ -188,14 +189,14 @@
                             }
                         });
                         ">
-                    <label class="block">Tanggal dan Waktu</label>
+                    <label class="block"></label>
+                    <x-form.label label="Lokasi Spesifik" required />
                     <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                     <x-label-error :messages="$errors->get('tanggal')" />
                 </fieldset>
             </div>
             <fieldset class="fieldset mb-4">
-                <label class="block">Deskripsi</label>
-
+                <x-form.label label="Deskripsi" required />
                 <div wire:ignore>
                     <textarea id="ckeditor-description"></textarea>
                 </div>
@@ -205,7 +206,7 @@
             </fieldset>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 ">
                 <fieldset class=" fieldset">
-                    <label class="block">Dokumentasi Sebelum Tidakan perbaikan langsung</label>
+                    <x-form.label label="Dokumentasi Sebelum Tidakan perbaikan langsung" />
                     <label wire:ignore for="upload-deskripsi" class="flex items-center gap-2 cursor-pointer border border-info rounded  hover:ring-1 hover:border-info hover:ring-info hover:outline-hidden">
                         <!-- Tombol custom -->
                         <span class="btn btn-info btn-xs">
@@ -229,8 +230,8 @@
                 </fieldset>
             </div>
             <fieldset class="fieldset mb-4">
-                <label class="block">Tindakan perbaikan langsung</label>
-
+                <label class="block"></label>
+                <x-form.label label="Tindakan perbaikan langsung" required />
                 <div wire:ignore>
                     <textarea id="ckeditor-immediate_corrective_action"></textarea>
                 </div>
@@ -241,7 +242,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 ">
 
                 <fieldset class=" fieldset">
-                    <label class="block">Dokumentasi Sesudah Tidakan perbaikan langsung</label>
+                    <x-form.label label="Dokumentasi Sesudah Tidakan perbaikan langsung" />
+                    <label class="block"></label>
                     <label wire:ignore for="upload-corrective" class="flex items-center gap-2 cursor-pointer border border-info rounded  hover:ring-1 hover:border-info hover:ring-info hover:outline-hidden">
                         <!-- Tombol custom -->
                         <span class="btn btn-info btn-xs">
@@ -268,11 +270,9 @@
                 {{-- KEY WORD --}}
                 <fieldset>
                     <input id="kta" value="kta" wire:model.live="keyWord" class="peer/kta radio radio-xs radio-accent" type="radio" name="keyWord" checked />
-                    <label for="kta" class="peer-checked/kta:text-accent">Kondisi Tidak Aman</label>
-
+                    <x-form.label for="kta" class="peer-checked/kta:text-accent text-[10px]" label="Kondisi Tidak Aman" required />
                     <input id="tta" value="tta" wire:model.live="keyWord" class="peer/tta radio radio-xs radio-primary" type="radio" name="keyWord" />
-                    <label for="tta" class="peer-checked/tta:text-primary">Tindakan Tidak Aman</label>
-
+                    <x-form.label for="tta" class="peer-checked/tta:text-primary text-[10px]" label="Tindakan Tidak Aman" required />
                     <div class="hidden peer-checked/kta:block mt-1">
                         <select wire:model.live="kondisi_tidak_aman" class="select select-xs mb-1 select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
                             <option value="">-- Pilih Kondisi Tidak Aman --</option>
