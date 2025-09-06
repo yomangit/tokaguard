@@ -1,6 +1,6 @@
 <section class="w-full">
     <x-toast />
-    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     @include('partials.manhours-heading')
     {{-- @livewire('hazard.hazard-form') --}}
     <x-manhours.layout>
