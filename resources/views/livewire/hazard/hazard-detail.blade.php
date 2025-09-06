@@ -84,7 +84,7 @@
             <div wire:loading.class="skeleton animate-pulse" wire:target="submit">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
                     <fieldset class="fieldset">
-                        <label class="block">Tipe Bahaya</label>
+                       <x-form.label label="Tipe Bahaya" required />
                         <select {{ $isDisabled ? 'disabled' : '' }} wire:model.live="tipe_bahaya" class="select select-xs select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
                             <option value="">-- Pilih --</option>
                             @foreach ($eventTypes as $et )
@@ -94,7 +94,7 @@
                         <x-label-error :messages="$errors->get('tipe_bahaya')" />
                     </fieldset>
                     <fieldset class="fieldset">
-                        <label class="block">Sub Tipe Bahaya</label>
+                         <x-form.label label="Sub Tipe Bahaya" required />
                         <select {{ $isDisabled ? 'disabled' : '' }} wire:model.live="sub_tipe_bahaya" class="select select-xs select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
                             <option value="">-- Pilih --</option>
                             @if ($tipe_bahaya)
@@ -108,7 +108,7 @@
                     </fieldset>
 
                     <fieldset class="fieldset ">
-                        <label class="block">Dilaporkan Oleh</label>
+                         <x-form.label label="Dilaporkan Oleh" required />
                         <div class="relative">
                             <!-- Input Search -->
                             <input {{ $isDisabled ? 'disabled' : '' }} type="text" wire:model.live.debounce.300ms="searchPelapor" placeholder="Cari Nama Pelapor..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
@@ -132,11 +132,9 @@
 
                     <fieldset>
                         <input {{ $isDisabled ? 'disabled' : '' }} id="department" value="department" wire:model="deptCont" class="peer/department radio radio-xs radio-accent" type="radio" name="deptCont" checked />
-                        <label for="department" class="peer-checked/department:text-accent">Departemen</label>
-
+                        <x-form.label for="department" class="peer-checked/department:text-accent text-[10px]" label="PT. MSM & PT. TTN" required />
                         <input {{ $isDisabled ? 'disabled' : '' }} id="company" value="company" wire:model="deptCont" class="peer/company radio radio-xs radio-primary" type="radio" name="deptCont" />
-                        <label for="company" class="peer-checked/company:text-primary">Kontraktor</label>
-
+                        <x-form.label for="company" class="peer-checked/company:text-primary" label="Kontraktor" required />
                         <div class="hidden peer-checked/department:block mt-0.5">
                             {{-- Department --}}
                             <div class="relative mb-1">
@@ -188,7 +186,7 @@
                         </div>
                     </fieldset>
                     <fieldset class="fieldset">
-                        <label class="block">Penanggung Jawab Area</label>
+                      <x-form.label label="Penanggung Jawab Area" required />
                         <select {{ $isDisabled ? 'disabled' : '' }} wire:model.live="penanggungJawab" class="select select-xs select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
                             <option value="">-- Pilih --</option>
                             @foreach($penanggungJawabOptions as $pj)
@@ -199,7 +197,7 @@
                     </fieldset>
 
                     <fieldset class="fieldset ">
-                        <label class="block">Lokasi</label>
+                     <x-form.label label="Lokasi" required />
                         <div class="relative">
                             <!-- Input Search -->
                             <input {{ $isDisabled ? 'disabled' : '' }} type="text" wire:model.live.debounce.300ms="searchLocation" placeholder="Cari Lokasi..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
@@ -224,7 +222,7 @@
                     {{-- Lokasi spesifik muncul hanya jika lokasi utama sudah dipilih --}}
                     @if($location_id)
                     <fieldset class="fieldset">
-                        <label class="block">Lokasi Spesifik</label>
+                        <x-form.label label="Lokasi Spesifik" required />
                         <input {{ $isDisabled ? 'disabled' : '' }} type="text" wire:model.live="location_specific" placeholder="Masukkan detail lokasi spesifik..." class=" input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                         <x-label-error :messages="$errors->get('location_specific')" />
                     </fieldset>
@@ -240,15 +238,14 @@
                                 }
                             });
                             ">
-                        <label class="block">Tanggal dan Waktu</label>
+                         <x-form.label label="Tanggal & Waktu" required />
                         <input {{ $isDisabled ? 'disabled' : '' }} type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." wire:model.live='tanggal' readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                         <x-label-error :messages="$errors->get('tanggal')" />
                     </fieldset>
 
                 </div>
                 <fieldset class="fieldset mb-4">
-                    <label class="block">Deskripsi</label>
-
+                   <x-form.label label="Deskripsi" required />
                     <div wire:ignore>
                         <textarea id="ckeditor-description">{{ $description }}</textarea>
                     </div>
@@ -258,7 +255,7 @@
                 </fieldset>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 ">
                     <fieldset class=" fieldset">
-                        <label class="block">Dokumentasi Sebelum Tindakan perbaikan langsung</label>
+                          <x-form.label label="Dokumentasi Sebelum Tidakan perbaikan langsung" />
                         <label wire:ignore for="upload-deskripsi" class="flex items-center gap-2  {{ $isDisabled ? 'cursor-not-allowed' : 'cursor-pointer' }} border border-info rounded  hover:ring-1 hover:border-info hover:ring-info hover:outline-hidden">
                             <!-- Tombol custom -->
                             <span class="btn btn-info btn-xs">
@@ -284,8 +281,7 @@
                     </fieldset>
                 </div>
                 <fieldset class="fieldset mb-4">
-                    <label class="block">Tindakan perbaikan langsung</label>
-
+                    <x-form.label label="Tindakan perbaikan langsung" required />
                     <div wire:ignore>
                         <textarea id="ckeditor-immediate_corrective_action">{{ $immediate_corrective_action }}</textarea>
                     </div>
@@ -295,7 +291,7 @@
                 </fieldset>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 ">
                     <fieldset class=" fieldset">
-                        <label class="block">Dokumentasi Sesudah Tindakan perbaikan langsung</label>
+                        <x-form.label label="Dokumentasi Sesudah Tidakan perbaikan langsung" />
                         <label wire:ignore for="upload-corrective" class="flex items-center gap-2  {{ $isDisabled ? 'cursor-not-allowed' : 'cursor-pointer' }} border border-info rounded  hover:ring-1 hover:border-info hover:ring-info hover:outline-hidden">
                             <!-- Tombol custom -->
                             <span class="btn btn-info btn-xs">
@@ -324,10 +320,9 @@
                     {{-- KEY WORD --}}
                     <fieldset>
                         <input {{ $isDisabled ? 'disabled' : '' }} id="kta" value="kta" wire:model.live="keyWord" class="peer/kta radio radio-xs radio-accent" type="radio" name="keyWord" checked />
-                        <label for="kta" class="peer-checked/kta:text-accent">Kondisi Tidak Aman</label>
-
+                         <x-form.label for="kta" class="peer-checked/kta:text-accent text-[10px]" label="Kondisi Tidak Aman" required />
                         <input {{ $isDisabled ? 'disabled' : '' }} id="tta" value="tta" wire:model.live="keyWord" class="peer/tta radio radio-xs radio-primary" type="radio" name="keyWord" />
-                        <label for="tta" class="peer-checked/tta:text-primary">Tindakan Tidak Aman</label>
+                        <x-form.label for="tta" class="peer-checked/tta:text-primary text-[10px]" label="Tindakan Tidak Aman" required />
 
                         <div class="hidden peer-checked/kta:block mt-1">
                             <select {{ $isDisabled ? 'disabled' : '' }} wire:model.live="kondisi_tidak_aman" class="select select-xs mb-1 select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
@@ -361,7 +356,7 @@
                     <div class=" space-y-4 md:grow">
                         {{-- Consequence --}}
                         <fieldset class="fieldset ">
-                            <label class="block ">Consequence</label>
+                             <x-form.label label="Consequence" required />
                             <select {{ $isDisabled ? 'disabled' : '' }} wire:model.live="consequence_id" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                                 <option value="">-- Pilih --</option>
                                 @foreach ($consequencess as $cons)
@@ -383,7 +378,7 @@
                         </fieldset>
                         {{-- Likelihood --}}
                         <fieldset class="fieldset ">
-                            <label class="block ">Likelihood</label>
+                            <x-form.label label="Likelihood" required />
                             <select {{ $isDisabled ? 'disabled' : '' }} wire:model.live="likelihood_id" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                                 <option value="">-- Pilih --</option>
                                 @foreach ($likelihoodss as $like)

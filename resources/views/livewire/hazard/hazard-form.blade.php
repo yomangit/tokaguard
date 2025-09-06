@@ -188,8 +188,7 @@
                             }
                         });
                         ">
-                    <label class="block"></label>
-                    <x-form.label label="Lokasi Spesifik" required />
+                    <x-form.label label="Tanggal & Waktu" required />
                     <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                     <x-label-error :messages="$errors->get('tanggal')" />
                 </fieldset>
