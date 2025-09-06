@@ -1,6 +1,6 @@
 <section class="w-full">
     <x-toast />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> --}}
     @include('partials.manhours-heading')
     {{-- @livewire('hazard.hazard-form') --}}
     <x-manhours.layout>
