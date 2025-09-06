@@ -446,7 +446,7 @@
                                     @endphp
                                     <td class="border cursor-pointer w-4 
                                         @if($likelihood_id == $l->id && $consequence_id == $c->id) border-2 border-stone-500 @endif" >
-                                        <label wire:click="edit({{ $l->id }}, {{ $c->id }})" class="btn btn-square btn-xs {{ $color }}">{{ Str::upper(substr($severity, 0, 1)) }}</label>
+                                        <label wire:click="edit({{ $l->id }}, {{ $c->id }})" class="btn btn-square btn-xs   {{ $isDisabled ? 'btn btn-disabled' : "$color" }}">{{ Str::upper(substr($severity, 0, 1)) }}</label>
                                     </td>
 
                                     @endforeach
