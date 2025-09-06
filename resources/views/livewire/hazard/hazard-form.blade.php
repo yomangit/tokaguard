@@ -11,7 +11,7 @@
             @endif
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
                 <fieldset class="fieldset">
-                    <label class="block">Tipe Bahaya</label>
+                    <x-form.label label="Tipe Bahaya" required />
                     <select wire:model.live="tipe_bahaya" class="select select-xs select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
                         <option value="">-- Pilih --</option>
                         @foreach ($eventTypes as $et )
