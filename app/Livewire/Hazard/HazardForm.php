@@ -88,12 +88,12 @@ class HazardForm extends Component
     public $manualPelaporMode = false;
     public $manualPelaporName = '';
     public function rules()
-{
-    return [
-        'pelapor_id' => $this->manualPelaporMode ? 'nullable' : 'required',
-        'manualPelaporName' => $this->manualPelaporMode ? 'required|string|max:255' : 'nullable',
-    ];
-}
+    {
+        return [
+            'pelapor_id' => $this->manualPelaporMode ? 'nullable' : 'required',
+            'manualPelaporName' => $this->manualPelaporMode ? 'required|string|max:255' : 'nullable',
+        ];
+    }
     protected $messages = [
 
         'likelihood_id.required'     => 'likelihood wajib diisi.',
@@ -128,7 +128,7 @@ class HazardForm extends Component
     ];
     public function mount()
     {
-         if (Auth::check()) {
+        if (Auth::check()) {
             $this->pelapor_id = Auth::id();
             $this->searchPelapor = Auth::user()->name;
         }
@@ -279,13 +279,17 @@ class HazardForm extends Component
         $this->pelapor_id = $id;
         $this->searchPelapor = $name;
         $this->showPelaporDropdown = false;
-        $this->manualPelaporMode =false;
+        $this->manualPelaporMode = false;
         $this->validateOnly('pelapor_id');
     }
     public function updatedManualPelaporName($value)
     {
-        // Jika input manual, kosongkan pelapor_id
         $this->pelapor_id = 0;
+    }
+    public function addPelaporManual()
+    {
+        $this->searchPelapor = $this->manualPelaporName;
+        $this->showPelaporDropdown = false;
     }
     public function getIsFormValidProperty()
     {
