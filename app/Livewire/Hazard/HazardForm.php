@@ -21,6 +21,7 @@ use App\Events\HazardSubmitted;
 use App\Models\RiskConsequence;
 use App\Models\UnsafeCondition;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Auth;
 use App\Helpers\DateBeforeOrEqualToday;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\HazardSubmittedNotification;
@@ -53,6 +54,7 @@ class HazardForm extends Component
     public $consequence_id;
     #[Validate('required')]
     public $location_id;
+    #[Validate('required')]
     public $pelapor_id;
     #[Validate('required|string')]
     public $description;
@@ -85,6 +87,13 @@ class HazardForm extends Component
     public $tanggal;
     public $manualPelaporMode = false;
     public $manualPelaporName = '';
+    public function rules()
+{
+    return [
+        'pelapor_id' => $this->manualPelaporMode ? 'nullable' : 'required',
+        'manualPelaporName' => $this->manualPelaporMode ? 'required|string|max:255' : 'nullable',
+    ];
+}
     protected $messages = [
 
         'likelihood_id.required'     => 'likelihood wajib diisi.',
@@ -119,6 +128,10 @@ class HazardForm extends Component
     ];
     public function mount()
     {
+         if (Auth::check()) {
+            $this->pelapor_id = Auth::id();
+            $this->searchPelapor = Auth::user()->name;
+        }
         $this->likelihoods = Likelihood::orderByDesc('level')->get();
         $this->consequences = RiskConsequence::orderBy('level')->get();
     }
@@ -272,7 +285,7 @@ class HazardForm extends Component
     public function updatedManualPelaporName($value)
     {
         // Jika input manual, kosongkan pelapor_id
-        $this->pelapor_id = null;
+        $this->pelapor_id = 0;
     }
     public function getIsFormValidProperty()
     {
