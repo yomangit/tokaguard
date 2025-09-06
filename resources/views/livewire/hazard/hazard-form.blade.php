@@ -34,28 +34,44 @@
                     <x-label-error :messages="$errors->get('sub_tipe_bahaya')" />
                 </fieldset>
 
-                <fieldset class="fieldset ">
+                <fieldset class="fieldset">
                     <label class="block">Dilaporkan Oleh</label>
                     <div class="relative">
                         <!-- Input Search -->
                         <input type="text" wire:model.live.debounce.300ms="searchPelapor" placeholder="Cari Nama Pelapor..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+
                         <!-- Dropdown hasil search -->
-                        @if($showPelaporDropdown && count($pelapors) > 0)
+                        @if($showPelaporDropdown)
                         <ul class="absolute z-10 bg-base-100 border rounded-md w-full mt-1 max-h-60 overflow-auto shadow">
                             <!-- Spinner ketika klik -->
                             <div wire:loading wire:target="selectPelapor" class="p-2 text-center">
                                 <span class="loading loading-spinner loading-sm text-secondary"></span>
                             </div>
+
+                            @if(count($pelapors) > 0)
                             @foreach($pelapors as $pelapor)
                             <li wire:click="selectPelapor({{ $pelapor->id }}, '{{ $pelapor->name }}')" class="px-3 py-2 cursor-pointer hover:bg-base-200">
                                 {{ $pelapor->name }}
                             </li>
                             @endforeach
+                            @else
+                            <!-- Jika tidak ada hasil -->
+                            <li wire:click="$set('manualPelaporMode', true)" class="px-3 py-2 cursor-pointer text-warning hover:bg-base-200">
+                                Tidak ditemukan, tambah pelapor manual
+                            </li>
+                            @endif
                         </ul>
                         @endif
                     </div>
+
+                    <!-- Input manual jika mode manual aktif -->
+                    @if($manualPelaporMode)
+                    <input type="text" wire:model="manualPelaporName" placeholder="Masukkan nama pelapor..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                    @endif
+
                     <x-label-error :messages="$errors->get('pelapor_id')" />
                 </fieldset>
+
 
                 <fieldset>
                     <input id="department" value="department" wire:model="deptCont" class="peer/department radio radio-xs radio-accent" type="radio" name="deptCont" checked />

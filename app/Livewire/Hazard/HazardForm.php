@@ -53,7 +53,6 @@ class HazardForm extends Component
     public $consequence_id;
     #[Validate('required')]
     public $location_id;
-    #[Validate('required')]
     public $pelapor_id;
     #[Validate('required|string')]
     public $description;
@@ -84,6 +83,8 @@ class HazardForm extends Component
     public $tindakan_tidak_aman;
     #[Validate(['required', 'date', new DateBeforeOrEqualToday])]
     public $tanggal;
+    public $manualPelaporMode = false;
+    public $manualPelaporName = '';
     protected $messages = [
 
         'likelihood_id.required'     => 'likelihood wajib diisi.',
@@ -265,7 +266,13 @@ class HazardForm extends Component
         $this->pelapor_id = $id;
         $this->searchPelapor = $name;
         $this->showPelaporDropdown = false;
+        $this->manualPelaporMode =false;
         $this->validateOnly('pelapor_id');
+    }
+    public function updatedManualPelaporName($value)
+    {
+        // Jika input manual, kosongkan pelapor_id
+        $this->pelapor_id = null;
     }
     public function getIsFormValidProperty()
     {
@@ -285,7 +292,6 @@ class HazardForm extends Component
         $tanggal = Carbon::createFromFormat('d-m-Y H:i', $this->tanggal)->format('Y-m-d H:i:s');
         if ($this->doc_deskripsi) {
             $docDeskripsiPath = FileHelper::compressAndStore($this->doc_deskripsi, 'sebelum_perbaikan');
-            
         }
         if ($this->doc_corrective) {
             $docCorrectivePath = FileHelper::compressAndStore($this->doc_corrective, 'sesudah_perbaikan');
