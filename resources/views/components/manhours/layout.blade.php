@@ -4,10 +4,10 @@
         <flux:subheading>{{ $subheading ?? '' }}</flux:subheading>
 
         <div class="flex w-full flex-1 flex-col gap-4 rounded-xl 
-            h-[calc(100vh-14rem)] 
-            sm:max-h-[calc(100vh-8rem)] 
-            md:max-h-[35rem] 
-            lg:max-h-[35rem] 
+             h-[calc(100vh-16rem)] 
+            sm:max-h-[calc(100vh-9rem)] 
+            md:max-h-[calc(100vh-14rem)] 
+            lg:max-h-[calc(100vh-16rem)] 
             2xl:max-h-[41rem]">
             <div class="h-full flex-1 overflow-y-auto overflow-x-hidden rounded-xl border border-neutral-200 dark:border-base-200 p-4">
                 <div class="w-full max-w-full ">
