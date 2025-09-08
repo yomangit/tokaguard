@@ -128,7 +128,7 @@
                                 @else
                                 <!-- Jika tidak ada hasil & belum mode manual -->
                                 @if(!$manualPelaporMode)
-                                <li wire:click="$set('manualPelaporMode', true)" class="px-3 py-2 cursor-pointer text-warning hover:bg-base-200">
+                                 <li wire:click="enableManualPelapor" class="px-3 py-2 cursor-pointer text-warning hover:bg-base-200">
                                     Tidak ditemukan, tambah pelapor manual
                                 </li>
                                 @endif

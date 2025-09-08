@@ -466,6 +466,11 @@ class HazardDetail extends Component
         $this->showPelaporDropdown = false;
         $this->validateOnly('pelapor_id');
     }
+    public function enableManualPelapor()
+    {
+        $this->manualPelaporMode = true;
+        $this->manualPelaporName = $this->searchPelapor; // isi default sama dengan isi search
+    }
     public function updatedManualPelaporName($value)
     {
         $this->pelapor_id = null;
