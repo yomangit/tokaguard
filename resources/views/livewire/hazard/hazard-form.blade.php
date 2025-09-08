@@ -5,8 +5,8 @@
     {{-- @livewire('hazard.hazard-form') --}}
     <x-manhours.layout>
         {{-- <livewire:hazard.hazard-report-panel /> --}}
-       
-        <form wire:submit.prevent="submit">  {{-- saya mau tanggalnya nempel disini --}}
+
+        <form wire:submit.prevent="submit"> {{-- saya mau tanggalnya nempel disini --}}
             @if (session()->has('message'))
             <div class="p-2 bg-green-200 rounded mb-2">{{ session('message') }}</div>
             @endif
@@ -183,21 +183,23 @@
                     <x-label-error :messages="$errors->get('location_specific')" />
                 </fieldset>
                 @endif
-                <fieldset class=" fieldset" x-data x-init="
-                            flatpickr($refs.tanggalInput, {
-                                disableMobile: true,       // aktifkan jam
-                                enableTime: true,       // aktifkan jam
-                                dateFormat: 'd-m-Y H:i', // format untuk Livewire
-                                defaultDate: new Date(),
-                                onChange: function(selectedDates, dateStr) {
-                                    @this.set('tanggal', dateStr);
-                                }
-                            });
-                            ">
+                <fieldset class="fieldset relative" x-data x-init="
+        flatpickr($refs.tanggalInput, {
+            disableMobile: true,       // aktifkan jam
+            enableTime: true,          // aktifkan jam
+            dateFormat: 'd-m-Y H:i',   // format untuk Livewire
+            defaultDate: new Date(),
+            appendTo: $el,             // <-- kalender ditempel di dalam fieldset ini
+            onChange: function(selectedDates, dateStr) {
+                @this.set('tanggal', dateStr);
+            }
+        });
+    ">
                     <x-form.label label="Tanggal & Waktu" required />
                     <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." wire:model.live='tanggal' readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                     <x-label-error :messages="$errors->get('tanggal')" />
                 </fieldset>
+
             </div>
             <fieldset class="fieldset mb-4">
                 <x-form.label label="Deskripsi" required />
