@@ -134,11 +134,46 @@ select:focus[data-flux-control] {
     transform-origin: top left; /* biar ngecil dari pojok kiri atas */
 }
 
-/* kecilkan input waktu di bawah kalender */
-.flatpickr-time input,
-.flatpickr-time .flatpickr-time-separator,
-.flatpickr-time .flatpickr-am-pm {
-    font-size: 0.75rem;
-    height: 1.5rem;
+/* === Kalender Flatpickr kecil & menempel === */
+
+/* Kalender tempel ke input (hilangkan shadow & jarak berlebihan) */
+.fieldset .flatpickr-calendar {
+  position: absolute !important;
+  top: 100%;   /* tepat di bawah input */
+  left: 0;
+  margin-top: 0.25rem; /* jarak kecil */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  border-radius: 0.5rem;
+  font-size: 0.75rem; /* kecilkan ukuran */
+  z-index: 50; /* pastikan di atas elemen lain */
+}
+
+/* Header bulan & tahun */
+.flatpickr-months .flatpickr-month {
+  font-size: 0.8rem;
+}
+
+/* Tombol navigasi bulan */
+.flatpickr-prev-month,
+.flatpickr-next-month {
+  width: 20px;
+  height: 20px;
+  font-size: 0.75rem;
+}
+
+/* Hari dalam kalender */
+.flatpickr-day {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 0.7rem;
+  border-radius: 0.25rem;
+}
+
+/* Input waktu (jam & menit) */
+.flatpickr-time input {
+  height: 24px;
+  font-size: 0.75rem;
+  padding: 0 0.25rem;
 }
 
