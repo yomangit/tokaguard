@@ -183,7 +183,7 @@
                     <x-label-error :messages="$errors->get('location_specific')" />
                 </fieldset>
                 @endif
-                <fieldset x-ref="wrapperTanggal" class="fieldset relative" x-data x-init="
+                <fieldset class="fieldset relative" x-data x-init="
                         flatpickr($refs.tanggalInput, {
                             disableMobile: true,
                             enableTime: true,
@@ -195,7 +195,7 @@
                         });
                     ">
                     <x-form.label label="Tanggal & Waktu" required />
-                    <div  class="relative w-full">
+                    <div x-ref="wrapperTanggal" class="relative w-full">
                         <input type="text" x-ref="tanggalInput" wire:model.live="tanggal" placeholder="Pilih Tanggal dan Waktu..." readonly class="input input-bordered cursor-pointer w-full 
                       focus:ring-1 focus:border-info focus:ring-info 
                       focus:outline-hidden input-xs" />
