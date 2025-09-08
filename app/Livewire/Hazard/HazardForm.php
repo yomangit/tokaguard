@@ -54,7 +54,7 @@ class HazardForm extends Component
     public $consequence_id;
     #[Validate('required')]
     public $location_id;
-    #[Validate('required')]
+    // #[Validate('required')]
     public $pelapor_id;
     #[Validate('required|string')]
     public $description;
