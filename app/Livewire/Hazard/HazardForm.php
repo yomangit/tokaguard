@@ -291,7 +291,7 @@ class HazardForm extends Component
     }
     public function updatedManualPelaporName($value)
     {
-        $this->pelapor_id = null;
+        $this->pelapor_id = 0;
     }
 
     public function addPelaporManual()
