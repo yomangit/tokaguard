@@ -54,7 +54,7 @@ class HazardForm extends Component
     public $consequence_id;
     #[Validate('required')]
     public $location_id;
-    // #[Validate('required')]
+    #[Validate('required')]
     public $pelapor_id;
     #[Validate('required|string')]
     public $description;
@@ -291,14 +291,14 @@ class HazardForm extends Component
     }
     public function updatedManualPelaporName($value)
     {
-        $this->pelapor_id = 0;
+        $this->pelapor_id = null;
     }
 
     public function addPelaporManual()
     {
         $this->searchPelapor = $this->manualPelaporName;
         $this->showPelaporDropdown = false;
-        $this->pelapor_id = 0;
+        $this->pelapor_id = null;
     }
     public function getIsFormValidProperty()
     {
