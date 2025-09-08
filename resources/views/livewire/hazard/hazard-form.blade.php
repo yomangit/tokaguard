@@ -63,7 +63,7 @@
                             <!-- Input manual jika mode manual aktif -->
                             @if($manualPelaporMode)
                             <li class="relative p-2">
-                                <input type="text" wire:model.live="manualPelaporName" placeholder="Masukkan nama pelapor..." class="input input-bordered w-full pr-28 focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                                <input type="text" wire:model.live="manualPelaporName" placeholder="Masukkan nama pelapor..." class="input input-bordered w-full  focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                                 <!-- Tombol absolute di kanan -->
                                 <div>
                                     <flux:button size="xs" wire:click="addPelaporManual" icon="plus" variant="primary" >
