@@ -55,35 +55,37 @@
                             </li>
                             @endforeach
                             @else
-                            <!-- Jika tidak ada hasil -->
+                            <!-- Jika tidak ada hasil & belum mode manual -->
                             @if(!$manualPelaporMode)
                             <li wire:click="$set('manualPelaporMode', true)" class="px-3 py-2 cursor-pointer text-warning hover:bg-base-200">
                                 Tidak ditemukan, tambah pelapor manual
                             </li>
                             @endif
+                            @endif
 
+                            <!-- Input manual jika mode manual aktif -->
                             @if($manualPelaporMode)
                             <li class="relative p-2">
                                 <input type="text" wire:model.live="manualPelaporName" placeholder="Masukkan nama pelapor..." class="input input-bordered w-full pr-28 focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
 
                                 <!-- Tombol absolute di kanan -->
-                                <button wire:click="addPelaporManual" class="btn btn-success btn-xs absolute top-1 right-2 flex items-center gap-1">
-                                    <x-icon name="plus" class="w-3 h-3" /> Tambah
-                                </button>
+                                <flux:button size="xs" wire:click="addPelaporManual" icon="plus" variant="primary" class="!absolute top-1 right-2">
+                                    Tambah
+                                </flux:button>
                             </li>
                             @endif
-
                         </ul>
                         @endif
-                        <!-- Input manual jika mode manual aktif -->
                     </div>
+
+                    <!-- Error Message -->
                     @if($manualPelaporMode)
                     <x-label-error :messages="$errors->get('manualPelaporName')" />
                     @else
                     <x-label-error :messages="$errors->get('pelapor_id')" />
-
                     @endif
                 </fieldset>
+
 
 
                 <fieldset>
