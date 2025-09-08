@@ -184,11 +184,14 @@
                 </fieldset>
                 @endif
                 <fieldset class="fieldset relative" x-data x-init="
-                        flatpickr($refs.tanggalInput, {
+                        flatpickr($refs.tanggalInput, 
+                        {
                             disableMobile: true,
                             enableTime: true,
                             dateFormat: 'd-m-Y H:i',
                             appendTo: $refs.wrapperTanggal, // popup nempel ke wrapper
+                            allowInput: true,
+                            clickOpens: true,
                             onChange: function(selectedDates, dateStr) {
                                 @this.set('tanggal', dateStr);
                             }
@@ -236,7 +239,7 @@
                     @endif
                     <!-- Input asli (disembunyikan) -->
                     <input id="upload-deskripsi" wire:model.live='doc_deskripsi' type="file" class="hidden" onchange="document.getElementById('file-name').textContent = this.files[0]?.name ?? 'Belum ada file'" />
-                    <x-label-error :messages="$errors->get('tanggal')" />
+                    <x-label-error :messages="$errors->get('doc_deskripsi')" />
                 </fieldset>
             </div>
             <fieldset class="fieldset mb-4">
@@ -273,7 +276,7 @@
                     @endif
                     <!-- Input asli (disembunyikan) -->
                     <input id="upload-corrective" wire:model.live='doc_corrective' type="file" class="hidden" onchange="document.getElementById('file-name-corrective').textContent = this.files[0]?.name ?? 'Belum ada file'" />
-                    <x-label-error :messages="$errors->get('tanggal')" />
+                    <x-label-error :messages="$errors->get('doc_corrective')" />
                 </fieldset>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2  gap-4 mb-4 border border-gray-300 p-4 rounded">

@@ -137,9 +137,3 @@ select:focus[data-flux-control] {
     z-index: 50; /* biar tidak ketiban modal/form lain */
 }
 
-/* Supaya posisinya selalu tepat di bawah input */
-.flatpickr-calendar.inline {
-    position: absolute !important;
-    top: 100% !important;
-    margin-top: 0.25rem; /* kasih sedikit jarak */
-}
