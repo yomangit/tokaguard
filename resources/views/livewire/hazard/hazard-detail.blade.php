@@ -128,7 +128,7 @@
                                 @else
                                 <!-- Jika tidak ada hasil & belum mode manual -->
                                 @if(!$manualPelaporMode)
-                                 <li wire:click="enableManualPelapor" class="px-3 py-2 cursor-pointer text-warning hover:bg-base-200">
+                                <li wire:click="enableManualPelapor" class="px-3 py-2 cursor-pointer text-warning hover:bg-base-200">
                                     Tidak ditemukan, tambah pelapor manual
                                 </li>
                                 @endif
@@ -256,18 +256,32 @@
                     </fieldset>
                     @endif
 
-                    <fieldset class=" fieldset" x-data x-init="
-                            flatpickr($refs.tanggalInput, {
-                                disableMobile: true,       // aktifkan jam
-                                enableTime: true,       // aktifkan jam
-                                dateFormat: 'd-m-Y H:i', // format untuk Livewire
-                                onChange: function(selectedDates, dateStr) {
-                                    @this.set('tanggal', dateStr);
-                                }
-                            });
-                            ">
+                    <fieldset class="fieldset relative">
                         <x-form.label label="Tanggal & Waktu" required />
-                        <input {{ $isDisabled ? 'disabled' : '' }} type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." wire:model.live='tanggal' readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                        <div class="relative" wire:ignore x-data="{
+                            fp: null,
+                            initFlatpickr() {
+                                if (this.fp) this.fp.destroy();
+                                this.fp = flatpickr(this.$refs.tanggalInput, {
+                                    disableMobile: true,
+                                    enableTime: true,
+                                    dateFormat: 'd-m-Y H:i',
+                                    defaultDate: this.$wire.entangle('tanggal').defer,
+                                    clickOpens: true,
+                                    appendTo: this.$refs.wrapper,
+                                    onChange: (selectedDates, dateStr) => {
+                                        this.$wire.set('tanggal', dateStr);
+                                    }
+                                });
+                            }
+                        }" x-ref="wrapper" x-init="
+                            initFlatpickr();
+                            Livewire.hook('message.processed', () => {
+                                initFlatpickr();
+                            });
+                        ">
+                            <input {{ $isDisabled ? 'disabled' : '' }} type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                        </div>
                         <x-label-error :messages="$errors->get('tanggal')" />
                     </fieldset>
 
