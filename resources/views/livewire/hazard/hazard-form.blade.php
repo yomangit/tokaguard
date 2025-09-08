@@ -183,34 +183,35 @@
                     <x-label-error :messages="$errors->get('location_specific')" />
                 </fieldset>
                 @endif
-                <fieldset class="fieldset relative" x-data x-ref="wrapper" x-init="
-                            function initFlatpickr() {
-                                flatpickr($refs.tanggalInput, {
-                                    disableMobile: true,
-                                    enableTime: true,
-                                    dateFormat: 'd-m-Y H:i',
-                                    defaultDate: @entangle('tanggal').defer,
-                                    clickOpens: true,
-                                    appendTo: $refs.wrapper,
-                                    onChange: function(selectedDates, dateStr) {
-                                        @this.set('tanggal', dateStr);
-                                    }
-                                });
-                            }
-
-                            initFlatpickr();
-
-                            // re-init setiap Livewire selesai update
-                            Livewire.hook('message.processed', (message, component) => {
-                                initFlatpickr();
-                            });
-                        ">
+                <fieldset class="fieldset relative" x-data="{
+        fp: null,
+        initFlatpickr() {
+            if (this.fp) this.fp.destroy();
+            this.fp = flatpickr(this.$refs.tanggalInput, {
+                disableMobile: true,
+                enableTime: true,
+                dateFormat: 'd-m-Y H:i',
+                defaultDate: this.$wire.entangle('tanggal').defer,
+                clickOpens: true,
+                appendTo: this.$refs.wrapper,
+                onChange: (selectedDates, dateStr) => {
+                    this.$wire.set('tanggal', dateStr);
+                }
+            });
+        }
+    }" x-ref="wrapper" x-init="
+        initFlatpickr();
+        Livewire.hook('message.processed', () => {
+            initFlatpickr();
+        });
+    ">
                     <x-form.label label="Tanggal & Waktu" required />
                     <div class="relative" wire:ignore>
                         <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                     </div>
                     <x-label-error :messages="$errors->get('tanggal')" />
                 </fieldset>
+
             </div>
             <fieldset class="fieldset mb-4">
                 <x-form.label label="Deskripsi" required />
