@@ -182,20 +182,33 @@
                     <x-label-error :messages="$errors->get('location_specific')" />
                 </fieldset>
                 @endif
-                <fieldset class=" fieldset" x-data x-init="
-                            flatpickr($refs.tanggalInput, {
-                                disableMobile: true,       // aktifkan jam
-                                enableTime: true,       // aktifkan jam
-                                dateFormat: 'd-m-Y H:i', // format untuk Livewire
-                                appendTo: $el,
-                                onChange: function(selectedDates, dateStr) {
-                                    @this.set('tanggal', dateStr);
-                                }
-                            });
-                            ">
+                <fieldset class="fieldset relative" x-data>
                     <x-form.label label="Tanggal & Waktu" required />
-                    <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." wire:model.live='tanggal' readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                    <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." wire:model.live="tanggal" readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+
+                    <!-- tempat kalender nempel -->
+                    <div x-ref="calendarContainer" class="absolute w-full z-50"></div>
+
                     <x-label-error :messages="$errors->get('tanggal')" />
+
+                    <script>
+                        document.addEventListener("alpine:init", () => {
+                            Alpine.data("datepicker", () => ({
+                                init() {
+                                    flatpickr(this.$refs.tanggalInput, {
+                                        disableMobile: true
+                                        , enableTime: true
+                                        , dateFormat: 'd-m-Y H:i'
+                                        , appendTo: this.$refs.calendarContainer
+                                        , onChange: (selectedDates, dateStr) => {
+                                            this.$wire.set('tanggal', dateStr)
+                                        }
+                                    })
+                                }
+                            }))
+                        })
+
+                    </script>
                 </fieldset>
             </div>
             <fieldset class="fieldset mb-4">
