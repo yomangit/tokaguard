@@ -348,7 +348,7 @@ class HazardForm extends Component
             'consequence_id'         => $this->consequence_id,
             'likelihood_id'          => $this->likelihood_id,
             'risk_level'             => $riskLevel,
-            'manual_pelapor_name' => $this->pelapor_id ? User::find($this->pelapor_id)?->name : $this->manualPelaporName, // kalau tidak ada, ambil dari input manual
+            'manualPelaporName' => $this->pelapor_id ? User::find($this->pelapor_id)?->name : $this->manualPelaporName, // kalau tidak ada, ambil dari input manual
         ]);
         $ermUsers = ErmAssignment::where('department_id', $hazard->department_id)
             ->orWhere('contractor_id', $hazard->contractor_id)
