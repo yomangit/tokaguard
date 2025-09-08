@@ -329,12 +329,13 @@ class HazardForm extends Component
                 ->where('risk_consequence_id', $this->consequence_id)
                 ->value('severity');
         }
+        $pelaporId = $this->pelapor_id ?: null;
         $hazard = Hazard::create([
             'event_type_id'          => $this->tipe_bahaya,
             'event_sub_type_id'      => $this->sub_tipe_bahaya,
             'department_id'          => $this->department_id,
             'contractor_id'          => $this->contractor_id,
-            'pelapor_id'             => $this->pelapor_id,
+            'pelapor_id'             => $pelaporId,
             'penanggung_jawab_id'    => $this->penanggungJawab,
             'location_id'            => $this->location_id,
             'location_specific'      => $this->location_specific,
