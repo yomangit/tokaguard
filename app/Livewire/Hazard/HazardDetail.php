@@ -66,7 +66,7 @@ class HazardDetail extends Component
     public $consequence_id;
     #[Validate('required')]
     public $location_id;
-    #[Validate('required')]
+    #[Validate]
     public $pelapor_id;
     #[Validate('required')]
     public $description;
@@ -194,9 +194,6 @@ class HazardDetail extends Component
         if ($this->location_id) {
             $this->searchLocation = Location::find($this->location_id)?->name ?? '';
         }
-
-        // ✅ Penanggung Jawab (dropdown biasa, cukup load listnya)
-        // $this->penanggungJawabOptions = User::select('id', 'name')->get()->toArray();
 
         if ($this->department_id) {
             $this->deptCont = 'department';
