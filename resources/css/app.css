@@ -128,5 +128,17 @@ select:focus[data-flux-control] {
 }
 
 /* Flatpickr biar full width */
+.flatpickr-calendar {
+    font-size: 0.75rem; /* sama dengan text-sm Tailwind */
+    transform: scale(0.9); /* perkecil keseluruhan */
+    transform-origin: top left; /* biar ngecil dari pojok kiri atas */
+}
 
+/* kecilkan input waktu di bawah kalender */
+.flatpickr-time input,
+.flatpickr-time .flatpickr-time-separator,
+.flatpickr-time .flatpickr-am-pm {
+    font-size: 0.75rem;
+    height: 1.5rem;
+}
 
