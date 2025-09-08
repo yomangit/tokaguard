@@ -177,36 +177,36 @@
 
                 {{-- Lokasi spesifik muncul hanya jika lokasi utama sudah dipilih --}}
                 @if($location_id)
-                <fieldset  class="fieldset">
+                <fieldset class="fieldset">
                     <x-form.label label="Lokasi Spesifik" required />
                     <input type="text" wire:model.live="location_specific" placeholder="Masukkan detail lokasi spesifik..." class=" input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                     <x-label-error :messages="$errors->get('location_specific')" />
                 </fieldset>
                 @endif
-                <fieldset  wire:ignore class="fieldset relative" x-data="{
-        fp: null,
-        initFlatpickr() {
-            if (this.fp) this.fp.destroy();
-            this.fp = flatpickr(this.$refs.tanggalInput, {
-                disableMobile: true,
-                enableTime: true,
-                dateFormat: 'd-m-Y H:i',
-                defaultDate: this.$wire.entangle('tanggal').defer,
-                clickOpens: true,
-                appendTo: this.$refs.wrapper,
-                onChange: (selectedDates, dateStr) => {
-                    this.$wire.set('tanggal', dateStr);
-                }
-            });
-        }
-    }" x-ref="wrapper" x-init="
-        initFlatpickr();
-        Livewire.hook('message.processed', () => {
-            initFlatpickr();
-        });
-    ">
+                <fieldset  class="fieldset relative">
                     <x-form.label label="Tanggal & Waktu" required />
-                    <div class="relative">
+                    <div class="relative" wire:ignore x-data="{
+                            fp: null,
+                            initFlatpickr() {
+                                if (this.fp) this.fp.destroy();
+                                this.fp = flatpickr(this.$refs.tanggalInput, {
+                                    disableMobile: true,
+                                    enableTime: true,
+                                    dateFormat: 'd-m-Y H:i',
+                                    defaultDate: this.$wire.entangle('tanggal').defer,
+                                    clickOpens: true,
+                                    appendTo: this.$refs.wrapper,
+                                    onChange: (selectedDates, dateStr) => {
+                                        this.$wire.set('tanggal', dateStr);
+                                    }
+                                });
+                            }
+                        }" x-ref="wrapper" x-init="
+                            initFlatpickr();
+                            Livewire.hook('message.processed', () => {
+                                initFlatpickr();
+                            });
+                        ">
                         <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                     </div>
                     <x-label-error :messages="$errors->get('tanggal')" />
