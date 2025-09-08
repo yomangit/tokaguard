@@ -544,7 +544,7 @@ class HazardDetail extends Component
             'consequence_id'         => $this->consequence_id,
             'likelihood_id'          => $this->likelihood_id,
             'risk_level'             => $riskLevel,
-            'manual_pelapor_name' => $this->pelapor_id ? User::find($this->pelapor_id)?->name : $this->manualPelaporName,
+            'manualPelaporName' => $this->pelapor_id ? User::find($this->pelapor_id)?->name : $this->manualPelaporName,
         ];
 
         // Hanya update kalau ada file baru
