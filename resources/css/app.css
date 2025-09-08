@@ -128,12 +128,5 @@ select:focus[data-flux-control] {
 }
 
 /* Flatpickr biar full width */
-.flatpickr-calendar {
-    position: absolute !important;
-    top: 100% !important; /* tepat di bawah input */
-    left: 0 !important;
-    width: 100% !important;
-    margin-top: 0.25rem; /* jarak kecil */
-    z-index: 50; /* biar tidak ketiban modal/form lain */
-}
+
 
