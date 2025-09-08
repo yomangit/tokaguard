@@ -183,23 +183,26 @@
                     <x-label-error :messages="$errors->get('location_specific')" />
                 </fieldset>
                 @endif
-                <fieldset class="fieldset relative" x-data x-init="
+                <fieldset class="fieldset relative" x-data x-ref="wrapper" x-init="
         flatpickr($refs.tanggalInput, {
             disableMobile: true,
             enableTime: true,
             dateFormat: 'd-m-Y H:i',
             defaultDate: new Date(),
             clickOpens: true,
-            appendTo: $refs.wrapper, // tempel ke wrapper fieldset
+            appendTo: $refs.wrapper, // tempel ke wrapper ini
             onChange: function(selectedDates, dateStr) {
                 @this.set('tanggal', dateStr);
             }
         });
-    " x-ref="wrapper">
+    ">
                     <x-form.label label="Tanggal & Waktu" required />
-                    <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." wire:model.live="tanggal" readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                    <div class="relative">
+                        <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." wire:model.live="tanggal" readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                    </div>
                     <x-label-error :messages="$errors->get('tanggal')" />
                 </fieldset>
+
 
 
 

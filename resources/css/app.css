@@ -137,15 +137,16 @@ select:focus[data-flux-control] {
 /* === Kalender Flatpickr kecil & menempel === */
 
 /* Kalender tempel ke input (hilangkan shadow & jarak berlebihan) */
+/* Flatpickr dalam fieldset */
 .fieldset .flatpickr-calendar {
   position: absolute !important;
-  top: 100%;   /* tepat di bawah input */
-  left: 0;
-  margin-top: 0.25rem; /* jarak kecil */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  top: 100% !important;   /* langsung di bawah input */
+  left: 0 !important;
+  margin-top: 0.25rem;    /* kasih jarak kecil */
+  z-index: 9999 !important; /* biar di atas elemen lain */
+  font-size: 0.75rem;     /* kecilkan biar rapi */
   border-radius: 0.5rem;
-  font-size: 0.75rem; /* kecilkan ukuran */
-  z-index: 50; /* pastikan di atas elemen lain */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 /* Header bulan & tahun */
