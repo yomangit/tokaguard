@@ -65,10 +65,11 @@
                             <li class="p-2">
                                 <div class="relative w-full">
                                     <input type="text" wire:model.live="manualPelaporName" placeholder="Masukkan nama pelapor..." class="input input-bordered w-full pr-20 focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
-
-                                    <flux:button size="xs" wire:click="addPelaporManual" icon="plus" variant="primary" class="!absolute top-1/2 -translate-y-1/2 right-2">
-                                        Tambah
-                                    </flux:button>
+                                    <div class="!absolute top-1/2 -translate-y-1/2 right-2">
+                                        <flux:button size="xs" wire:click="addPelaporManual" icon="plus" variant="primary">
+                                            Tambah
+                                        </flux:button>
+                                    </div>
                                 </div>
                             </li>
 
