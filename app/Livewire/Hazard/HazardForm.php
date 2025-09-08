@@ -299,7 +299,6 @@ class HazardForm extends Component
         $this->searchPelapor = $this->manualPelaporName;
         $this->showPelaporDropdown = false;
         $this->pelapor_id = 0;
-        dd($this->pelapor_id);
     }
     public function getIsFormValidProperty()
     {
