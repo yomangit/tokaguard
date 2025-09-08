@@ -16,7 +16,7 @@
             @php
             $isDisabled = in_array(optional($hazards)->status, ['cancelled', 'closed']);
             @endphp
-            <div class="flex items-stretch gap-2">
+            <div class="flex flex-col md:flex-row md:items-stretch gap-2">
                 {{-- PROCEED TO --}}
                 <div class="max-w-sm">
                     <label class="label">

@@ -1,5 +1,5 @@
 <div class="flex  flex-col ">
-    <div class=" hidden md:block w-full">
+    <div class=" hidden md:block w-60">
         <flux:navlist-horizontal>
             <flux:navlist-horizontal.item :href="route('departmentUserManager')" :current="request()->routeIs(  'departmentUserManager' )" wire:navigate>{{ __('Depertement User Manager') }}</flux:navlist-horizontal.item>
             <flux:navlist-horizontal.item :href="route('contractorUserManager')" :current="request()->routeIs(  'contractorUserManager' )" wire:navigate>{{ __('Contractor User Manager') }}</flux:navlist-horizontal.item>
