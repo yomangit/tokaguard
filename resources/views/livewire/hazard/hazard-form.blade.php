@@ -197,7 +197,7 @@
         });
     ">
                     <x-form.label label="Tanggal & Waktu" required />
-                    <div class="relative">
+                    <div wire:ignore class="relative">
                         <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." wire:model.live="tanggal" readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                     </div>
                     <x-label-error :messages="$errors->get('tanggal')" />
