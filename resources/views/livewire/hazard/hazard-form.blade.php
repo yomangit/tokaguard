@@ -5,7 +5,7 @@
     {{-- @livewire('hazard.hazard-form') --}}
     <x-manhours.layout>
         {{-- <livewire:hazard.hazard-report-panel /> --}}
-        <form wire:submit.prevent="submit">
+        <form x-ref="calendarContainer" wire:submit.prevent="submit">
             @if (session()->has('message'))
             <div class="p-2 bg-green-200 rounded mb-2">{{ session('message') }}</div>
             @endif
@@ -187,7 +187,6 @@
                     <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." wire:model.live="tanggal" readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
 
                     <!-- tempat kalender nempel -->
-                    <div x-ref="calendarContainer" class="absolute w-full z-50"></div>
 
                     <x-label-error :messages="$errors->get('tanggal')" />
 
