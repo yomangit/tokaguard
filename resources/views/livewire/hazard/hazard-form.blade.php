@@ -184,21 +184,29 @@
                 </fieldset>
                 @endif
                 <fieldset class="fieldset relative" x-data x-init="
-        flatpickr($refs.tanggalInput, {
-            disableMobile: true,       // aktifkan jam
-            enableTime: true,          // aktifkan jam
-            dateFormat: 'd-m-Y H:i',   // format untuk Livewire
+        let fp = flatpickr($refs.tanggalInput, {
+            disableMobile: true,
+            enableTime: true,
+            dateFormat: 'd-m-Y H:i',
             defaultDate: new Date(),
-            appendTo: $el,             // <-- kalender ditempel di dalam fieldset ini
+            appendTo: $el,
+            clickOpens: true,
+            allowInput: false, // biar ga error pas readonly
             onChange: function(selectedDates, dateStr) {
                 @this.set('tanggal', dateStr);
             }
+        });
+
+        // Paksa tetap bisa dibuka setiap klik input
+        $refs.tanggalInput.addEventListener('click', () => {
+            fp.open();
         });
     ">
                     <x-form.label label="Tanggal & Waktu" required />
                     <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." wire:model.live='tanggal' readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                     <x-label-error :messages="$errors->get('tanggal')" />
                 </fieldset>
+
 
             </div>
             <fieldset class="fieldset mb-4">
