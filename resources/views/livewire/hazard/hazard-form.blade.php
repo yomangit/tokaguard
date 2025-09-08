@@ -188,6 +188,7 @@
                                 disableMobile: true,       // aktifkan jam
                                 enableTime: true,       // aktifkan jam
                                 dateFormat: 'd-m-Y H:i', // format untuk Livewire
+                                defaultDate: new Date()
                                 onChange: function(selectedDates, dateStr) {
                                     @this.set('tanggal', dateStr);
                                 }
