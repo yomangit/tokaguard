@@ -32,7 +32,7 @@
                             {{ str_replace('_', ' ', $report->status) }}
                         </span>
                     </td>
-                    <td class="border px-2 py-1">{{ $report->pelapor->name ?? '-' }}</td>
+                    <td class="border px-2 py-1">{{ $report->pelapor->name ?? $report->manualPelaporName }}</td>
                     <td class="border px-2 py-1">{{ $report->created_at->format('d M Y') }}</td>
                     <td>
                         @if(

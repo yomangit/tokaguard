@@ -171,7 +171,7 @@ class HazardDetail extends Component
             $this->manualPelaporName = $this->searchPelapor; // biar konsisten juga
         } else {
             // ✅ Jika pelapor_id null → pakai manualPelaporName dari DB
-            $this->manualPelaporName = $this->hazards->manual_pelapor_name ?? '';
+            $this->manualPelaporName = $this->hazards->manualPelaporName ?? '';
             $this->searchPelapor     = $this->manualPelaporName;
             $this->manualPelaporMode = true; // langsung aktifkan mode input manual
         }
