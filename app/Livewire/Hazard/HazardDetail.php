@@ -99,6 +99,15 @@ class HazardDetail extends Component
     public $tindakan_tidak_aman;
     #[Validate('required|date')]
     public $tanggal;
+    public $manualPelaporMode = false;
+    public $manualPelaporName = '';
+    public function rules()
+    {
+        return [
+            'pelapor_id' => $this->manualPelaporMode ? 'nullable' : 'required',
+            'manualPelaporName' => $this->manualPelaporMode ? 'required|string|max:255' : 'nullable',
+        ];
+    }
     protected $messages = [
 
         'likelihood_id.required'     => 'likelihood wajib diisi.',
@@ -157,7 +166,14 @@ class HazardDetail extends Component
         $this->likelihood_id = $this->hazards->likelihood_id;
         // ✅ Load nama untuk ditampilkan di search input
         if ($this->pelapor_id) {
+            // ✅ Jika pelapor_id ada → ambil nama user
             $this->searchPelapor = User::find($this->pelapor_id)?->name ?? '';
+            $this->manualPelaporName = $this->searchPelapor; // biar konsisten juga
+        } else {
+            // ✅ Jika pelapor_id null → pakai manualPelaporName dari DB
+            $this->manualPelaporName = $this->hazards->manual_pelapor_name ?? '';
+            $this->searchPelapor     = $this->manualPelaporName;
+            $this->manualPelaporMode = true; // langsung aktifkan mode input manual
         }
         if ($this->department_id) {
             $department = Department::with('users')->find($this->department_id);
@@ -433,6 +449,8 @@ class HazardDetail extends Component
     }
     public function updatedSearchPelapor()
     {
+        $this->reset('manualPelaporName');
+        $this->manualPelaporMode = false;
         if (strlen($this->searchPelapor) > 1) {
             $this->pelapors = User::where('name', 'like', '%' . $this->searchPelapor . '%')
                 ->orderBy('name')
@@ -450,6 +468,15 @@ class HazardDetail extends Component
         $this->searchPelapor = $name;
         $this->showPelaporDropdown = false;
         $this->validateOnly('pelapor_id');
+    }
+    public function updatedManualPelaporName($value)
+    {
+        $this->pelapor_id = null;
+    }
+    public function addPelaporManual()
+    {
+        $this->searchPelapor = $this->manualPelaporName;
+        $this->showPelaporDropdown = false;
     }
     public function getIsFormValidProperty()
     {
@@ -515,6 +542,7 @@ class HazardDetail extends Component
             'consequence_id'         => $this->consequence_id,
             'likelihood_id'          => $this->likelihood_id,
             'risk_level'             => $riskLevel,
+            'manual_pelapor_name' => $this->pelapor_id ? User::find($this->pelapor_id)?->name : $this->manualPelaporName,
         ];
 
         // Hanya update kalau ada file baru

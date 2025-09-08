@@ -16,6 +16,7 @@ class Hazard extends Model
         'contractor_id',
         'penanggung_jawab_id',
         'pelapor_id',
+        'manualPelaporName',
         'location_id',
         'location_specific',
         'tanggal',

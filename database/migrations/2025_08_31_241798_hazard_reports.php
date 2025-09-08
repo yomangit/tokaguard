@@ -26,6 +26,7 @@ return new class extends Migration
             // Penanggung jawab area/pelapor
             $table->foreignId('penanggung_jawab_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('pelapor_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->string('manualPelaporName')->nullable(); // path file
 
             // Lokasi
             $table->foreignId('location_id')->nullable()->constrained('locations')->nullOnDelete();

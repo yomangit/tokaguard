@@ -263,6 +263,7 @@ class HazardForm extends Component
     }
     public function updatedSearchPelapor()
     {
+        $this->reset('manualPelaporName');
         $this->manualPelaporMode = false;
         if (strlen($this->searchPelapor) > 1) {
             $this->pelapors = User::where('name', 'like', '%' . $this->searchPelapor . '%')
@@ -270,7 +271,6 @@ class HazardForm extends Component
                 ->limit(10)
                 ->get();
             $this->showPelaporDropdown = true;
-             
         } else {
             $this->pelapors = [];
             $this->showPelaporDropdown = false;
@@ -286,7 +286,7 @@ class HazardForm extends Component
     }
     public function updatedManualPelaporName($value)
     {
-        $this->pelapor_id = 0;
+        $this->pelapor_id = null;
     }
     public function addPelaporManual()
     {
@@ -342,6 +342,7 @@ class HazardForm extends Component
             'consequence_id'         => $this->consequence_id,
             'likelihood_id'          => $this->likelihood_id,
             'risk_level'             => $riskLevel,
+            'manual_pelapor_name' => $this->pelapor_id ? User::find($this->pelapor_id)?->name : $this->manualPelaporName, // kalau tidak ada, ambil dari input manual
         ]);
         $ermUsers = ErmAssignment::where('department_id', $hazard->department_id)
             ->orWhere('contractor_id', $hazard->contractor_id)
