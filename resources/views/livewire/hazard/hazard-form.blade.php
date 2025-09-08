@@ -184,28 +184,33 @@
                 </fieldset>
                 @endif
                 <fieldset class="fieldset relative" x-data x-ref="wrapper" x-init="
-                        flatpickr($refs.tanggalInput, {
-                            disableMobile: true,
-                            enableTime: true,
-                            dateFormat: 'd-m-Y H:i',
-                            defaultDate: new Date(),
-                            clickOpens: true,
-                            appendTo: $refs.wrapper, // tempel ke wrapper ini
-                            onChange: function(selectedDates, dateStr) {
-                                @this.set('tanggal', dateStr);
+                            function initFlatpickr() {
+                                flatpickr($refs.tanggalInput, {
+                                    disableMobile: true,
+                                    enableTime: true,
+                                    dateFormat: 'd-m-Y H:i',
+                                    defaultDate: @entangle('tanggal').defer,
+                                    clickOpens: true,
+                                    appendTo: $refs.wrapper,
+                                    onChange: function(selectedDates, dateStr) {
+                                        @this.set('tanggal', dateStr);
+                                    }
+                                });
                             }
-                        });
-                    ">
+
+                            initFlatpickr();
+
+                            // re-init setiap Livewire selesai update
+                            Livewire.hook('message.processed', (message, component) => {
+                                initFlatpickr();
+                            });
+                        ">
                     <x-form.label label="Tanggal & Waktu" required />
-                    <div wire:ignore class="relative">
-                        <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." wire:model.live="tanggal" readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                    <div class="relative" wire:ignore>
+                        <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                     </div>
                     <x-label-error :messages="$errors->get('tanggal')" />
                 </fieldset>
-
-
-
-
             </div>
             <fieldset class="fieldset mb-4">
                 <x-form.label label="Deskripsi" required />
