@@ -190,8 +190,7 @@
                             enableTime: true,
                             dateFormat: 'd-m-Y H:i',
                             appendTo: $refs.wrapperTanggal, // popup nempel ke wrapper
-                            allowInput: true,
-                            clickOpens: true,
+                            static: true,
                             onChange: function(selectedDates, dateStr) {
                                 @this.set('tanggal', dateStr);
                             }
