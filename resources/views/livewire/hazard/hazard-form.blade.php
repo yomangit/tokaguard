@@ -5,7 +5,8 @@
     {{-- @livewire('hazard.hazard-form') --}}
     <x-manhours.layout>
         {{-- <livewire:hazard.hazard-report-panel /> --}}
-        <form x-ref="calendarContainer" wire:submit.prevent="submit">
+
+        <form wire:submit.prevent="submit"> {{-- saya mau tanggalnya nempel disini --}}
             @if (session()->has('message'))
             <div class="p-2 bg-green-200 rounded mb-2">{{ session('message') }}</div>
             @endif
@@ -182,33 +183,29 @@
                     <x-label-error :messages="$errors->get('location_specific')" />
                 </fieldset>
                 @endif
-                <fieldset class="fieldset relative" x-data>
-                    <x-form.label label="Tanggal & Waktu" required />
-                    <input type="text" x-ref="tanggalInput" placeholder="Pilih Tanggal dan Waktu..." wire:model.live="tanggal" readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                <fieldset class="fieldset relative" x-data x-init="
+              flatpickr($refs.tanggalInput, {
+                  disableMobile: true,
+                  enableTime: true,
+                  dateFormat: 'd-m-Y H:i',
+                  appendTo: $refs.wrapperTanggal, // popup nempel ke wrapper
+                  onChange: function(selectedDates, dateStr) {
+                      @this.set('tanggal', dateStr);
+                  }
+              });
+          ">
 
-                    <!-- tempat kalender nempel -->
+                    <x-form.label label="Tanggal & Waktu" required />
+
+                    <div x-ref="wrapperTanggal" class="relative w-full">
+                        <input type="text" x-ref="tanggalInput" wire:model.live="tanggal" placeholder="Pilih Tanggal dan Waktu..." readonly class="input input-bordered cursor-pointer w-full 
+                      focus:ring-1 focus:border-info focus:ring-info 
+                      focus:outline-hidden input-xs" />
+                    </div>
 
                     <x-label-error :messages="$errors->get('tanggal')" />
-
-                    <script>
-                        document.addEventListener("alpine:init", () => {
-                            Alpine.data("datepicker", () => ({
-                                init() {
-                                    flatpickr(this.$refs.tanggalInput, {
-                                        disableMobile: true
-                                        , enableTime: true
-                                        , dateFormat: 'd-m-Y H:i'
-                                        , appendTo: this.$refs.calendarContainer
-                                        , onChange: (selectedDates, dateStr) => {
-                                            this.$wire.set('tanggal', dateStr)
-                                        }
-                                    })
-                                }
-                            }))
-                        })
-
-                    </script>
                 </fieldset>
+
             </div>
             <fieldset class="fieldset mb-4">
                 <x-form.label label="Deskripsi" required />

@@ -126,3 +126,17 @@ select:focus[data-flux-control] {
 .ck-editor {
     width: 100% !important; /* biar responsif */
 }
+
+/* Flatpickr biar full width */
+.flatpickr-calendar {
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+}
+
+/* Supaya posisinya selalu tepat di bawah input */
+.flatpickr-calendar.inline {
+    position: absolute !important;
+    top: 100% !important;
+    margin-top: 0.25rem; /* kasih sedikit jarak */
+}
