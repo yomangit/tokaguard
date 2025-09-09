@@ -411,9 +411,8 @@
                                 default => 'bg-gray-100',
                                 };
                                 @endphp
-
                                 <td class="border cursor-pointer  @if($likelihood_id == $l->id && $consequence_id == $c->id) border-2 border-stone-500 @endif">
-                                    <span wire:click="edit({{ $l->id }}, {{ $c->id }})" class="btn btn-square btn-xs {{ $color}}>{{ Str::upper(substr($severity, 0, 1)) }}</span>
+                                    <span wire:click="edit({{ $l->id }}, {{ $c->id }})" class="btn btn-square btn-xs   {{ $color}}">{{ Str::upper(substr($severity, 0, 1)) }}</span>
                                 </td>
                                 @endforeach
                             </tr>
