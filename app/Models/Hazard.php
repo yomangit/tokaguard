@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\HazardStatus;
+use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Models\Activity;
 
@@ -42,9 +43,12 @@ class Hazard extends Model
     protected static $logOnlyDirty = true; // hanya log kalau ada perubahan
     protected static $logName = 'hazard_report';
 
-    public function getDescriptionForEvent(string $eventName): string
+    public function getActivitylogOptions(): LogOptions
     {
-        return "Laporan hazard {$eventName}";
+        return LogOptions::defaults()
+            ->useLogName('hazard_report')
+            ->logOnly(['status', 'penanggung_jawab_id', 'immediate_corrective_action'])
+            ->logOnlyDirty(); // hanya field berubah yang dicatat
     }
     // relasi ke logs
     public function activities()
