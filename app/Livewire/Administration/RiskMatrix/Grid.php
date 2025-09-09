@@ -5,8 +5,10 @@ namespace App\Livewire\Administration\RiskMatrix;
 use Flux\Flux;
 use Livewire\Component;
 use App\Models\Likelihood;
+use App\Models\RiskAssessment;
 use App\Models\RiskMatrixCell;
 use App\Models\RiskConsequence;
+use App\Models\RiskAssessmentMatrix;
 
 class Grid extends Component
 {
@@ -48,6 +50,15 @@ class Grid extends Component
                 'severity' => $this->severity,
                 'description' => $this->description,
                 'action' => $this->action,
+            ]
+        );
+         $risk_assessment_id =  RiskAssessment::where('risk_assessments_name', 'like', '%' . $this->severity . '%')->first()->id;
+        RiskAssessmentMatrix::updateOrCreate(
+            [
+                'risk_matrix_cell_id' =>  $this->editingCellId,
+            ],
+            [
+                'risk_assessment_id' =>  $risk_assessment_id,
             ]
         );
          $this->dispatch(
