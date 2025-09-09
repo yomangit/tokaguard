@@ -14,7 +14,7 @@
                 </span>
 
                 {{-- Tombol buka modal --}}
-                <flux:button size="xs" wire:click="addPelaporManual" icon="clock" variant="primary" onclick="my_modal_2.showModal()"></flux:button>
+                <flux:button size="xs"  icon="clock" variant="primary" onclick="my_modal_2.showModal()"></flux:button>
                 {{-- Modal DaisyUI --}}
                 <dialog class="modal" id="my_modal_2" role="dialog">
                     <div class="modal-box max-w-4xl">
