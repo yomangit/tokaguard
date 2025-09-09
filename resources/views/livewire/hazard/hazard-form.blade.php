@@ -6,7 +6,7 @@
     <x-manhours.layout>
         {{-- <livewire:hazard.hazard-report-panel /> --}}
 
-        <form wire:submit.prevent="submit"> {{-- saya mau tanggalnya nempel disini --}}
+        <form wire:submit.prevent="submit"> 
          
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
                 <fieldset class="fieldset">
