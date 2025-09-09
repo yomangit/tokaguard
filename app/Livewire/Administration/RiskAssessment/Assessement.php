@@ -113,7 +113,7 @@ class Assessement extends Component
 
     public function resetForm()
     {
-        $this->reset(['name', 'action_days', 'coordinator','reporting_obligation','notes', 'riskConsequenceId', 'isEditing']);
+        $this->reset(['name', 'action_days', 'coordinator','reporting_obligation','notes', 'riskAssessmentId', 'isEditing']);
     }
     public function render()
     {
