@@ -61,12 +61,20 @@
 
                 {{-- TOMBOL SIMPAN --}}
                 <div class="card-actions justify-end self-end mt-1">
-                    <div x-data="{ proceedTo: @entangle('proceedTo') }" class="card-actions justify-end">
+                    <div x-data="{ proceedTo: @entangle('proceedTo') }" class="card-actions justify-end hidden md:block">
                         <div class="tooltip ">
                             <div class="tooltip-content z-40">
                                 <div class="animate-bounce text-orange-400  text-sm font-black">Kirim</div>
                             </div>
                             <flux:button size="xs" wire:click="processAction" icon:trailing="send" variant="primary"></flux:button>
+                        </div>
+                    </div>
+                    <div x-data="{ proceedTo: @entangle('proceedTo') }" class="card-actions justify-end block md:hidden">
+                        <div class="tooltip ">
+                            <div class="tooltip-content z-40">
+                                <div class="animate-bounce text-orange-400  text-sm font-black">Kirim</div>
+                            </div>
+                            <flux:button size="xs" wire:click="processAction" icon:trailing="send" class="w-full" variant="primary">Kirim</flux:button>
                         </div>
                     </div>
                 </div>
