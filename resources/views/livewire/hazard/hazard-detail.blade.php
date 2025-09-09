@@ -16,7 +16,7 @@
                 </div>
 
                 {{-- Tombol buka modal --}}
-                <flux:button size="xs" variant="primary" icon='clock' onclick="my_modal_2.showModal()"></flux:button>
+                <flux:button size="xs" variant="accent" icon='clock' onclick="my_modal_2.showModal()"></flux:button>
             </div>
 
             @php
