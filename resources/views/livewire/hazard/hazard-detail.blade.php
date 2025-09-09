@@ -4,67 +4,29 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <div class="card bg-base-100 shadow-md mb-2 ">
         <div class="card-body py-2 px-4 ">
-            {{-- STATUS --}}
-            <div class="flex gap-2 items-center">
-                <label class="label">
-                    <span class="label-text text-xs font-semibold">Status :</span>
-                </label>
-                <span class="text-green-600 italic text-xs capitalize">
-                    {{ $hazards->status }}
-                </span>
+            {{-- STATUS + Tombol Audit Trail --}}
+            <div class="flex justify-between items-center">
+                <div class="flex gap-2 items-center">
+                    <label class="label">
+                        <span class="label-text text-xs font-semibold">Status :</span>
+                    </label>
+                    <span class="text-green-600 italic text-xs capitalize">
+                        {{ $hazards->status }}
+                    </span>
+                </div>
 
                 {{-- Tombol buka modal --}}
-                <flux:button size="xs"  icon="clock" variant="primary" onclick="my_modal_2.showModal()"></flux:button>
-                {{-- Modal DaisyUI --}}
-                <dialog class="modal" id="my_modal_2" role="dialog">
-                    <div class="modal-box max-w-4xl">
-                        <form method="dialog">
-                            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                        </form>
-                        <h3 class="text-lg font-bold mb-2">Audit Trail</h3>
-                        <table class="table table-sm w-full border">
-                            <thead>
-                                <tr class="bg-gray-100">
-                                    <th class="border px-2 py-1">Tanggal</th>
-                                    <th class="border px-2 py-1">User</th>
-                                    <th class="border px-2 py-1">Perubahan</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($report->activities as $activity)
-                                <tr>
-                                    <td class="border px-2 py-1">{{ $activity->created_at->format('d-m-Y H:i') }}</td>
-                                    <td class="border px-2 py-1">{{ $activity->causer->name ?? 'System' }}</td>
-                                    <td class="border px-2 py-1">
-                                        @foreach(($activity->changes['attributes'] ?? []) as $field => $new)
-                                        <div>
-                                            <strong>{{ ucfirst(str_replace('_', ' ', $field)) }}</strong>:
-                                            <span class="text-red-500">{{ $activity->changes['old'][$field] ?? '-' }}</span>
-                                            →
-                                            <span class="text-green-600">{{ $new }}</span>
-                                        </div>
-                                        @endforeach
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr>
-                                    <td colspan="3" class="text-center text-gray-500 py-2">Belum ada perubahan</td>
-                                </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </dialog>
+                <flux:button size="xs" variant="primary" onclick="my_modal_2.showModal()">
+                    <x-lucide-file-clock class="w-4 h-4 mr-1" /> Lihat Audit Trail
+                </flux:button>
             </div>
-
-
 
             @php
             $isDisabled = in_array(optional($hazards)->status, ['cancelled', 'closed']);
             @endphp
 
             {{-- Form Action --}}
-            <div class="flex flex-col md:flex-row md:items-stretch gap-2">
+            <div class="flex flex-col md:flex-row md:items-stretch gap-2 mt-3">
                 {{-- PROCEED TO --}}
                 <div class="max-w-sm">
                     <label class="label">
@@ -128,7 +90,48 @@
                 </div>
             </div>
 
+            {{-- Modal DaisyUI --}}
+            <dialog class="modal" id="my_modal_2" role="dialog">
+                <div class="modal-box max-w-4xl">
+                    <form method="dialog">
+                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
+                    <h3 class="text-lg font-bold mb-2">Audit Trail</h3>
+                    <table class="table table-sm w-full border">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="border px-2 py-1">Tanggal</th>
+                                <th class="border px-2 py-1">User</th>
+                                <th class="border px-2 py-1">Perubahan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($report->activities as $activity)
+                            <tr>
+                                <td class="border px-2 py-1">{{ $activity->created_at->format('d-m-Y H:i') }}</td>
+                                <td class="border px-2 py-1">{{ $activity->causer->name ?? 'System' }}</td>
+                                <td class="border px-2 py-1">
+                                    @foreach(($activity->changes['attributes'] ?? []) as $field => $new)
+                                    <div>
+                                        <strong>{{ ucfirst(str_replace('_', ' ', $field)) }}</strong>:
+                                        <span class="text-red-500">{{ $activity->changes['old'][$field] ?? '-' }}</span>
+                                        →
+                                        <span class="text-green-600">{{ $new }}</span>
+                                    </div>
+                                    @endforeach
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3" class="text-center text-gray-500 py-2">Belum ada perubahan</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </dialog>
         </div>
+
     </div>
 
     <form wire:submit.prevent="submit">
