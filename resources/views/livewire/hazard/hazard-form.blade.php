@@ -417,34 +417,34 @@
                         </tbody>
                     </table>
                 </div>
-                @if ($RiskAssessment !=null)
-                <table class="table table-xs">
-
-                    <tr>
-                        <th class="w-40 text-xs border-2 border-slate-400">Potential Risk Rating</th>
-                        <td class="pl-2 text-xs border-2 border-slate-400">
-                            {{ $RiskAssessment->name }}</td>
-                    </tr>
-                    <tr>
-                        <th class="w-40 text-xs border-2 border-slate-400">Notify</th>
-                        <td class="pl-2 text-xs border-2 border-slate-400">
-                            {{ $RiskAssessment->reporting_obligation }}</td>
-                    </tr>
-                    <tr>
-                        <th class="w-40 text-xs border-2 border-slate-400">Deadline</th>
-                        <td class="pl-2 text-xs border-2 border-slate-400">{{ $RiskAssessment->notes }}</td>
-                    </tr>
-                    <tr>
-                        <th class="w-40 text-xs border-2 border-slate-400">Coordinator</th>
-                        <td class="pl-2 text-xs border-2 border-slate-400">
-                            {{ $RiskAssessment->coordinator }}
-                        </td>
-                    </tr>
-
-
-                </table>
-                @endif
             </div>
+            @if ($RiskAssessment !=null)
+            <table class="table table-xs mb-4">
+
+                <tr>
+                    <th class="w-40 text-xs border-2 border-slate-400">Potential Risk Rating</th>
+                    <td class="pl-2 text-xs border-2 border-slate-400">
+                        {{ $RiskAssessment->name }}</td>
+                </tr>
+                <tr>
+                    <th class="w-40 text-xs border-2 border-slate-400">Notify</th>
+                    <td class="pl-2 text-xs border-2 border-slate-400">
+                        {{ $RiskAssessment->reporting_obligation }}</td>
+                </tr>
+                <tr>
+                    <th class="w-40 text-xs border-2 border-slate-400">Deadline</th>
+                    <td class="pl-2 text-xs border-2 border-slate-400">{{ $RiskAssessment->notes }}</td>
+                </tr>
+                <tr>
+                    <th class="w-40 text-xs border-2 border-slate-400">Coordinator</th>
+                    <td class="pl-2 text-xs border-2 border-slate-400">
+                        {{ $RiskAssessment->coordinator }}
+                    </td>
+                </tr>
+
+
+            </table>
+            @endif
             <flux:button size="xs" type="submit" icon:trailing="send" variant="primary">Kirim Laporan</flux:button>
         </form>
     </x-manhours.layout>
