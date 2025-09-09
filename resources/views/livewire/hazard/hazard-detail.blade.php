@@ -14,14 +14,11 @@
                 </span>
 
                 {{-- Tombol buka modal --}}
-                <label for="auditTrailModal" class="ml-4 text-xs text-blue-600 underline hover:text-blue-800 cursor-pointer">
-                    Lihat Audit Trail
-                </label>
+                <button class="btn" onclick="my_modal_2.showModal()">open modal</button>
             </div>
 
             {{-- Modal DaisyUI --}}
-            <input type="checkbox" id="auditTrailModal" class="modal-toggle" />
-            <div class="modal" role="dialog">
+            <dialog class="modal" id="my_modal_2" role="dialog">
                 <div class="modal-box max-w-4xl">
                     <h3 class="text-lg font-bold mb-2">Audit Trail</h3>
                     <table class="table table-sm w-full border">
@@ -55,12 +52,11 @@
                             @endforelse
                         </tbody>
                     </table>
-
-                    <div class="modal-action">
-                        <label for="auditTrailModal" class="btn btn-sm">Tutup</label>
-                    </div>
                 </div>
-            </div>
+                <form method="dialog" class="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
 
             @php
             $isDisabled = in_array(optional($hazards)->status, ['cancelled', 'closed']);
