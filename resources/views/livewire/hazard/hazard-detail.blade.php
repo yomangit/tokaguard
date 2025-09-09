@@ -16,9 +16,7 @@
                 </div>
 
                 {{-- Tombol buka modal --}}
-                <flux:button size="xs" variant="primary" onclick="my_modal_2.showModal()">
-                    <x-lucide-file-clock class="w-4 h-4 mr-1" /> Lihat Audit Trail
-                </flux:button>
+                <flux:button size="xs" variant="primary" icon='clock' onclick="my_modal_2.showModal()"></flux:button>
             </div>
 
             @php
