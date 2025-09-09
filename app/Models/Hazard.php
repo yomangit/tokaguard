@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\HazardStatus;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
 
 class Hazard extends Model
 {
@@ -32,6 +33,24 @@ class Hazard extends Model
         'risk_level',
     ];
 
+
+    protected static $logAttributes = [
+        'status',
+        'penanggung_jawab_id',
+        'immediate_corrective_action',
+    ];
+    protected static $logOnlyDirty = true; // hanya log kalau ada perubahan
+    protected static $logName = 'hazard_report';
+
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return "Laporan hazard {$eventName}";
+    }
+    // relasi ke logs
+    public function activities()
+    {
+        return $this->morphMany(Activity::class, 'subject');
+    }
     public function eventType()
     {
         return $this->belongsTo(EventType::class, 'event_type_id');

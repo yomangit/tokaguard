@@ -101,6 +101,7 @@ class HazardDetail extends Component
     public $tanggal;
     public $manualPelaporMode = false;
     public $manualPelaporName = '';
+    public $hazard_id;
     public function rules()
     {
         return [
@@ -141,9 +142,10 @@ class HazardDetail extends Component
     ];
     public function mount($hazard)
     {
+        $this->hazard_id = $hazard;
         $this->likelihoods = Likelihood::orderByDesc('level')->get();
         $this->consequences = RiskConsequence::orderBy('level')->get();
-
+        
         $this->hazards = Hazard::with('assignedErms')->findOrFail($hazard);
         $this->tanggal = Carbon::createFromFormat('Y-m-d H:i:s', $this->hazards->tanggal)->format('d-m-Y H:i');
         $this->tipe_bahaya = $this->hazards->event_type_id;
@@ -592,6 +594,7 @@ class HazardDetail extends Component
         $this->loadAvailableTransitions();
         $this->loadErmList();
         return view('livewire.hazard.hazard-detail', [
+            'report'=>Hazard::with('activities.causer')->findOrFail($this->hazard_id),
             'Department'   => Department::all(),
             'likelihoodss' => Likelihood::orderByDesc('level')->get(),
             'consequencess' => RiskConsequence::orderBy('level')->get(),
