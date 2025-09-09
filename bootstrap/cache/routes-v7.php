@@ -13,7 +13,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::uhBzgb6xVOpt2vVa',
+            '_route' => 'generated::SMClJxXiDKA4nwLy',
           ),
           1 => NULL,
           2 => 
@@ -33,7 +33,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::7RKR5bdW79yAEXA8',
+            '_route' => 'generated::fDhvhGkjYrOE8Y8K',
           ),
           1 => NULL,
           2 => 
@@ -53,7 +53,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::JzFt21Meydff99f7',
+            '_route' => 'generated::AYPV0WlepwrMjKbN',
           ),
           1 => NULL,
           2 => 
@@ -73,7 +73,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::nCLgWEp5IQlNU2DN',
+            '_route' => 'generated::l6hB8poRFW31i8hI',
           ),
           1 => NULL,
           2 => 
@@ -93,7 +93,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::eqwty4y4lGR88352',
+            '_route' => 'generated::eFCtj0s9aez7a0je',
           ),
           1 => NULL,
           2 => 
@@ -132,7 +132,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::nlINMljUq3MhagAC',
+            '_route' => 'generated::3Ghc6YVZL8VsmOVs',
           ),
           1 => NULL,
           2 => 
@@ -152,7 +152,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::GqDWaBmUi829N2h3',
+            '_route' => 'generated::tOt2XdDMPYH4ev5f',
           ),
           1 => NULL,
           2 => 
@@ -191,7 +191,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::CGPner9TRJDtL4er',
+            '_route' => 'generated::pMq0A7g2gCuCTckt',
           ),
           1 => NULL,
           2 => 
@@ -231,7 +231,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::UdNjSD3GP5s08UWK',
+            '_route' => 'generated::6JI6wCxJsmOQgElN',
           ),
           1 => NULL,
           2 => 
@@ -256,7 +256,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::sLCXKJTjD0BIVQnI',
+            '_route' => 'generated::9gVpgfCC1SueuObJ',
           ),
           1 => NULL,
           2 => 
@@ -735,6 +735,26 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/administration/risk/Assessement' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'administration-risk-Assessement',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
       '/administration/risk/Matrix' => 
       array (
         0 => 
@@ -1172,7 +1192,7 @@ app('router')->setCompiledRoutes(
   ),
   'attributes' => 
   array (
-    'generated::uhBzgb6xVOpt2vVa' => 
+    'generated::SMClJxXiDKA4nwLy' => 
     array (
       'methods' => 
       array (
@@ -1184,7 +1204,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Flux\\AssetManager@fluxJs',
         'controller' => 'Flux\\AssetManager@fluxJs',
-        'as' => 'generated::uhBzgb6xVOpt2vVa',
+        'as' => 'generated::SMClJxXiDKA4nwLy',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1200,7 +1220,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::7RKR5bdW79yAEXA8' => 
+    'generated::fDhvhGkjYrOE8Y8K' => 
     array (
       'methods' => 
       array (
@@ -1212,7 +1232,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Flux\\AssetManager@fluxMinJs',
         'controller' => 'Flux\\AssetManager@fluxMinJs',
-        'as' => 'generated::7RKR5bdW79yAEXA8',
+        'as' => 'generated::fDhvhGkjYrOE8Y8K',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1228,7 +1248,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::JzFt21Meydff99f7' => 
+    'generated::AYPV0WlepwrMjKbN' => 
     array (
       'methods' => 
       array (
@@ -1240,7 +1260,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Flux\\AssetManager@editorCss',
         'controller' => 'Flux\\AssetManager@editorCss',
-        'as' => 'generated::JzFt21Meydff99f7',
+        'as' => 'generated::AYPV0WlepwrMjKbN',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1256,7 +1276,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::nCLgWEp5IQlNU2DN' => 
+    'generated::l6hB8poRFW31i8hI' => 
     array (
       'methods' => 
       array (
@@ -1268,7 +1288,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Flux\\AssetManager@editorJs',
         'controller' => 'Flux\\AssetManager@editorJs',
-        'as' => 'generated::nCLgWEp5IQlNU2DN',
+        'as' => 'generated::l6hB8poRFW31i8hI',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1284,7 +1304,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::eqwty4y4lGR88352' => 
+    'generated::eFCtj0s9aez7a0je' => 
     array (
       'methods' => 
       array (
@@ -1296,7 +1316,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Flux\\AssetManager@editorMinJs',
         'controller' => 'Flux\\AssetManager@editorMinJs',
-        'as' => 'generated::eqwty4y4lGR88352',
+        'as' => 'generated::eFCtj0s9aez7a0je',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1343,7 +1363,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::nlINMljUq3MhagAC' => 
+    'generated::3Ghc6YVZL8VsmOVs' => 
     array (
       'methods' => 
       array (
@@ -1355,7 +1375,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Livewire\\Mechanisms\\FrontendAssets\\FrontendAssets@returnJavaScriptAsFile',
         'controller' => 'Livewire\\Mechanisms\\FrontendAssets\\FrontendAssets@returnJavaScriptAsFile',
-        'as' => 'generated::nlINMljUq3MhagAC',
+        'as' => 'generated::3Ghc6YVZL8VsmOVs',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1371,7 +1391,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::GqDWaBmUi829N2h3' => 
+    'generated::tOt2XdDMPYH4ev5f' => 
     array (
       'methods' => 
       array (
@@ -1383,7 +1403,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Livewire\\Mechanisms\\FrontendAssets\\FrontendAssets@maps',
         'controller' => 'Livewire\\Mechanisms\\FrontendAssets\\FrontendAssets@maps',
-        'as' => 'generated::GqDWaBmUi829N2h3',
+        'as' => 'generated::tOt2XdDMPYH4ev5f',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1454,7 +1474,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::CGPner9TRJDtL4er' => 
+    'generated::pMq0A7g2gCuCTckt' => 
     array (
       'methods' => 
       array (
@@ -1482,8 +1502,8 @@ app('router')->setCompiledRoutes(
                     return response(\\Illuminate\\Support\\Facades\\View::file(\'D:\\\\project\\\\new Project\\\\my_app\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Configuration\'.\'/../resources/health-up.blade.php\', [
                         \'exception\' => $exception,
                     ]), status: $exception ? 500 : 200);
-                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000007e90000000000000000";}}',
-        'as' => 'generated::CGPner9TRJDtL4er',
+                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000007930000000000000000";}}',
+        'as' => 'generated::pMq0A7g2gCuCTckt',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1546,7 +1566,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::UdNjSD3GP5s08UWK' => 
+    'generated::6JI6wCxJsmOQgElN' => 
     array (
       'methods' => 
       array (
@@ -1572,7 +1592,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::UdNjSD3GP5s08UWK',
+        'as' => 'generated::6JI6wCxJsmOQgElN',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1590,7 +1610,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::sLCXKJTjD0BIVQnI' => 
+    'generated::9gVpgfCC1SueuObJ' => 
     array (
       'methods' => 
       array (
@@ -1617,7 +1637,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::sLCXKJTjD0BIVQnI',
+        'as' => 'generated::9gVpgfCC1SueuObJ',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2547,6 +2567,44 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'administration-risk-Assessement' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'administration/risk/Assessement',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Livewire\\Administration\\RiskAssessment\\Assessement@__invoke',
+        'controller' => 'App\\Livewire\\Administration\\RiskAssessment\\Assessement',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'administration-risk-Assessement',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'administration-risk-Matrix' => 
     array (
       'methods' => 
@@ -3209,7 +3267,7 @@ app('router')->setCompiledRoutes(
                         $config,
                         $isProduction
                     ))($request, $path);
-                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000007ec0000000000000000";}}',
+                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000007960000000000000000";}}',
         'as' => 'storage.local',
       ),
       'fallback' => false,
