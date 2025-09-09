@@ -191,7 +191,6 @@
                                     disableMobile: true,
                                     enableTime: true,
                                     dateFormat: 'd-m-Y H:i',
-                                    defaultDate: new Date(),
                                     clickOpens: true,
                                     appendTo: this.$refs.wrapper,
                                     onChange: (selectedDates, dateStr) => {
