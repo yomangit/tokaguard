@@ -384,7 +384,7 @@ class HazardForm extends Component
         $this->selectedLikelihoodId = $this->likelihood_id;
         $this->selectedConsequenceId = $this->consequence_id;
 
-        $id_table = RiskMatrixCell::where('likelihood_id', $this->risk_likelihood_id)->where('risk_consequence_id', $this->risk_consequence_id)->first()->id;
+        $id_table = RiskMatrixCell::where('likelihood_id', $this->likelihood_id)->where('risk_consequence_id', $this->risk_consequence_id)->first()->id;
         $risk_assessment_id = RiskAssessmentMatrix::where('risk_matrix_cell_id',$id_table)->first()->risk_assessment_id;
         $this->RiskAssessment =RiskAssessment::whereId($risk_assessment_id)->first();
     }
