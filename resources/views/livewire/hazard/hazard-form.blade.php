@@ -183,7 +183,7 @@
                     <x-label-error :messages="$errors->get('location_specific')" />
                 </fieldset>
                 @endif
-                <fieldset  class="fieldset relative">
+                <fieldset class="fieldset relative">
                     <x-form.label label="Tanggal & Waktu" required />
                     <div class="relative" wire:ignore x-data="{
                             fp: null,
@@ -411,12 +411,10 @@
                                 default => 'bg-gray-100',
                                 };
                                 @endphp
-                                <td class="border cursor-pointer w-4 {{ $color }}
-                                    @if($likelihood_id == $l->id && $consequence_id == $c->id) border-2 border-stone-500 @endif" wire:click="edit({{ $l->id }}, {{ $c->id }})">
-                                    <div class="text-[6px]">{{ Str::upper(substr($severity, 0, 1)) }}</div>
 
+                                <td class="border cursor-pointer  @if($likelihood_id == $l->id && $consequence_id == $c->id) border-2 border-stone-500 @endif">
+                                    <span wire:click="edit({{ $l->id }}, {{ $c->id }})" class="btn btn-square btn-xs {{ $color}}>{{ Str::upper(substr($severity, 0, 1)) }}</span>
                                 </td>
-
                                 @endforeach
                             </tr>
                             @endforeach
