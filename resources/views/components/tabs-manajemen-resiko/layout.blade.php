@@ -3,7 +3,7 @@
         <flux:navlist-horizontal>
             <flux:navlist-horizontal.item :href="route('administration-risk-Consequence')"    wire:navigate>{{ __('Risk Consequence') }}</flux:navlist-horizontal.item>
             <flux:navlist-horizontal.item :href="route('administration-risk-Likelihood')"    wire:navigate>{{ __('Risk Likelihood') }}</flux:navlist-horizontal.item>
-            <flux:navlist-horizontal.item :href="route('administration-risk-Assessment')"    wire:navigate>{{ __('Risk Assessment') }}</flux:navlist-horizontal.item>
+            <flux:navlist-horizontal.item :href="route('administration-risk-Assessement')"    wire:navigate>{{ __('Risk Assessment') }}</flux:navlist-horizontal.item>
             <flux:navlist-horizontal.item :href="route('administration-risk-Matrix')"    wire:navigate>{{ __('Risk Matrix') }}</flux:navlist-horizontal.item>
         </flux:navlist-horizontal>
     </div>
@@ -11,7 +11,7 @@
         <flux:navlist>
             <flux:navlist-horizontal.item :href="route('administration-risk-Consequence')"    wire:navigate>{{ __('Risk Consequence') }}</flux:navlist-horizontal.item>
             <flux:navlist-horizontal.item :href="route('administration-risk-Likelihood')"    wire:navigate>{{ __('Risk Likelihood') }}</flux:navlist-horizontal.item>
-            <flux:navlist-horizontal.item :href="route('administration-risk-Assessment')"    wire:navigate>{{ __('Risk Assessment') }}</flux:navlist-horizontal.item>
+            <flux:navlist-horizontal.item :href="route('administration-risk-Assessement')"    wire:navigate>{{ __('Risk Assessment') }}</flux:navlist-horizontal.item>
             <flux:navlist-horizontal.item :href="route('administration-risk-Matrix')"    wire:navigate>{{ __('Risk Matrix') }}</flux:navlist-horizontal.item>
         </flux:navlist>
     </div>
