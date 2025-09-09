@@ -204,7 +204,7 @@
                                 initFlatpickr();
                             });
                         ">
-                        <input type="text" x-ref="tanggalInput" wire.model.live='tanggal' placeholder="Pilih Tanggal dan Waktu..." readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                        <input type="text" x-ref="tanggalInput" wire:model.live='tanggal' placeholder="Pilih Tanggal dan Waktu..." readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                     </div>
                     <x-label-error :messages="$errors->get('tanggal')" />
                 </fieldset>
