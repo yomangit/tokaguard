@@ -13,7 +13,7 @@
                     {{ $hazards->status }}
                 </span>
 
-                {{-- Tombol Audit Trail --}}
+                {{-- Tombol buka modal --}}
                 <label for="auditTrailModal" class="ml-4 text-xs text-blue-600 underline hover:text-blue-800 cursor-pointer">
                     Lihat Audit Trail
                 </label>
@@ -23,57 +23,50 @@
             <input type="checkbox" id="auditTrailModal" class="modal-toggle" />
             <div class="modal" role="dialog">
                 <div class="modal-box max-w-4xl">
-                    <h3 class="font-bold text-lg mb-2">Audit Trail</h3>
-                    <p class="text-sm text-gray-500 mb-4">Riwayat perubahan status & penanggung jawab.</p>
-
-                    <div class="overflow-x-auto">
-                        <table class="table table-sm w-full border">
-                            <thead>
-                                <tr class="bg-gray-100 text-xs">
-                                    <th class="border px-2 py-1">Tanggal</th>
-                                    <th class="border px-2 py-1">User</th>
-                                    <th class="border px-2 py-1">Perubahan</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($report->activities as $activity)
-                                <tr>
-                                    <td class="border px-2 py-1 text-xs">
-                                        {{ $activity->created_at->format('d-m-Y H:i') }}
-                                    </td>
-                                    <td class="border px-2 py-1 text-xs">
-                                        {{ $activity->causer->name ?? 'System' }}
-                                    </td>
-                                    <td class="border px-2 py-1 text-xs">
-                                        @foreach(($activity->changes['attributes'] ?? []) as $field => $new)
-                                        <div>
-                                            <strong>{{ ucfirst(str_replace('_', ' ', $field)) }}</strong>:
-                                            <span class="text-red-500">{{ $activity->changes['old'][$field] ?? '-' }}</span>
-                                            →
-                                            <span class="text-green-600">{{ $new }}</span>
-                                        </div>
-                                        @endforeach
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr>
-                                    <td colspan="3" class="text-center text-gray-500 py-2 text-xs">
-                                        Belum ada perubahan
-                                    </td>
-                                </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
+                    <h3 class="text-lg font-bold mb-2">Audit Trail</h3>
+                    <table class="table table-sm w-full border">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="border px-2 py-1">Tanggal</th>
+                                <th class="border px-2 py-1">User</th>
+                                <th class="border px-2 py-1">Perubahan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($report->activities as $activity)
+                            <tr>
+                                <td class="border px-2 py-1">{{ $activity->created_at->format('d-m-Y H:i') }}</td>
+                                <td class="border px-2 py-1">{{ $activity->causer->name ?? 'System' }}</td>
+                                <td class="border px-2 py-1">
+                                    @foreach(($activity->changes['attributes'] ?? []) as $field => $new)
+                                    <div>
+                                        <strong>{{ ucfirst(str_replace('_', ' ', $field)) }}</strong>:
+                                        <span class="text-red-500">{{ $activity->changes['old'][$field] ?? '-' }}</span>
+                                        →
+                                        <span class="text-green-600">{{ $new }}</span>
+                                    </div>
+                                    @endforeach
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3" class="text-center text-gray-500 py-2">Belum ada perubahan</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
 
                     <div class="modal-action">
                         <label for="auditTrailModal" class="btn btn-sm">Tutup</label>
                     </div>
                 </div>
             </div>
+
             @php
             $isDisabled = in_array(optional($hazards)->status, ['cancelled', 'closed']);
             @endphp
+
+            {{-- Form Action --}}
             <div class="flex flex-col md:flex-row md:items-stretch gap-2">
                 {{-- PROCEED TO --}}
                 <div class="max-w-sm">
@@ -94,7 +87,7 @@
                 @if ($proceedTo === 'in_progress')
                 <div class="max-w-sm">
                     <label class="label">
-                        <span class="label-text font-semibold  text-xs">Pilih ERM Utama</span>
+                        <span class="label-text font-semibold text-xs">Pilih ERM Utama</span>
                     </label>
                     <select wire:model="assignTo1" class="select select-xs select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
                         <option value="">-- Pilih --</option>
@@ -106,7 +99,7 @@
 
                 <div class="max-w-sm">
                     <label class="label">
-                        <span class="label-text font-semibold  text-xs">Pilih ERM Tambahan (Opsional)</span>
+                        <span class="label-text font-semibold text-xs">Pilih ERM Tambahan (Opsional)</span>
                     </label>
                     <select wire:model="assignTo2" class="select select-xs select-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden">
                         <option value="">-- Pilih --</option>
@@ -120,17 +113,17 @@
                 {{-- TOMBOL SIMPAN --}}
                 <div class="card-actions justify-end self-end mt-1">
                     <div x-data="{ proceedTo: @entangle('proceedTo') }" class="card-actions justify-end hidden md:block">
-                        <div class="tooltip ">
+                        <div class="tooltip">
                             <div class="tooltip-content z-40">
-                                <div class="animate-bounce text-orange-400  text-sm font-black">Kirim</div>
+                                <div class="animate-bounce text-orange-400 text-sm font-black">Kirim</div>
                             </div>
                             <flux:button size="xs" wire:click="processAction" icon:trailing="send" variant="primary"></flux:button>
                         </div>
                     </div>
                     <div x-data="{ proceedTo: @entangle('proceedTo') }" class="card-actions justify-end block md:hidden">
-                        <div class="tooltip ">
+                        <div class="tooltip">
                             <div class="tooltip-content z-40">
-                                <div class="animate-bounce text-orange-400  text-sm font-black">Kirim</div>
+                                <div class="animate-bounce text-orange-400 text-sm font-black">Kirim</div>
                             </div>
                             <flux:button size="xs" wire:click="processAction" icon:trailing="send" class="w-full" variant="primary">Kirim</flux:button>
                         </div>
