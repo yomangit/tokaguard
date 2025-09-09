@@ -50,7 +50,7 @@
                 </tbody>
             </table>
         </div>
-        <flux:modal name="Risk-Consequence">
+        <flux:modal name="Risk-Assessment">
             <form wire:submit.prevent="store" class='grid justify-items-stretch'>
                 @csrf
                 <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs sm:w-sm border p-4 sm:justify-self-center">
@@ -86,7 +86,7 @@
                 </div>
             </form>
         </flux:modal>
-        <flux:modal name="Risk-ConsequenceEdit">
+        <flux:modal name="Risk-AssessmentEdit">
             <form wire:submit.prevent="update" class='grid justify-items-stretch'>
                 @csrf
                 <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs sm:w-sm border p-4 sm:justify-self-center">
