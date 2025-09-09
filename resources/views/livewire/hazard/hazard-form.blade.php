@@ -7,9 +7,7 @@
         {{-- <livewire:hazard.hazard-report-panel /> --}}
 
         <form wire:submit.prevent="submit"> {{-- saya mau tanggalnya nempel disini --}}
-            @if (session()->has('message'))
-            <div class="p-2 bg-green-200 rounded mb-2">{{ session('message') }}</div>
-            @endif
+         
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
                 <fieldset class="fieldset">
                     <x-form.label label="Tipe Bahaya" required />
