@@ -6,9 +6,10 @@ use App\Enums\HazardStatus;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Models\Activity;
-
+use Spatie\Activitylog\Traits\LogsActivity;
 class Hazard extends Model
 {
+    use LogsActivity;
     protected $table = 'hazard_reports';
     protected $fillable = [
         'event_type_id',
