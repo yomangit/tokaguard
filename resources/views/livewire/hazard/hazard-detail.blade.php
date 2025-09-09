@@ -276,6 +276,7 @@
                                     dateFormat: 'd-m-Y H:i',
                                     defaultDate: this.$wire.entangle('tanggal').defer,
                                     clickOpens: true,
+                                    
                                     appendTo: this.$refs.wrapper,
                                     onChange: (selectedDates, dateStr) => {
                                         this.$wire.set('tanggal', dateStr);
