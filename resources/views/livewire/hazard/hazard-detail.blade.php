@@ -24,7 +24,7 @@
             @endphp
 
             {{-- Form Action --}}
-            <div class="flex flex-col md:flex-row md:items-stretch gap-2 mt-3">
+            <div class="flex flex-col md:flex-row md:items-stretch gap-2 ">
                 {{-- PROCEED TO --}}
                 <div class="max-w-sm">
                     <label class="label">
