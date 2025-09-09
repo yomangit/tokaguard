@@ -5,7 +5,7 @@
     <div class="card bg-base-100 shadow-md mb-2 ">
         <div class="card-body py-2 px-4 ">
             {{-- STATUS --}}
-            <div class=" flex gap-2">
+            <div class="flex gap-2 items-center">
                 <label class="label">
                     <span class="label-text text-xs font-semibold">Status :</span>
                 </label>
@@ -13,45 +13,66 @@
                     {{ $hazards->status }}
                 </span>
 
-                <h3 class="text-lg font-bold mb-2">Audit Trail</h3>
-                <table class="table table-sm w-full border">
-                    <thead>
-                        <tr class="bg-gray-100">
-                            <th class="border px-2 py-1">Tanggal</th>
-                            <th class="border px-2 py-1">User</th>
-                            <th class="border px-2 py-1">Perubahan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($report->activities as $activity)
-                        <tr>
-                            <td class="border px-2 py-1">{{ $activity->created_at->format('d-m-Y H:i') }}</td>
-                            <td class="border px-2 py-1">{{ $activity->causer->name ?? 'System' }}</td>
-                            <td class="border px-2 py-1">
-                                @foreach(($activity->changes['attributes'] ?? []) as $field => $new)
-                                <div>
-                                    <strong>{{ ucfirst(str_replace('_', ' ', $field)) }}</strong>:
-                                    <span class="text-red-500">{{ $activity->changes['old'][$field] ?? '-' }}</span>
-                                    →
-                                    <span class="text-green-600">{{ $new }}</span>
-                                </div>
-                                @endforeach
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="3" class="text-center text-gray-500 py-2">Belum ada perubahan</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-
+                {{-- Tombol buka modal Audit Trail --}}
+                <button @click="openAudit = true" type="button" class="ml-4 text-xs text-blue-600 underline hover:text-blue-800">
+                    Lihat Audit Trail
+                </button>
             </div>
+
+            {{-- Modal Audit Trail --}}
+            <div x-data="{ openAudit: false }" x-show="openAudit" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" x-cloak>
+                <div class="bg-white rounded-lg shadow-lg max-w-3xl w-full p-4">
+                    <div class="flex justify-between items-center border-b pb-2 mb-4">
+                        <h3 class="text-lg font-bold">Audit Trail</h3>
+                        <button @click="openAudit = false" class="text-gray-500 hover:text-gray-800">✕</button>
+                    </div>
+
+                    <table class="table table-sm w-full border">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="border px-2 py-1">Tanggal</th>
+                                <th class="border px-2 py-1">User</th>
+                                <th class="border px-2 py-1">Perubahan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($report->activities as $activity)
+                            <tr>
+                                <td class="border px-2 py-1">{{ $activity->created_at->format('d-m-Y H:i') }}</td>
+                                <td class="border px-2 py-1">{{ $activity->causer->name ?? 'System' }}</td>
+                                <td class="border px-2 py-1">
+                                    @foreach(($activity->changes['attributes'] ?? []) as $field => $new)
+                                    <div>
+                                        <strong>{{ ucfirst(str_replace('_', ' ', $field)) }}</strong>:
+                                        <span class="text-red-500">{{ $activity->changes['old'][$field] ?? '-' }}</span>
+                                        →
+                                        <span class="text-green-600">{{ $new }}</span>
+                                    </div>
+                                    @endforeach
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3" class="text-center text-gray-500 py-2">Belum ada perubahan</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+
+                    <div class="flex justify-end mt-4">
+                        <button @click="openAudit = false" class="px-4 py-1 bg-gray-200 rounded hover:bg-gray-300">
+                            Tutup
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             @php
             $isDisabled = in_array(optional($hazards)->status, ['cancelled', 'closed']);
             @endphp
-            <div class="flex flex-col md:flex-row md:items-stretch gap-2">
-                {{-- PROCEED TO --}}
+
+            {{-- Lanjutkan Ke --}}
+            <div class="flex flex-col md:flex-row md:items-stretch gap-2 mt-4">
                 <div class="max-w-sm">
                     <label class="label">
                         <span class="label-text text-xs font-semibold">Lanjutkan Ke</span>
@@ -113,8 +134,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
+
     </div>
 
     <form wire:submit.prevent="submit">
