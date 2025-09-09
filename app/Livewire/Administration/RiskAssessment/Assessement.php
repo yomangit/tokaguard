@@ -37,9 +37,11 @@ class Assessement extends Component
         $this->validate();
 
         RiskAssessment::create([
-            'level' => $this->level,
             'name' => $this->name,
-            'description' => $this->description,
+            'action_days' => $this->action_days,
+            'coordinator' => $this->coordinator,
+            'reporting_obligation' => $this->reporting_obligation,
+            'notes' => $this->notes,
         ]);
         $this->dispatch(
             'alert',
