@@ -6,8 +6,8 @@
     <x-manhours.layout>
         {{-- <livewire:hazard.hazard-report-panel /> --}}
 
-        <form wire:submit.prevent="submit"> 
-         
+        <form wire:submit.prevent="submit">
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
                 <fieldset class="fieldset">
                     <x-form.label label="Tipe Bahaya" required />
@@ -417,7 +417,33 @@
                         </tbody>
                     </table>
                 </div>
+                @if ($RiskAssessment !=null)
+                <table class="table table-xs">
 
+                    <tr>
+                        <th class="w-40 text-xs border-2 border-slate-400">Potential Risk Rating</th>
+                        <td class="pl-2 text-xs border-2 border-slate-400">
+                            {{ $RiskAssessment->name }}</td>
+                    </tr>
+                    <tr>
+                        <th class="w-40 text-xs border-2 border-slate-400">Notify</th>
+                        <td class="pl-2 text-xs border-2 border-slate-400">
+                            {{ $RiskAssessment->reporting_obligation }}</td>
+                    </tr>
+                    <tr>
+                        <th class="w-40 text-xs border-2 border-slate-400">Deadline</th>
+                        <td class="pl-2 text-xs border-2 border-slate-400">{{ $RiskAssessment->notes }}</td>
+                    </tr>
+                    <tr>
+                        <th class="w-40 text-xs border-2 border-slate-400">Coordinator</th>
+                        <td class="pl-2 text-xs border-2 border-slate-400">
+                            {{ $RiskAssessment->coordinator }}
+                        </td>
+                    </tr>
+
+
+                </table>
+                @endif
             </div>
             <flux:button size="xs" type="submit" icon:trailing="send" variant="primary">Kirim Laporan</flux:button>
         </form>

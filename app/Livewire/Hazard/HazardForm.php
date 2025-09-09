@@ -17,10 +17,13 @@ use App\Helpers\FileHelper;
 use App\Models\EventSubType;
 use App\Models\ErmAssignment;
 use Livewire\WithFileUploads;
+use App\Models\RiskAssessment;
+use App\Models\RiskMatrixCell;
 use App\Events\HazardSubmitted;
 use App\Models\RiskConsequence;
 use App\Models\UnsafeCondition;
 use Livewire\Attributes\Validate;
+use App\Models\RiskAssessmentMatrix;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\DateBeforeOrEqualToday;
 use Illuminate\Support\Facades\Notification;
@@ -48,6 +51,7 @@ class HazardForm extends Component
     public $selectedLikelihoodId = null;
     public $selectedConsequenceId = null;
     public $status;
+    public $RiskAssessment;
     #[Validate('required')]
     public $likelihood_id;
     #[Validate('required')]
@@ -379,6 +383,10 @@ class HazardForm extends Component
 
         $this->selectedLikelihoodId = $this->likelihood_id;
         $this->selectedConsequenceId = $this->consequence_id;
+
+        $id_table = RiskMatrixCell::where('likelihood_id', $this->risk_likelihood_id)->where('risk_consequence_id', $this->risk_consequence_id)->first()->id;
+        $risk_assessment_id = RiskAssessmentMatrix::where('risk_matrix_cell_id',$id_table)->first()->risk_assessment_id;
+        $this->RiskAssessment =RiskAssessment::whereId($risk_assessment_id)->first();
     }
 
     public function render()
