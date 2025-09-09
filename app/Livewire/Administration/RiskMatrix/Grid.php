@@ -52,7 +52,7 @@ class Grid extends Component
                 'action' => $this->action,
             ]
         );
-         $risk_assessment_id =  RiskAssessment::where('risk_assessments_name', 'like', '%' . $this->severity . '%')->first()->id;
+         $risk_assessment_id =  RiskAssessment::where('name', 'like', '%' . $this->severity . '%')->first()->id;
         RiskAssessmentMatrix::updateOrCreate(
             [
                 'risk_matrix_cell_id' =>  $this->editingCellId,
