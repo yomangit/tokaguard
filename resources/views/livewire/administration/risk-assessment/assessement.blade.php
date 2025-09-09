@@ -65,11 +65,11 @@
                     <x-label-error :messages="$errors->get('action_days')" />
                     {{-- Coordinator --}}
                     <x-label-req>{{ __('Coordinator') }} </x-label-req>
-                    <x-text-area wire:model.live='coordinator' :error="$errors->get('coordinator')" type="text" placeholder="coordinator" />
+                    <x-text-input wire:model.live='coordinator' :error="$errors->get('coordinator')" type="text" placeholder="coordinator" />
                     <x-label-error :messages="$errors->get('coordinator')" />
                     {{-- Reporting Obligation --}}
                     <x-label-req>{{ __('Reporting Obligation') }} </x-label-req>
-                    <x-text-area wire:model.live='reporting_obligation' :error="$errors->get('reporting_obligation')" type="text" placeholder="Reporting Obligation" />
+                    <x-text-input wire:model.live='reporting_obligation' :error="$errors->get('reporting_obligation')" type="text" placeholder="Reporting Obligation" />
                     <x-label-error :messages="$errors->get('reporting_obligation')" />
                     {{-- Notes --}}
                     <x-label-req>{{ __('Notes') }} </x-label-req>
@@ -101,11 +101,11 @@
                     <x-label-error :messages="$errors->get('action_days')" />
                     {{-- Coordinator --}}
                     <x-label-req>{{ __('Coordinator') }} </x-label-req>
-                    <x-text-area wire:model.live='coordinator' :error="$errors->get('coordinator')" type="text" placeholder="coordinator" />
+                    <x-text-input wire:model.live='coordinator' :error="$errors->get('coordinator')" type="text" placeholder="coordinator" />
                     <x-label-error :messages="$errors->get('coordinator')" />
                     {{-- Reporting Obligation --}}
                     <x-label-req>{{ __('Reporting Obligation') }} </x-label-req>
-                    <x-text-area wire:model.live='reporting_obligation' :error="$errors->get('reporting_obligation')" type="text" placeholder="Reporting Obligation" />
+                    <x-text-input wire:model.live='reporting_obligation' :error="$errors->get('reporting_obligation')" type="text" placeholder="Reporting Obligation" />
                     <x-label-error :messages="$errors->get('reporting_obligation')" />
                     {{-- Notes --}}
                     <x-label-req>{{ __('Notes') }} </x-label-req>
