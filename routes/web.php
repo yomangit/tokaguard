@@ -31,6 +31,7 @@ use App\Livewire\Administration\Locations\Location;
 use App\Livewire\Administration\People\User;
 use App\Livewire\Administration\RelasiContUser\ContractorUserManager;
 use App\Livewire\Administration\RelasiDeptUser\DepartmentUserManager;
+use App\Livewire\Administration\RiskAssessment\Assessement;
 use App\Livewire\Administration\Roles\Role;
 use App\Livewire\Administrator\UserRoleManager\UserRole;
 use App\Livewire\Hazard\HazardForm;
@@ -72,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('administration/event_general/ModeratorAssignmentManager', ModeratorAssignmentManager::class)->name('administration-event_general-ModeratorAssignmentManager');
     Route::get('administration/risk/Consequence', RiskConsequence::class)->name('administration-risk-Consequence');
     Route::get('administration/risk/Likelihood', RiskLikelihood::class)->name('administration-risk-Likelihood');
+    Route::get('administration/risk/Assessement', Assessement::class)->name('administration-risk-Assessement');
     Route::get('administration/risk/Matrix', Grid::class)->name('administration-risk-Matrix');
     Route::get('administration/location', Location::class)->name('location');
     Route::get('administration/cause_analysis/kta', Kta::class)->name('kta');
