@@ -1,7 +1,7 @@
 <section class="w-full">
     <x-toast />
     <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
-    @include('partials.manhours-heading')
+    @include('partials.manhours')
     <div class="flex justify-between">
         <!-- You can open the modal using ID.showModal() method -->
         <flux:tooltip content="tambah data" position="top">
@@ -41,315 +41,7 @@
                         <td>12/5/2020</td>
                         <td>Purple</td>
                     </tr>
-                    <tr>
-                        <th>3</th>
-                        <td>Brice Swyre</td>
-                        <td>Tax Accountant</td>
-                        <td>Carroll Group</td>
-                        <td>China</td>
-                        <td>8/15/2020</td>
-                        <td>Red</td>
-                    </tr>
-                    <tr>
-                        <th>4</th>
-                        <td>Marjy Ferencz</td>
-                        <td>Office Assistant I</td>
-                        <td>Rowe-Schoen</td>
-                        <td>Russia</td>
-                        <td>3/25/2021</td>
-                        <td>Crimson</td>
-                    </tr>
-                    <tr>
-                        <th>5</th>
-                        <td>Yancy Tear</td>
-                        <td>Community Outreach Specialist</td>
-                        <td>Wyman-Ledner</td>
-                        <td>Brazil</td>
-                        <td>5/22/2020</td>
-                        <td>Indigo</td>
-                    </tr>
-                    <tr>
-                        <th>6</th>
-                        <td>Irma Vasilik</td>
-                        <td>Editor</td>
-                        <td>Wiza, Bins and Emard</td>
-                        <td>Venezuela</td>
-                        <td>12/8/2020</td>
-                        <td>Purple</td>
-                    </tr>
-                    <tr>
-                        <th>7</th>
-                        <td>Meghann Durtnal</td>
-                        <td>Staff Accountant IV</td>
-                        <td>Schuster-Schimmel</td>
-                        <td>Philippines</td>
-                        <td>2/17/2021</td>
-                        <td>Yellow</td>
-                    </tr>
-                    <tr>
-                        <th>8</th>
-                        <td>Sammy Seston</td>
-                        <td>Accountant I</td>
-                        <td>O'Hara, Welch and Keebler</td>
-                        <td>Indonesia</td>
-                        <td>5/23/2020</td>
-                        <td>Crimson</td>
-                    </tr>
-                    <tr>
-                        <th>9</th>
-                        <td>Lesya Tinham</td>
-                        <td>Safety Technician IV</td>
-                        <td>Turner-Kuhlman</td>
-                        <td>Philippines</td>
-                        <td>2/21/2021</td>
-                        <td>Maroon</td>
-                    </tr>
-                    <tr>
-                        <th>10</th>
-                        <td>Zaneta Tewkesbury</td>
-                        <td>VP Marketing</td>
-                        <td>Sauer LLC</td>
-                        <td>Chad</td>
-                        <td>6/23/2020</td>
-                        <td>Green</td>
-                    </tr>
-                    <tr>
-                        <th>11</th>
-                        <td>Andy Tipple</td>
-                        <td>Librarian</td>
-                        <td>Hilpert Group</td>
-                        <td>Poland</td>
-                        <td>7/9/2020</td>
-                        <td>Indigo</td>
-                    </tr>
-                    <tr>
-                        <th>12</th>
-                        <td>Sophi Biles</td>
-                        <td>Recruiting Manager</td>
-                        <td>Gutmann Inc</td>
-                        <td>Indonesia</td>
-                        <td>2/12/2021</td>
-                        <td>Maroon</td>
-                    </tr>
-                    <tr>
-                        <th>13</th>
-                        <td>Florida Garces</td>
-                        <td>Web Developer IV</td>
-                        <td>Gaylord, Pacocha and Baumbach</td>
-                        <td>Poland</td>
-                        <td>5/31/2020</td>
-                        <td>Purple</td>
-                    </tr>
-                    <tr>
-                        <th>14</th>
-                        <td>Maribeth Popping</td>
-                        <td>Analyst Programmer</td>
-                        <td>Deckow-Pouros</td>
-                        <td>Portugal</td>
-                        <td>4/27/2021</td>
-                        <td>Aquamarine</td>
-                    </tr>
-                    <tr>
-                        <th>15</th>
-                        <td>Moritz Dryburgh</td>
-                        <td>Dental Hygienist</td>
-                        <td>Schiller, Cole and Hackett</td>
-                        <td>Sri Lanka</td>
-                        <td>8/8/2020</td>
-                        <td>Crimson</td>
-                    </tr>
-                    <tr>
-                        <th>6</th>
-                        <td>Irma Vasilik</td>
-                        <td>Editor</td>
-                        <td>Wiza, Bins and Emard</td>
-                        <td>Venezuela</td>
-                        <td>12/8/2020</td>
-                        <td>Purple</td>
-                    </tr>
-                    <tr>
-                        <th>7</th>
-                        <td>Meghann Durtnal</td>
-                        <td>Staff Accountant IV</td>
-                        <td>Schuster-Schimmel</td>
-                        <td>Philippines</td>
-                        <td>2/17/2021</td>
-                        <td>Yellow</td>
-                    </tr>
-                    <tr>
-                        <th>8</th>
-                        <td>Sammy Seston</td>
-                        <td>Accountant I</td>
-                        <td>O'Hara, Welch and Keebler</td>
-                        <td>Indonesia</td>
-                        <td>5/23/2020</td>
-                        <td>Crimson</td>
-                    </tr>
-                    <tr>
-                        <th>9</th>
-                        <td>Lesya Tinham</td>
-                        <td>Safety Technician IV</td>
-                        <td>Turner-Kuhlman</td>
-                        <td>Philippines</td>
-                        <td>2/21/2021</td>
-                        <td>Maroon</td>
-                    </tr>
-                    <tr>
-                        <th>10</th>
-                        <td>Zaneta Tewkesbury</td>
-                        <td>VP Marketing</td>
-                        <td>Sauer LLC</td>
-                        <td>Chad</td>
-                        <td>6/23/2020</td>
-                        <td>Green</td>
-                    </tr>
-                    <tr>
-                        <th>11</th>
-                        <td>Andy Tipple</td>
-                        <td>Librarian</td>
-                        <td>Hilpert Group</td>
-                        <td>Poland</td>
-                        <td>7/9/2020</td>
-                        <td>Indigo</td>
-                    </tr>
-                    <tr>
-                        <th>12</th>
-                        <td>Sophi Biles</td>
-                        <td>Recruiting Manager</td>
-                        <td>Gutmann Inc</td>
-                        <td>Indonesia</td>
-                        <td>2/12/2021</td>
-                        <td>Maroon</td>
-                    </tr>
-                    <tr>
-                        <th>13</th>
-                        <td>Florida Garces</td>
-                        <td>Web Developer IV</td>
-                        <td>Gaylord, Pacocha and Baumbach</td>
-                        <td>Poland</td>
-                        <td>5/31/2020</td>
-                        <td>Purple</td>
-                    </tr>
-                    <tr>
-                        <th>14</th>
-                        <td>Maribeth Popping</td>
-                        <td>Analyst Programmer</td>
-                        <td>Deckow-Pouros</td>
-                        <td>Portugal</td>
-                        <td>4/27/2021</td>
-                        <td>Aquamarine</td>
-                    </tr>
-                    <tr>
-                        <th>15</th>
-                        <td>Moritz Dryburgh</td>
-                        <td>Dental Hygienist</td>
-                        <td>Schiller, Cole and Hackett</td>
-                        <td>Sri Lanka</td>
-                        <td>8/8/2020</td>
-                        <td>Crimson</td>
-                    </tr>
-                    <tr>
-                        <th>6</th>
-                        <td>Irma Vasilik</td>
-                        <td>Editor</td>
-                        <td>Wiza, Bins and Emard</td>
-                        <td>Venezuela</td>
-                        <td>12/8/2020</td>
-                        <td>Purple</td>
-                    </tr>
-                    <tr>
-                        <th>7</th>
-                        <td>Meghann Durtnal</td>
-                        <td>Staff Accountant IV</td>
-                        <td>Schuster-Schimmel</td>
-                        <td>Philippines</td>
-                        <td>2/17/2021</td>
-                        <td>Yellow</td>
-                    </tr>
-                    <tr>
-                        <th>8</th>
-                        <td>Sammy Seston</td>
-                        <td>Accountant I</td>
-                        <td>O'Hara, Welch and Keebler</td>
-                        <td>Indonesia</td>
-                        <td>5/23/2020</td>
-                        <td>Crimson</td>
-                    </tr>
-                    <tr>
-                        <th>9</th>
-                        <td>Lesya Tinham</td>
-                        <td>Safety Technician IV</td>
-                        <td>Turner-Kuhlman</td>
-                        <td>Philippines</td>
-                        <td>2/21/2021</td>
-                        <td>Maroon</td>
-                    </tr>
-                    <tr>
-                        <th>10</th>
-                        <td>Zaneta Tewkesbury</td>
-                        <td>VP Marketing</td>
-                        <td>Sauer LLC</td>
-                        <td>Chad</td>
-                        <td>6/23/2020</td>
-                        <td>Green</td>
-                    </tr>
-                    <tr>
-                        <th>11</th>
-                        <td>Andy Tipple</td>
-                        <td>Librarian</td>
-                        <td>Hilpert Group</td>
-                        <td>Poland</td>
-                        <td>7/9/2020</td>
-                        <td>Indigo</td>
-                    </tr>
-                    <tr>
-                        <th>12</th>
-                        <td>Sophi Biles</td>
-                        <td>Recruiting Manager</td>
-                        <td>Gutmann Inc</td>
-                        <td>Indonesia</td>
-                        <td>2/12/2021</td>
-                        <td>Maroon</td>
-                    </tr>
-                    <tr>
-                        <th>13</th>
-                        <td>Florida Garces</td>
-                        <td>Web Developer IV</td>
-                        <td>Gaylord, Pacocha and Baumbach</td>
-                        <td>Poland</td>
-                        <td>5/31/2020</td>
-                        <td>Purple</td>
-                    </tr>
-                    <tr>
-                        <th>14</th>
-                        <td>Maribeth Popping</td>
-                        <td>Analyst Programmer</td>
-                        <td>Deckow-Pouros</td>
-                        <td>Portugal</td>
-                        <td>4/27/2021</td>
-                        <td>Aquamarine</td>
-                    </tr>
-                    <tr>
-                        <th>15</th>
-                        <td>Moritz Dryburgh</td>
-                        <td>Dental Hygienist</td>
-                        <td>Schiller, Cole and Hackett</td>
-                        <td>Sri Lanka</td>
-                        <td>8/8/2020</td>
-                        <td>Crimson</td>
-                    </tr>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Job</th>
-                        <th>company</th>
-                        <th>location</th>
-                        <th>Last Login</th>
-                        <th>Favorite Color</th>
-                    </tr>
-                </tfoot>
             </table>
         </div>
     </x-manhours.layout>
@@ -419,30 +111,37 @@
     </div>
     <script>
         var picker = new Pikaday({
-
             field: document.getElementById('myDatepicker')
-            , format: 'D-M-YYYY'
+            , format: 'MM-YYYY'
             , toString(date, format) {
-
-                const day = date.getDate();
-                const month = date.getMonth() + 1;
+                const month = ("0" + (date.getMonth() + 1)).slice(-2); // 01, 02, ...
                 const year = date.getFullYear();
-                var tgl = day + '-' + month + '-' + year;
-                @this.set('date', tgl)
-                return `${day}-${month}-${year}`;
-
+                var tgl = month + '-' + year;
+                @this.set('date', tgl);
+                return `${month}-${year}`;
             }
             , parse(dateString, format) {
-                const parts = dateString.split('/');
-                const day = parseInt(parts[0], 10);
-                const month = parseInt(parts[1], 10) - 1;
-                const year = parseInt(parts[2], 10);
-                return new Date(year, month, day);
-
-
+                const parts = dateString.split('-');
+                const month = parseInt(parts[0], 10) - 1;
+                const year = parseInt(parts[1], 10);
+                return new Date(year, month, 1);
+            },
+            // Optional: biar tidak pilih hari
+            onSelect: function(date) {
+                const month = ("0" + (date.getMonth() + 1)).slice(-2);
+                const year = date.getFullYear();
+                picker.hide(); // tutup langsung setelah pilih bulan
+                @this.set('date', month + '-' + year);
             }
-
         });
 
     </script>
+
+    <style>
+        /* Sembunyikan tampilan hari */
+        .pika-single .pika-lendar table {
+            display: none;
+        }
+
+    </style>
 </section>
