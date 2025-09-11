@@ -54,11 +54,35 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {{-- Tanggal --}}
-                        <div>
-                            <x-label-req>{{ __('Tanggal') }} </x-label-req>
-                            <x-text-input wire:model.live='date' :error="$errors->get('date')" type="text" placeholder="Date" id="myDatepicker" class="w-full" />
-                            <x-label-error :messages="$errors->get('date')" />
-                        </div>
+                        <fieldset class="fieldset relative">
+                            <x-form.label label="Tanggal & Waktu" required />
+                            <div class="relative" wire:ignore x-data="{
+                            fp: null,
+                            initFlatpickr() {
+                                if (this.fp) this.fp.destroy();
+                                this.fp = flatpickr(this.$refs.tanggalInput, {
+                                    disableMobile: true,
+                                    enableTime: true,
+                                    
+                                    defaultDate: this.$wire.entangle('tanggal').defer,
+                                    clickOpens: true,
+                                    
+                                    appendTo: this.$refs.wrapper,
+                                    onChange: (selectedDates, dateStr) => {
+                                        this.$wire.set('tanggal', dateStr);
+                                    }
+                                });
+                            }
+                        }" x-ref="wrapper" x-init="
+                            initFlatpickr();
+                            Livewire.hook('message.processed', () => {
+                                initFlatpickr();
+                            });
+                        ">
+                                <input type="text" x-ref="tanggalInput" wire:model.live='tanggal' placeholder="Pilih Tanggal dan Waktu..." readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                            </div>
+                            <x-label-error :messages="$errors->get('tanggal')" />
+                        </fieldset>
 
                         {{-- Nama Perusahaan --}}
                         <div>
@@ -125,39 +149,5 @@
             </form>
         </div>
     </div>
-    <script>
-        var picker = new Pikaday({
-            field: document.getElementById('myDatepicker')
-            , format: 'MM-YYYY'
-            , toString(date, format) {
-                const month = ("0" + (date.getMonth() + 1)).slice(-2); // 01, 02, ...
-                const year = date.getFullYear();
-                var tgl = month + '-' + year;
-                @this.set('date', tgl);
-                return `${month}-${year}`;
-            }
-            , parse(dateString, format) {
-                const parts = dateString.split('-');
-                const month = parseInt(parts[0], 10) - 1;
-                const year = parseInt(parts[1], 10);
-                return new Date(year, month, 1);
-            },
-            // Optional: biar tidak pilih hari
-            onSelect: function(date) {
-                const month = ("0" + (date.getMonth() + 1)).slice(-2);
-                const year = date.getFullYear();
-                picker.hide(); // tutup langsung setelah pilih bulan
-                @this.set('date', month + '-' + year);
-            }
-        });
 
-    </script>
-
-    <style>
-        /* Sembunyikan tampilan hari */
-        .pika-single .pika-lendar table {
-            display: none;
-        }
-
-    </style>
 </section>
