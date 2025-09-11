@@ -61,6 +61,7 @@
                                 this.fp = flatpickr(this.$refs.input, {
                                     plugins: [
                                         new monthSelectPlugin({
+                                            disableMobile: true,
                                             shorthand: true,  // Jan, Feb, ...
                                             dateFormat: 'm-Y', // format yang dikirim ke Livewire
                                             altFormat: 'F Y',  // format yang ditampilkan ke user (September 2025)
@@ -74,9 +75,8 @@
                             }
                         }" x-init="initFlatpickr()" x-effect="if($wire.date) fp.setDate($wire.date, true)" wire:ignore>
                         <input x-ref="input" type="text" wire:model.live="date" class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih bulan" />
+                         <x-label-error :messages="$errors->get('date')" />
                     </div>
-
-
 
                     {{-- Kategori Perusahaan --}}
                     <div>
