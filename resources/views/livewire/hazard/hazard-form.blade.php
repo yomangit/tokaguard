@@ -196,8 +196,7 @@
                                                 altFormat: 'F Y',    // tampilan ke user (ex: September 2025)
                                             })
                                         ],
-                                        clickOpens: true,
-                                        appendTo: document.body, // ✅ nempel ke <body>
+                                       
                                         onChange: (selectedDates, dateStr) => {
                                             this.$wire.set('month', dateStr);
                                         }
