@@ -57,7 +57,7 @@ class Index extends Component
     {
         $custodian = Contractor::firstWhere('contractor_name', 'LIKE', $this->company)->first()->contractor_id;
         $this->department = Custodian::where('contractor_id', $custodian)->Departemen->department_name;
-        dd($this->department);
+        dd($custodian);
     }
 
     public function render()
