@@ -72,26 +72,39 @@
                                 })
                             }
                         }" x-init="initFlatpickr()" x-effect="if($wire.date) fp.setDate($wire.date, true)" wire:ignore>
-                        <input x-ref="input" type="text" wire:model.live="date" class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih bulan" />
+                        <x-form.label label="Bulan" required />
+                        <input x-ref="input" type="text" wire:model.live="date" class="input input-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih bulan" />
                         <x-label-error :messages="$errors->get('date')" />
                     </div>
 
                     {{-- Kategori Perusahaan --}}
                     <div>
-                        <x-form.label label="Kategori Perusahaan" required />
-                        <select wire:model.live="likelihood_id" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
+                        <x-form.label label="Jenis Entitas" required />
+                        <select wire:model.live="entity_type" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                             <option value="">-- Pilih --</option>
-                            @foreach ($Companies as $company)
-                            <option value="">$company->company_name</option>
-                            @endforeach
+                            <option value="owner">Perusahaan (Owner)</option>
+                            <option value="contractor">Kontraktor</option>
+
                         </select>
-                        <x-label-error :messages="$errors->get('company_category')" />
+                        <x-label-error :messages="$errors->get('entity_type')" />
                     </div>
 
                     {{-- Departemen --}}
                     <div>
-                        <x-form.label label="Departemen" required />
-                        <input type="text" wire:model.live="department" placeholder="Masukkan nama departemen..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                        <x-form.label label="perusahaan" required />
+                        <select wire:model.live="perusahaan" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
+                            <option value="">-- Pilih --</option>
+                            @if ($entity_type="owner")
+                            @foreach ($bu as $company)
+                            <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
+                            @endforeach
+                            @else
+                            @foreach ($cont as $co)
+                            <option value="{{ $co->contractor_name }}">{{ $company->contractor_name }}</option>
+                            @endforeach
+                            @endif
+
+                        </select>
                         <x-label-error :messages="$errors->get('department')" />
                     </div>
 

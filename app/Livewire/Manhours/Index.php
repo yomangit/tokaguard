@@ -2,17 +2,20 @@
 
 namespace App\Livewire\Manhours;
 
+use App\Models\BusinessUnit;
 use Carbon\Carbon;
 use App\Models\Company;
+use App\Models\Contractor;
 use Livewire\Component;
 use App\Models\Department;
 use Livewire\Attributes\Validate;
+use Matrix\Operators\Division;
 
 class Index extends Component
 {
     public $modalOpen;
     public $date;
-    public $company_category;
+    public $entity_type;
     public $company;
     public $department;
 
@@ -30,7 +33,7 @@ class Index extends Component
 
     protected $rules = [
         'date' => 'required',
-        'company_category' => 'required|string',
+        'entity_type' => 'required|string',
         'company' => 'required|string',
         'department' => 'required|string',
 
@@ -54,7 +57,8 @@ class Index extends Component
     {
 
         return view('livewire.manhours.index', [
-            'Departments'   => Department::all(),
+            'bu'   => BusinessUnit::all(),
+            'cont' => Contractor::all(),
             'Companies' => Company::get(),
         ]);
     }
