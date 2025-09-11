@@ -552,7 +552,7 @@
 
                 </div>
                 @if ($RiskAssessment !=null)
-                <table class="table table-xs mb-4">
+                <table class="table table-xs mt-4">
 
                     <tr>
                         <th class="w-40 text-xs border-2 border-slate-400">Potential Risk Rating</th>
