@@ -49,57 +49,73 @@
         <div class="modal-box ">
             <form class='grid justify-items-stretch'>
                 @csrf
-                <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-md border p-4 justify-self-center">
-                    <legend class="fieldset-legend">Input manhours</legend>
-                    {{-- tanggal --}}
-                    <x-label-req>{{ __('Tanggal') }} </x-label-req>
-                    <x-text-input wire:model.live='date' :error="$errors->get('date')" type="text" placeholder="Date" id="myDatepicker" />
-                    <x-label-error :messages="$errors->get('date')" />
-                    {{-- Nama Perusahaan --}}
-                    <x-label-req>{{ __('Nama perusahaan') }} </x-label-req>
-                    <flux:dropdown class='  btn btn-xs btn-outline btn-info' position="bottom" align="start">
-                        <flux:navlist.search icon:trailing="chevrons-up-down" wire:navigate>{{ $company_name}}</flux:navlist.search>
-                        <flux:menu class=" md:w-96">
-                            <flux:input size="xs" icon="magnifying-glass" wire:model.live='search_company' placeholder="Cari Perusahaan" />
-                            <flux:menu.separator />
-                            <flux:menu.radio.group>
-                                @foreach ($Companies as $company)
-                                <flux:menu.radio wire:click='id_company({{ $company->id }})' wire:navigate>{{$company->company_name}}</flux:menu.radio>
-                                @endforeach
-                            </flux:menu.radio.group>
-                        </flux:menu>
-                    </flux:dropdown>
-                    <x-label-error :messages="$errors->get('date')" />
-                    {{-- Nama Departemen --}}
-                    <x-label-req>{{ __('Nama Department') }} </x-label-req>
-                    <flux:dropdown class='  btn btn-xs btn-outline btn-info' position="bottom" align="start">
-                        <flux:navlist.search icon:trailing="chevrons-up-down" wire:navigate>{{ $company_name}}</flux:navlist.search>
-                        <flux:menu class=" md:w-96">
-                            <flux:input size="xs" icon="magnifying-glass" wire:model.live='search_company' placeholder="Cari Perusahaan" />
-                            <flux:menu.separator />
-                            <flux:menu.radio.group>
-                                @foreach ($Companies as $company)
-                                <flux:menu.radio wire:click='id_company({{ $company->id }})' wire:navigate>{{$company->company_name}}</flux:menu.radio>
-                                @endforeach
-                            </flux:menu.radio.group>
+                <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border p-4 max-w-full sm:max-w-md md:max-w-2xl lg:max-w-4xl mx-auto">
+                    <legend class="fieldset-legend">Input Manhours</legend>
 
-                        </flux:menu>
-                    </flux:dropdown>
-                    <x-label-error :messages="$errors->get('date')" />
-                    {{-- Job Class --}}
-                    <x-label-req>{{ __('Job Class') }} </x-label-req>
-                    <flux:dropdown class='  btn btn-xs btn-outline btn-info' btn-info position="bottom" align="start">
-                        <flux:navlist.search icon:trailing="chevrons-up-down" wire:navigate>{{ $company_name}}</flux:navlist.search>
-                        <flux:menu class=" md:w-96">
-                            <flux:menu.radio.group>
-                                <flux:menu.radio wire:navigate>Supervisor</flux:menu.radio>
-                                <flux:menu.radio wire:navigate>Operational</flux:menu.radio>
-                                <flux:menu.radio wire:navigate>Administrator</flux:menu.radio>
-                            </flux:menu.radio.group>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {{-- Tanggal --}}
+                        <div>
+                            <x-label-req>{{ __('Tanggal') }} </x-label-req>
+                            <x-text-input wire:model.live='date' :error="$errors->get('date')" type="text" placeholder="Date" id="myDatepicker" class="w-full" />
+                            <x-label-error :messages="$errors->get('date')" />
+                        </div>
 
-                        </flux:menu>
-                    </flux:dropdown>
-                    <x-label-error :messages="$errors->get('date')" />
+                        {{-- Nama Perusahaan --}}
+                        <div>
+                            <x-label-req>{{ __('Nama perusahaan') }} </x-label-req>
+                            <flux:dropdown class="btn btn-xs btn-outline btn-info w-full" position="bottom" align="start">
+                                <flux:navlist.search icon:trailing="chevrons-up-down" wire:navigate>{{ $company_name }}</flux:navlist.search>
+                                <flux:menu class="w-full md:w-96">
+                                    <flux:input size="xs" icon="magnifying-glass" wire:model.live='search_company' placeholder="Cari Perusahaan" class="w-full" />
+                                    <flux:menu.separator />
+                                    <flux:menu.radio.group>
+                                        @foreach ($Companies as $company)
+                                        <flux:menu.radio wire:click='id_company({{ $company->id }})' wire:navigate>
+                                            {{ $company->company_name }}
+                                        </flux:menu.radio>
+                                        @endforeach
+                                    </flux:menu.radio.group>
+                                </flux:menu>
+                            </flux:dropdown>
+                            <x-label-error :messages="$errors->get('company_id')" />
+                        </div>
+
+                        {{-- Nama Department --}}
+                        <div>
+                            <x-label-req>{{ __('Nama Department') }} </x-label-req>
+                            <flux:dropdown class="btn btn-xs btn-outline btn-info w-full" position="bottom" align="start">
+                                <flux:navlist.search icon:trailing="chevrons-up-down" wire:navigate>{{ $department_name ?? 'Pilih Department' }}</flux:navlist.search>
+                                <flux:menu class="w-full md:w-96">
+                                    <flux:input size="xs" icon="magnifying-glass" wire:model.live='search_department' placeholder="Cari Department" class="w-full" />
+                                    <flux:menu.separator />
+                                    <flux:menu.radio.group>
+                                        @foreach ($Departments as $department)
+                                        <flux:menu.radio wire:click='id_department({{ $department->id }})' wire:navigate>
+                                            {{ $department->department_name }}
+                                        </flux:menu.radio>
+                                        @endforeach
+                                    </flux:menu.radio.group>
+                                </flux:menu>
+                            </flux:dropdown>
+                            <x-label-error :messages="$errors->get('department_id')" />
+                        </div>
+
+                        {{-- Job Class --}}
+                        <div>
+                            <x-label-req>{{ __('Job Class') }} </x-label-req>
+                            <flux:dropdown class="btn btn-xs btn-outline btn-info w-full" position="bottom" align="start">
+                                <flux:navlist.search icon:trailing="chevrons-up-down" wire:navigate>{{ $job_class ?? 'Pilih Job Class' }}</flux:navlist.search>
+                                <flux:menu class="w-full md:w-96">
+                                    <flux:menu.radio.group>
+                                        <flux:menu.radio wire:click="$set('job_class','Supervisor')" wire:navigate>Supervisor</flux:menu.radio>
+                                        <flux:menu.radio wire:click="$set('job_class','Operational')" wire:navigate>Operational</flux:menu.radio>
+                                        <flux:menu.radio wire:click="$set('job_class','Administrator')" wire:navigate>Administrator</flux:menu.radio>
+                                    </flux:menu.radio.group>
+                                </flux:menu>
+                            </flux:dropdown>
+                            <x-label-error :messages="$errors->get('job_class')" />
+                        </div>
+                    </div>
                 </fieldset>
 
                 <div class="modal-action">
