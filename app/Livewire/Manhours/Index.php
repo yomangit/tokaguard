@@ -6,6 +6,7 @@ use App\Models\BusinessUnit;
 use Carbon\Carbon;
 use App\Models\Company;
 use App\Models\Contractor;
+use App\Models\Custodian;
 use Livewire\Component;
 use App\Models\Department;
 use Livewire\Attributes\Validate;
@@ -52,6 +53,13 @@ class Index extends Component
     {
         $this->reset('modalOpen');
     }
+    public function updatedCompany()
+    {
+        if ($this->entity_type === 'contractor') {
+            $custodian = Contractor::where('Contractor', 'LIKE', $this->company)->first()->contractor_id;
+            $this->department = Custodian::where('contractor_id', $custodian)->Departemen->department_name;
+        }
+    }
 
     public function render()
     {
@@ -59,6 +67,7 @@ class Index extends Component
         return view('livewire.manhours.index', [
             'bu'   => BusinessUnit::all(),
             'cont' => Contractor::all(),
+            'departemen' => Department::get(),
             'Companies' => Company::get(),
         ]);
     }

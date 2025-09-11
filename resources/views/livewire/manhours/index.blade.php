@@ -89,10 +89,10 @@
                         <x-label-error :messages="$errors->get('entity_type')" />
                     </fieldset>
 
-                    {{-- Departemen --}}
+                    {{-- Perusahaan --}}
                     <fieldset class="fieldset">
                         <x-form.label label="perusahaan" required />
-                        <select wire:model.live="perusahaan" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
+                        <select wire:model.live="company" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
 
                             @if ($entity_type==="owner")
                             @foreach ($bu as $company)
@@ -107,12 +107,23 @@
                             @endif
 
                         </select>
-                        <x-label-error :messages="$errors->get('department')" />
+                        <x-label-error :messages="$errors->get('company')" />
                     </fieldset>
+                    {{-- Departemen --}}
                      <fieldset class="fieldset">
-                        <x-form.label label="Jenis Entitas" required />
-                        <input  type="text" wire:model.live="dept" readonly class="input input-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih bulan" />
-                        <x-label-error :messages="$errors->get('entity_type')" />
+                        <x-form.label label="department" required />
+                        @if($entity_type==="contractor")
+                        <input  type="text" wire:model.live="department" readonly class="input input-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih bulan" />
+                        @else
+                             <select wire:model.live="department" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
+                            <option value="">-- Pilih --</option>
+                          @foreach ($departemen as $dept)
+                              
+                          <option value="{{ $dept->department_name }}">{{ $dept->department_name }}</option>
+                          @endforeach
+                        </select>
+                        @endif
+                        <x-label-error :messages="$errors->get('department')" />
                     </fieldset>
                     {{-- Job Class --}}
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
