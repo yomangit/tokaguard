@@ -53,9 +53,9 @@ class Index extends Component
     {
         $this->reset('modalOpen');
     }
-    public function updatedCompany($value)
+    public function updatedCompany()
     {
-        $custodian = Contractor::firstWhere('contractor_name',  $value)->first()->contractor_id;
+        $custodian = Contractor::firstWhere('contractor_name', 'LIKE', $this->company)->first()->contractor_id;
         $this->department = Custodian::where('contractor_id', $custodian)->Departemen->department_name;
         dd($this->department);
     }
