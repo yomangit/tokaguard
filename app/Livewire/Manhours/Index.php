@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Manhours;
 
+use Carbon\Carbon;
 use App\Models\Company;
 use Livewire\Component;
 use App\Models\Department;
@@ -35,7 +36,6 @@ class Index extends Component
             $this->company_name = "Semua Perusahaan";
         }
 
-        $this->tgl = $this->date;
         return view('livewire.manhours.index', [
             'Departments'   => Department::all(),
             'Companies' => Company::search(trim($this->search_company))->get()
@@ -44,6 +44,8 @@ class Index extends Component
     public function store()
     {
         $this->validate();
+        $bulan = Carbon::createFromFormat('m-Y', $this->date)->startOfMonth();
+
         $this->dispatch(
             'alert',
             [
