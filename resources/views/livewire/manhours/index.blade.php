@@ -53,7 +53,7 @@
                 <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border p-4 overflow-y-auto">
                     <legend class="fieldset-legend">Form Input Manhours & Manpower</legend>
                     {{-- Bulan --}}
-                    <div x-data="{
+                    <fieldset class="fieldset" x-data="{
                             fp: null,
                             initFlatpickr() {
                                 this.fp = flatpickr(this.$refs.input, {
@@ -75,10 +75,10 @@
                         <x-form.label label="Bulan" required />
                         <input x-ref="input" type="text" wire:model.live="date" class="input input-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih bulan" />
                         <x-label-error :messages="$errors->get('date')" />
-                    </div>
+                    </fieldset>
 
                     {{-- Kategori Perusahaan --}}
-                    <div>
+                    <fieldset class="fieldset">
                         <x-form.label label="Jenis Entitas" required />
                         <select wire:model.live="entity_type" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                             <option value="">-- Pilih --</option>
@@ -87,10 +87,10 @@
 
                         </select>
                         <x-label-error :messages="$errors->get('entity_type')" />
-                    </div>
+                    </fieldset>
 
                     {{-- Departemen --}}
-                    <div>
+                    <fieldset class="fieldset">
                         <x-form.label label="perusahaan" required />
                         <select wire:model.live="perusahaan" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                             <option value="">-- Pilih --</option>
@@ -106,7 +106,7 @@
 
                         </select>
                         <x-label-error :messages="$errors->get('department')" />
-                    </div>
+                    </fieldset>
 
                     {{-- Job Class --}}
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
