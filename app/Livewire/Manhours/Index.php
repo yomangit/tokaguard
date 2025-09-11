@@ -58,6 +58,8 @@ class Index extends Component
         if ($this->entity_type === "contractor") {
             $custodian = Contractor::firstWhere('contractor_name', 'LIKE', $this->company)->first()->id;
             $this->department = Custodian::where('contractor_id', $custodian)->first()->Departemen->department_name;
+        } else {
+            $this->reset('department');
         }
     }
 
