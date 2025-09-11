@@ -63,11 +63,8 @@
                                 this.fp = flatpickr(this.$refs.tanggalInput, {
                                     disableMobile: true,
                                     enableTime: true,
-                                    
                                     defaultDate: this.$wire.entangle('tanggal').defer,
                                     clickOpens: true,
-                                    
-                                    appendTo: this.$refs.wrapper,
                                     onChange: (selectedDates, dateStr) => {
                                         this.$wire.set('tanggal', dateStr);
                                     }
@@ -79,14 +76,14 @@
                                 initFlatpickr();
                             });
                         ">
-                                <input type="text" x-ref="tanggalInput" wire:model.live='tanggal' placeholder="Pilih Tanggal dan Waktu..." readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                                <input type="text"  wire:model.live='tanggal' placeholder="Pilih Tanggal dan Waktu..." readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                             </div>
                             <x-label-error :messages="$errors->get('tanggal')" />
                         </fieldset>
 
                         {{-- Nama Perusahaan --}}
                         <div>
-                            <x-label-req>{{ __('Nama perusahaan') }} </x-label-req>
+                            <x-form.label label="Tanggal & Waktu" required />
                             <flux:dropdown class="btn btn-xs btn-outline btn-info w-full" position="bottom" align="start">
                                 <flux:navlist.search icon:trailing="chevrons-up-down" wire:navigate>{{ $company_name }}</flux:navlist.search>
                                 <flux:menu class="w-full md:w-96">
@@ -106,7 +103,7 @@
 
                         {{-- Nama Department --}}
                         <div>
-                            <x-label-req>{{ __('Nama Department') }} </x-label-req>
+                             <x-form.label label="Tanggal & Waktu" required />
                             <flux:dropdown class="btn btn-xs btn-outline btn-info w-full" position="bottom" align="start">
                                 <flux:navlist.search icon:trailing="chevrons-up-down" wire:navigate>{{ $department_name ?? 'Pilih Department' }}</flux:navlist.search>
                                 <flux:menu class="w-full md:w-96">
@@ -126,7 +123,7 @@
 
                         {{-- Job Class --}}
                         <div>
-                            <x-label-req>{{ __('Job Class') }} </x-label-req>
+                            <x-form.label label="Tanggal & Waktu" required />
                             <flux:dropdown class="btn btn-xs btn-outline btn-info w-full" position="bottom" align="start">
                                 <flux:navlist.search icon:trailing="chevrons-up-down" wire:navigate>{{ $job_class ?? 'Pilih Job Class' }}</flux:navlist.search>
                                 <flux:menu class="w-full md:w-96">
