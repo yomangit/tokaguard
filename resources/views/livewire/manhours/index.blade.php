@@ -109,7 +109,11 @@
                         </select>
                         <x-label-error :messages="$errors->get('department')" />
                     </fieldset>
-
+                     <fieldset class="fieldset">
+                        <x-form.label label="Jenis Entitas" required />
+                        <input  type="text" wire:model.live="dept" readonly class="input input-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih bulan" />
+                        <x-label-error :messages="$errors->get('entity_type')" />
+                    </fieldset>
                     {{-- Job Class --}}
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {{-- Supervisor --}}
