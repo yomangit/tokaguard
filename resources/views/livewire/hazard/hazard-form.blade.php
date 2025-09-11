@@ -182,32 +182,37 @@
                 </fieldset>
                 @endif
                 <fieldset class="fieldset relative">
-                    <x-form.label label="Tanggal & Waktu" required />
+                    <x-form.label label="Bulan" required />
                     <div class="relative" wire:ignore x-data="{
-                            fp: null,
-                            initFlatpickr() {
-                                if (this.fp) this.fp.destroy();
-                                this.fp = flatpickr(this.$refs.tanggalInput, {
-                                    disableMobile: true,
-                                    enableTime: true,
-                                    dateFormat: 'd-m-Y H:i',
-                                    clickOpens: true,
-                                    appendTo: this.$refs.wrapper,
-                                    onChange: (selectedDates, dateStr) => {
-                                        this.$wire.set('tanggal', dateStr);
-                                    }
-                                });
-                            }
-                        }" x-ref="wrapper" x-init="
-                            initFlatpickr();
-                            Livewire.hook('message.processed', () => {
+                                fp: null,
+                                initFlatpickr() {
+                                    if (this.fp) this.fp.destroy();
+                                    this.fp = flatpickr(this.$el.querySelector('input'), {
+                                        disableMobile: true,
+                                        plugins: [
+                                            new monthSelectPlugin({
+                                                shorthand: true,
+                                                dateFormat: 'm-Y',   // format ke Livewire (ex: 09-2025)
+                                                altFormat: 'F Y',    // tampilan ke user (ex: September 2025)
+                                            })
+                                        ],
+                                        clickOpens: true,
+                                        appendTo: document.body, // ✅ nempel ke <body>
+                                        onChange: (selectedDates, dateStr) => {
+                                            this.$wire.set('month', dateStr);
+                                        }
+                                    });
+                                }
+                            }" x-init="
                                 initFlatpickr();
-                            });
-                        ">
-                        <input type="text" x-ref="tanggalInput" wire:model.live='tanggal' placeholder="Pilih Tanggal dan Waktu..." readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                                Livewire.hook('message.processed', () => initFlatpickr());
+                            ">
+                        <input type="text" wire:model.live='month' placeholder="Pilih Bulan & Tahun..." readonly class="input input-bordered cursor-pointer w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
                     </div>
-                    <x-label-error :messages="$errors->get('tanggal')" />
+                    <x-label-error :messages="$errors->get('month')" />
                 </fieldset>
+
+
 
             </div>
             <fieldset class="fieldset mb-4">
