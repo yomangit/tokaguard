@@ -100,7 +100,7 @@
                             @endforeach
                             @elseif($entity_type==="contractor")
                             @foreach ($cont as $co)
-                            <option value="{{ $co->contractor_name }}">{{ $company->contractor_name }}</option>
+                            <option value="{{ $co->contractor_name }}">{{ $co->contractor_name }}</option>
                             @endforeach
                             @else
                             <option value="">-- Pilih --</option>
