@@ -44,7 +44,9 @@ class Index extends Component
     {
         $this->validate();
         $bulan = Carbon::createFromFormat('m-Y', $this->date)->startOfMonth();
-        dd($bulan);
+
+        dd($bulan->format('Y/m/d'));
+
         $this->dispatch(
             'alert',
             [
