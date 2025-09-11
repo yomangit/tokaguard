@@ -62,7 +62,7 @@
                                     plugins: [
                                         new monthSelectPlugin({
                                             shorthand: true,  // Jan, Feb, ...
-                                            dateFormat: 'Y-m', // format yang dikirim ke Livewire
+                                            dateFormat: 'm-Y', // format yang dikirim ke Livewire
                                             altFormat: 'F Y',  // format yang ditampilkan ke user (September 2025)
                                             theme: 'light'
                                         })
