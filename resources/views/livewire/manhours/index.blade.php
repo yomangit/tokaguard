@@ -59,12 +59,12 @@
                                         enableTime: true,
                                         dateFormat: 'Y-m-d H:i',
                                         onChange: (selectedDates, dateStr) => {
-                                            $wire.set('tanggal', dateStr)
+                                            $wire.set('date', dateStr)
                                         }
                                     })
                                 }
-                            }" x-init="initFlatpickr()" x-effect="if($wire.tanggal) fp.setDate($wire.tanggal, true)" wire:ignore>
-                        <input x-ref="input" type="text" class="input input-bordered w-full" placeholder="Pilih tanggal" />
+                            }" x-init="initFlatpickr()" x-effect="if($wire.date) fp.setDate($wire.date, true)" wire:ignore>
+                        <input x-ref="input" type="text" wire:model.live='date' class="input input-bordered w-full" placeholder="Pilih tanggal" />
                     </div>
 
 
