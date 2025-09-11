@@ -151,8 +151,8 @@
 
             {{-- Tombol Aksi --}}
             <div class="flex justify-end gap-2 mt-4">
-                <x-secondary-button type="button" wire:click="$set('modalOpen', false)">Batal</x-secondary-button>
-                <x-primary-button type="submit">Simpan</x-primary-button>
+                <flux:button variant="danger" wire:click="$set('modalOpen', false)">Batal</flux:button>
+                <flux:button variant="primary" type="submit">Simpan</flux:button>
             </div>
         </form>
     </div>
