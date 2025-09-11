@@ -55,7 +55,7 @@ class Index extends Component
 
         return view('livewire.manhours.index', [
             'Departments'   => Department::all(),
-            'Companies' => Company::search(trim($this->search_company))->get(),
+            'Companies' => Company::get(),
         ]);
     }
     public function store()
