@@ -11,11 +11,36 @@ use Livewire\Attributes\Validate;
 class Index extends Component
 {
     public $modalOpen;
-    // fild
-    #[Validate('required', message: 'kolom tanggal tidak boleh kosong!!!')]
     public $date;
-    public $tgl;
-    public $search_company, $company_id, $company_name;
+    public $company_category;
+    public $company;
+    public $department;
+
+    // input Supervisor
+    public $manhours_supervisor;
+    public $manpower_supervisor;
+
+    // input Operational
+    public $manhours_operational;
+    public $manpower_operational;
+
+    // input Administration
+    public $manhours_administration;
+    public $manpower_administration;
+
+    protected $rules = [
+        'date' => 'required',
+        'company_category' => 'required|string',
+        'company' => 'required|string',
+        'department' => 'required|string',
+
+        'manhours_supervisor' => 'required|numeric',
+        'manpower_supervisor' => 'required|numeric',
+        'manhours_operational' => 'required|numeric',
+        'manpower_operational' => 'required|numeric',
+        'manhours_administration' => 'required|numeric',
+        'manpower_administration' => 'required|numeric',
+    ];
     public function open_modal()
     {
         $this->modalOpen = 'modal-open';
@@ -24,20 +49,13 @@ class Index extends Component
     {
         $this->reset('modalOpen');
     }
-    public function id_company(Company $id)
-    {
-        $this->company_id = $id->id;
-        $this->company_name = $id->company_name;
-    }
+
     public function render()
     {
-        if (empty($this->company_id)) {
 
-            $this->company_name = "Semua Perusahaan";
-        }
         return view('livewire.manhours.index', [
             'Departments'   => Department::all(),
-            'Companies' => Company::search(trim($this->search_company))->get()
+            'Companies' => Company::search(trim($this->search_company))->get(),
         ]);
     }
     public function store()

@@ -73,13 +73,18 @@
                             }
                         }" x-init="initFlatpickr()" x-effect="if($wire.date) fp.setDate($wire.date, true)" wire:ignore>
                         <input x-ref="input" type="text" wire:model.live="date" class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih bulan" />
-                         <x-label-error :messages="$errors->get('date')" />
+                        <x-label-error :messages="$errors->get('date')" />
                     </div>
 
                     {{-- Kategori Perusahaan --}}
                     <div>
                         <x-form.label label="Kategori Perusahaan" required />
-                        <input type="text" wire:model.live="company_category" placeholder="Masukkan kategori perusahaan..." class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" />
+                        <select wire:model.live="likelihood_id" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
+                            <option value="">-- Pilih --</option>
+                            @foreach ($Companies as $company)
+                            <option value="">$company->company_name</option>
+                            @endforeach
+                        </select>
                         <x-label-error :messages="$errors->get('company_category')" />
                     </div>
 
