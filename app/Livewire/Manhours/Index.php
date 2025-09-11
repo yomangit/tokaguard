@@ -35,7 +35,6 @@ class Index extends Component
 
             $this->company_name = "Semua Perusahaan";
         }
-
         return view('livewire.manhours.index', [
             'Departments'   => Department::all(),
             'Companies' => Company::search(trim($this->search_company))->get()
@@ -45,7 +44,7 @@ class Index extends Component
     {
         $this->validate();
         $bulan = Carbon::createFromFormat('m-Y', $this->date)->startOfMonth();
-
+        dd($bulan);
         $this->dispatch(
             'alert',
             [
