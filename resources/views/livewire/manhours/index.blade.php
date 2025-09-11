@@ -112,8 +112,8 @@
                     {{-- Departemen --}}
                      <fieldset class="fieldset">
                         <x-form.label label="department" required />
-                        @if($entity_type==="contractor")
-                        <input  type="text" wire:model.live="department" readonly class="input input-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih bulan" />
+                        @if($entity_type ==="contractor")
+                        <input  type="text" wire:model.live="department" readonly class="input input-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs"  />
                         @else
                              <select wire:model.live="department" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                             <option value="">-- Pilih --</option>
