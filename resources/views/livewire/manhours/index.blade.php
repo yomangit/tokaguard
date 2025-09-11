@@ -93,15 +93,17 @@
                     <fieldset class="fieldset">
                         <x-form.label label="perusahaan" required />
                         <select wire:model.live="perusahaan" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
-                            <option value="">-- Pilih --</option>
-                            @if ($entity_type="owner")
+
+                            @if ($entity_type==="owner")
                             @foreach ($bu as $company)
                             <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
                             @endforeach
-                            @else
+                            @elseif($entity_type==="contractor")
                             @foreach ($cont as $co)
                             <option value="{{ $co->contractor_name }}">{{ $company->contractor_name }}</option>
                             @endforeach
+                            @else
+                            <option value="">-- Pilih --</option>
                             @endif
 
                         </select>
