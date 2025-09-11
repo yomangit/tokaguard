@@ -1,6 +1,8 @@
 <section class="w-full">
     <x-toast />
-    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script>
+
     @include('partials.manhours')
     <div class="flex justify-between">
         <!-- You can open the modal using ID.showModal() method -->
@@ -52,20 +54,28 @@
                     <legend class="fieldset-legend">Form Input Manhours & Manpower</legend>
 
                     {{-- Bulan --}}
+                    {{-- Bulan --}}
                     <div x-data="{
-                                fp: null,
-                                initFlatpickr() {
-                                    this.fp = flatpickr(this.$refs.input, {
-                                        enableTime: true,
-                                        dateFormat: 'Y-m-d H:i',
-                                        onChange: (selectedDates, dateStr) => {
-                                            $wire.set('date', dateStr)
-                                        }
-                                    })
-                                }
-                            }" x-init="initFlatpickr()" x-effect="if($wire.date) fp.setDate($wire.date, true)" wire:ignore>
-                        <input x-ref="input" type="text" wire:model.live='date' class="input input-bordered w-full" placeholder="Pilih tanggal" />
+                            fp: null,
+                            initFlatpickr() {
+                                this.fp = flatpickr(this.$refs.input, {
+                                    plugins: [
+                                        new monthSelectPlugin({
+                                            shorthand: true,  // Jan, Feb, ...
+                                            dateFormat: 'Y-m', // format yang dikirim ke Livewire
+                                            altFormat: 'F Y',  // format yang ditampilkan ke user (September 2025)
+                                            theme: 'light'
+                                        })
+                                    ],
+                                    onChange: (selectedDates, dateStr) => {
+                                        $wire.set('date', dateStr)
+                                    }
+                                })
+                            }
+                        }" x-init="initFlatpickr()" x-effect="if($wire.date) fp.setDate($wire.date, true)" wire:ignore>
+                        <input x-ref="input" type="text" wire:model.live="date" class="input input-bordered w-full focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih bulan" />
                     </div>
+
 
 
                     {{-- Kategori Perusahaan --}}
