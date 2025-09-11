@@ -99,8 +99,8 @@
                             @foreach ($bu as $company)
                             <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
                             @endforeach
-                             <option value="">-- Pilih --</option>
                             @elseif($entity_type==="contractor")
+                            <option value="">-- Pilih --</option>
                             @foreach ($cont as $co)
                             <option value="{{ $co->contractor_name }}">{{ $co->contractor_name }}</option>
                             @endforeach
