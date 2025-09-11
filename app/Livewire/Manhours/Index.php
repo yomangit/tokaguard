@@ -4,6 +4,7 @@ namespace App\Livewire\Manhours;
 
 use App\Models\Company;
 use Livewire\Component;
+use App\Models\Department;
 use Livewire\Attributes\Validate;
 
 class Index extends Component
@@ -36,6 +37,7 @@ class Index extends Component
 
         $this->tgl = $this->date;
         return view('livewire.manhours.index', [
+            'Departments'   => Department::all(),
             'Companies' => Company::search(trim($this->search_company))->get()
         ]);
     }
