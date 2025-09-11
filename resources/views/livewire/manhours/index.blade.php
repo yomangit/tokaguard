@@ -50,7 +50,7 @@
     <div class="modal {{ $modalOpen }}">
         <div class="modal-box max-w-4xl">
             <form wire:submit.prevent="save">
-                <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border p-4 space-y-6">
+                <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border p-4 overflow-y-auto">
                     <legend class="fieldset-legend">Form Input Manhours & Manpower</legend>
 
                     {{-- Bulan --}}
