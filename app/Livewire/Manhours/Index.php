@@ -79,7 +79,7 @@ class Index extends Component
             $this->selectedId = $id;
             $data = Manhour::findOrFail($id);
 
-            $this->date        = Carbon::parse($data->date)->format('m-Y');
+            $this->date        = Carbon::parse($data->date)->format('M-Y');
             $this->entity_type = strtolower($data->company_category) === "contractor" ? "contractor" : "owner";
             $this->company     = $data->company;
             $this->department  = $data->department;
@@ -152,7 +152,7 @@ class Index extends Component
             ? 'Contractor'
             : 'PT. Archi Indonesia';
 
-        $bulan = Carbon::createFromFormat('m-Y', $this->date)->startOfMonth();
+        $bulan = Carbon::createFromFormat('M-Y', $this->date)->startOfMonth();
 
         foreach ($this->jobclasses as $key => $label) {
             $query = Manhour::where('date', $bulan->format('Y/m/d'))

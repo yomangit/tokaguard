@@ -30,7 +30,7 @@
                     @foreach ($data_manhours as $no => $manhour)
                     <tr>
                         <th>{{ $data_manhours->firstItem() + $no }}</th>
-                        <td>{{ \Carbon\Carbon::parse($manhour->date)->translatedFormat('mm-Y') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($manhour->date)->translatedFormat('M-Y') }}</td>
                         <td>{{ $manhour->company_category }}</td>
                         <td>{{ $manhour->company }}</td>
                         <td>{{ $manhour->department }}</td>
@@ -71,7 +71,7 @@
                                             new monthSelectPlugin({
                                                 disableMobile: true,
                                                 shorthand: true,  // Jan, Feb, ...
-                                                dateFormat: 'm-Y', // format yang dikirim ke Livewire
+                                                dateFormat: 'M-Y', // format yang dikirim ke Livewire
                                                 altFormat: 'F Y',  // format yang ditampilkan ke user (September 2025)
                                                 theme: 'light'
                                             })
