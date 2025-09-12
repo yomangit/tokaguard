@@ -82,7 +82,9 @@ class Index extends Component
             $this->company     = $data->company;
             $this->department  = $data->department;
             $this->dept_group  = $data->dept_group;
-
+            // 🔹 tambahkan ini supaya opsi perusahaan & departemen muncul
+            $this->updatedCompany();
+            $this->updatedDepartment();
             // isi jobclass sesuai data yang ada
             $this->manhours[$data->job_class]  = $data->manhours;
             $this->manpower[$data->job_class]  = $data->manpower;
