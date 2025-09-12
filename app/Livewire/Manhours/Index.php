@@ -185,14 +185,15 @@ class Index extends Component
             if ($mode === 'update') {
                 Manhour::updateOrCreate(
                     [
+                        'id'               => $this->selectedId,
+                    ],
+                    [
                         'date'             => $bulan->format('Y/m/d'),
                         'company_category' => $company_category,
                         'company'          => $this->company,
                         'department'       => $this->department,
                         'dept_group'       => $this->dept_group,
                         'job_class'        => $label,
-                    ],
-                    [
                         'manhours'         => $this->manhours[$key],
                         'manpower'         => $this->manpower[$key],
                     ]
