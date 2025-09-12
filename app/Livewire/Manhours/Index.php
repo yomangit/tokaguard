@@ -9,6 +9,7 @@ use App\Models\Contractor;
 use App\Models\Custodian;
 use Livewire\Component;
 use App\Models\Department;
+use App\Models\Department_group;
 use Livewire\Attributes\Validate;
 use Matrix\Operators\Division;
 
@@ -20,6 +21,7 @@ class Index extends Component
     public $company;
     public $department;
     public $custodian=[];
+    public $deptGroup=[];
 
     // input Supervisor
     public $manhours_supervisor;
@@ -59,7 +61,11 @@ class Index extends Component
         if ($this->entity_type === "contractor") {
             $custodian = Contractor::where('contractor_name', 'LIKE', $this->company)->first()->id;
             $this->custodian = Custodian::where('contractor_id','LIKE', $custodian)->get();
-        } else {
+        } 
+        elseif ($this->entity_type === "owner") {
+            $this->deptGroup = Department_group::get();
+        }
+        else {
             $this->reset('department');
         }
     }
@@ -68,7 +74,6 @@ class Index extends Component
     {
 
         return view('livewire.manhours.index', [
-            'bu'   => BusinessUnit::all(),
             'cont' => Contractor::all(),
             'departemen' => Department::get(),
             'Companies' => Company::get(),

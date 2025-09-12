@@ -13,4 +13,13 @@ class Department_group extends Model
         'department_id',
         'status'
     ];
+
+    public function Departemen()
+    {
+        return $this->belongsTo(Department::class);
+    }
+    public function Group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }

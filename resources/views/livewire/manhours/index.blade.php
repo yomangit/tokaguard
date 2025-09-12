@@ -124,9 +124,8 @@
                         @else
                         <select wire:model.live="department" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                             <option value="">-- Pilih --</option>
-                            @foreach ($departemen as $dept)
-
-                            <option value="{{ $dept->department_name }}">{{ $dept->department_name }}</option>
+                            @foreach ($deptGroup as $dg)
+                            <option value="{{ $dg->Departemen->department_name }}">{{ $dg->Departemen->department_name }}</option>
                             @endforeach
                         </select>
                         @endif
