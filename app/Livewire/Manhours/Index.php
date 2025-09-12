@@ -226,7 +226,7 @@ public function close_modal()
             }
         }
 
-    Mail::to('penerima@domain.com')->send(new TestMail());
+         Mail::to('Yoman.Banea@archimining.com')->send(new TestMail());
 
    
 
