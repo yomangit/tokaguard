@@ -46,151 +46,151 @@
                 </tbody>
             </table>
         </div>
-    </x-manhours.layout>
-    <div class="modal {{ $modalOpen }}">
-        <div class="modal-box max-w-4xl">
-            <form wire:submit.prevent="store">
-                <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border p-4 overflow-y-auto">
-                    <legend class="fieldset-legend">Form Input Manhours & Manpower</legend>
-                    {{-- Bulan --}}
-                    <fieldset class="fieldset">
-                        <x-form.label label="Bulan" required />
-                        <div x-data="{
-                            fp: null,
-                            initFlatpickr() {
-                                this.fp = flatpickr(this.$refs.input, {
-                                    plugins: [
-                                        new monthSelectPlugin({
-                                            disableMobile: true,
-                                            shorthand: true,  // Jan, Feb, ...
-                                            dateFormat: 'm-Y', // format yang dikirim ke Livewire
-                                            altFormat: 'F Y',  // format yang ditampilkan ke user (September 2025)
-                                            theme: 'light'
-                                        })
-                                    ],
-                                    onChange: (selectedDates, dateStr) => {
-                                        $wire.set('date', dateStr)
-                                    }
-                                })
-                            }
-                        }" x-init="initFlatpickr()" x-effect="if($wire.date) fp.setDate($wire.date, true)" wire:ignore>
-                            <input x-ref="input" type="text" wire:model.live="date" class="input input-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih bulan" />
-                        </div>
-                        <x-label-error :messages="$errors->get('date')" />
-                    </fieldset>
-
-                    {{-- Kategori Perusahaan --}}
-                    <fieldset class="fieldset">
-                        <x-form.label label="Jenis Entitas" required />
-                        <select wire:model.live="entity_type" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
-                            <option value="">-- Pilih --</option>
-                            <option value="owner">Perusahaan (Owner)</option>
-                            <option value="contractor">Kontraktor</option>
-
-                        </select>
-
-                        <x-label-error :messages="$errors->get('entity_type')" />
-                    </fieldset>
-
-                    {{-- Perusahaan --}}
-                    <fieldset class="fieldset">
-                        <x-form.label label="perusahaan" required />
-                        <select wire:model.live="company" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
-
-                            @if ($entity_type==="owner")
-                            <option value="">-- Pilih --</option>
-                            @foreach ($bu as $company)
-                            <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
-                            @endforeach
-                            @elseif($entity_type==="contractor")
-                            <option value="">-- Pilih --</option>
-                            @foreach ($cont as $co)
-                            <option value="{{ $co->contractor_name }}">{{ $co->contractor_name }}</option>
-                            @endforeach
+        <div class="modal {{ $modalOpen }}">
+            <div class="modal-box max-w-4xl">
+                <form wire:submit.prevent="store">
+                    <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border p-4 overflow-y-auto">
+                        <legend class="fieldset-legend">Form Input Manhours & Manpower</legend>
+                        {{-- Bulan --}}
+                        <fieldset class="fieldset">
+                            <x-form.label label="Bulan" required />
+                            <div x-data="{
+                                fp: null,
+                                initFlatpickr() {
+                                    this.fp = flatpickr(this.$refs.input, {
+                                        plugins: [
+                                            new monthSelectPlugin({
+                                                disableMobile: true,
+                                                shorthand: true,  // Jan, Feb, ...
+                                                dateFormat: 'm-Y', // format yang dikirim ke Livewire
+                                                altFormat: 'F Y',  // format yang ditampilkan ke user (September 2025)
+                                                theme: 'light'
+                                            })
+                                        ],
+                                        onChange: (selectedDates, dateStr) => {
+                                            $wire.set('date', dateStr)
+                                        }
+                                    })
+                                }
+                            }" x-init="initFlatpickr()" x-effect="if($wire.date) fp.setDate($wire.date, true)" wire:ignore>
+                                <input x-ref="input" type="text" wire:model.live="date" class="input input-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih bulan" />
+                            </div>
+                            <x-label-error :messages="$errors->get('date')" />
+                        </fieldset>
+    
+                        {{-- Kategori Perusahaan --}}
+                        <fieldset class="fieldset">
+                            <x-form.label label="Jenis Entitas" required />
+                            <select wire:model.live="entity_type" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
+                                <option value="">-- Pilih --</option>
+                                <option value="owner">Perusahaan (Owner)</option>
+                                <option value="contractor">Kontraktor</option>
+    
+                            </select>
+    
+                            <x-label-error :messages="$errors->get('entity_type')" />
+                        </fieldset>
+    
+                        {{-- Perusahaan --}}
+                        <fieldset class="fieldset">
+                            <x-form.label label="perusahaan" required />
+                            <select wire:model.live="company" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
+    
+                                @if ($entity_type==="owner")
+                                <option value="">-- Pilih --</option>
+                                @foreach ($bu as $company)
+                                <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
+                                @endforeach
+                                @elseif($entity_type==="contractor")
+                                <option value="">-- Pilih --</option>
+                                @foreach ($cont as $co)
+                                <option value="{{ $co->contractor_name }}">{{ $co->contractor_name }}</option>
+                                @endforeach
+                                @else
+                                <option value="">-- Pilih --</option>
+                                @endif
+    
+                            </select>
+                            <x-label-error :messages="$errors->get('company')" />
+                        </fieldset>
+                        {{-- Departemen --}}
+                        <fieldset class="fieldset">
+                            <x-form.label label="department" required />
+                            @if($entity_type ==="contractor")
+                            <select wire:model.live="department" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
+                                <option value="">-- Pilih --</option>
+                                @foreach ($custodian as $cust)
+                                <option value="{{ $cust->Departemen->department_name }}">{{ $cust->Departemen->department_name }}</option>
+                                @endforeach
+                            </select>
                             @else
-                            <option value="">-- Pilih --</option>
+                            <select wire:model.live="department" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
+                                <option value="">-- Pilih --</option>
+                                @foreach ($deptGroup as $dg)
+                                <option value="{{ $dg->Departemen->department_name }}">{{ $dg->Departemen->department_name }}</option>
+                                @endforeach
+                            </select>
                             @endif
-
-                        </select>
-                        <x-label-error :messages="$errors->get('company')" />
+                            <x-label-error :messages="$errors->get('department')" />
+                        </fieldset>
+                        {{-- Job Class --}}
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            {{-- Supervisor --}}
+                            <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
+                                <legend class="text-sm font-semibold">Supervisor</legend>
+                                <fieldset class="fieldset">
+                                    <x-form.label label="Manhours" required />
+                                    <input type="number" wire:model.live="manhours_supervisor" placeholder="Masukkan manhours..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
+                                    <x-label-error :messages="$errors->get('manhours_supervisor')" />
+                                </fieldset>
+                                <fieldset class="fieldset mt-2">
+                                    <x-form.label label="Manpower" required />
+                                    <input type="number" wire:model.live="manpower_supervisor" placeholder="Masukkan manpower..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
+                                    <x-label-error :messages="$errors->get('manpower_supervisor')" />
+                                </fieldset>
+                            </fieldset>
+    
+                            {{-- Operational --}}
+                            <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
+                                <legend class="text-sm font-semibold">Operational</legend>
+                                <fieldset class="fieldset">
+                                    <x-form.label label="Manhours" required />
+                                    <input type="number" wire:model.live="manhours_operational" placeholder="Masukkan manhours..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
+                                    <x-label-error :messages="$errors->get('manhours_operational')" />
+                                </fieldset>
+                                <fieldset class="fieldset mt-2">
+                                    <x-form.label label="Manpower" required />
+                                    <input type="number" wire:model.live="manpower_operational" placeholder="Masukkan manpower..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
+                                    <x-label-error :messages="$errors->get('manpower_operational')" />
+                                </fieldset>
+                            </fieldset>
+    
+                            {{-- Administration --}}
+                            <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
+                                <legend class="text-sm font-semibold">Administration</legend>
+                                <fieldset class="fieldset">
+                                    <x-form.label label="Manhours" required />
+                                    <input type="number" wire:model.live="manhours_administration" placeholder="Masukkan manhours..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
+                                    <x-label-error :messages="$errors->get('manhours_administration')" />
+                                </fieldset>
+                                <fieldset class="fieldset mt-2">
+                                    <x-form.label label="Manpower" required />
+                                    <input type="number" wire:model.live="manpower_administration" placeholder="Masukkan manpower..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
+                                    <x-label-error :messages="$errors->get('manpower_administration')" />
+                                </fieldset>
+                            </fieldset>
+                        </div>
                     </fieldset>
-                    {{-- Departemen --}}
-                    <fieldset class="fieldset">
-                        <x-form.label label="department" required />
-                        @if($entity_type ==="contractor")
-                        <select wire:model.live="department" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
-                            <option value="">-- Pilih --</option>
-                            @foreach ($custodian as $cust)
-                            <option value="{{ $cust->Departemen->department_name }}">{{ $cust->Departemen->department_name }}</option>
-                            @endforeach
-                        </select>
-                        @else
-                        <select wire:model.live="department" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
-                            <option value="">-- Pilih --</option>
-                            @foreach ($deptGroup as $dg)
-                            <option value="{{ $dg->Departemen->department_name }}">{{ $dg->Departemen->department_name }}</option>
-                            @endforeach
-                        </select>
-                        @endif
-                        <x-label-error :messages="$errors->get('department')" />
-                    </fieldset>
-                    {{-- Job Class --}}
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {{-- Supervisor --}}
-                        <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
-                            <legend class="text-sm font-semibold">Supervisor</legend>
-                            <fieldset class="fieldset">
-                                <x-form.label label="Manhours" required />
-                                <input type="number" wire:model.live="manhours_supervisor" placeholder="Masukkan manhours..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
-                                <x-label-error :messages="$errors->get('manhours_supervisor')" />
-                            </fieldset>
-                            <fieldset class="fieldset mt-2">
-                                <x-form.label label="Manpower" required />
-                                <input type="number" wire:model.live="manpower_supervisor" placeholder="Masukkan manpower..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
-                                <x-label-error :messages="$errors->get('manpower_supervisor')" />
-                            </fieldset>
-                        </fieldset>
-
-                        {{-- Operational --}}
-                        <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
-                            <legend class="text-sm font-semibold">Operational</legend>
-                            <fieldset class="fieldset">
-                                <x-form.label label="Manhours" required />
-                                <input type="number" wire:model.live="manhours_operational" placeholder="Masukkan manhours..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
-                                <x-label-error :messages="$errors->get('manhours_operational')" />
-                            </fieldset>
-                            <fieldset class="fieldset mt-2">
-                                <x-form.label label="Manpower" required />
-                                <input type="number" wire:model.live="manpower_operational" placeholder="Masukkan manpower..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
-                                <x-label-error :messages="$errors->get('manpower_operational')" />
-                            </fieldset>
-                        </fieldset>
-
-                        {{-- Administration --}}
-                        <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
-                            <legend class="text-sm font-semibold">Administration</legend>
-                            <fieldset class="fieldset">
-                                <x-form.label label="Manhours" required />
-                                <input type="number" wire:model.live="manhours_administration" placeholder="Masukkan manhours..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
-                                <x-label-error :messages="$errors->get('manhours_administration')" />
-                            </fieldset>
-                            <fieldset class="fieldset mt-2">
-                                <x-form.label label="Manpower" required />
-                                <input type="number" wire:model.live="manpower_administration" placeholder="Masukkan manpower..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
-                                <x-label-error :messages="$errors->get('manpower_administration')" />
-                            </fieldset>
-                        </fieldset>
+    
+                    {{-- Tombol Aksi --}}
+                    <div class="flex justify-end gap-2 mt-4">
+                        <flux:button size="xs" variant="danger" wire:click="$set('modalOpen', false)">Batal</flux:button>
+                        <flux:button size="xs" variant="primary" type="submit">Simpan</flux:button>
                     </div>
-                </fieldset>
-
-                {{-- Tombol Aksi --}}
-                <div class="flex justify-end gap-2 mt-4">
-                    <flux:button size="xs" variant="danger" wire:click="$set('modalOpen', false)">Batal</flux:button>
-                    <flux:button size="xs" variant="primary" type="submit">Simpan</flux:button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
+    </x-manhours.layout>
 
 
 
