@@ -57,7 +57,7 @@
         <div class="mt-4">{{ $data_manhours->links() }}</div>
         <div class="modal {{ $modalOpen }}">
             <div class="modal-box max-w-4xl w-11/12 max-h-[90vh] md:max-h-[85vh] lg:max-h-[80vh] overflow-y-auto">
-                <form wire:submit.prevent="store">
+                <form wire:submit.prevent="{{ $selectedId ? "update($selectedId)" : 'store' }}">
                     <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border p-4 overflow-y-auto">
                         <legend class="fieldset-legend">Form Input Manhours & Manpower</legend>
                         {{-- Bulan --}}
@@ -176,7 +176,11 @@
                     {{-- Tombol Aksi --}}
                     <div class="flex justify-end gap-2 mt-4">
                         <flux:button size="xs" variant="danger" wire:click="$set('modalOpen', false)">Batal</flux:button>
+                        @if ($selectedId)
+                        <flux:button size="xs" variant="primary" type="submit">Update</flux:button>
+                        @else
                         <flux:button size="xs" variant="primary" type="submit">Simpan</flux:button>
+                        @endif
                     </div>
                 </form>
             </div>

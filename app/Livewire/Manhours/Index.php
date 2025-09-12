@@ -20,7 +20,7 @@ class Index extends Component
     public $modalOpen;
     public $custodian = [];
     public $deptGroup = [];
-
+    public $selectedId = null;
     // input umum
     public $date;
     public $entity_type;
@@ -69,9 +69,37 @@ class Index extends Component
 
         return $rules;
     }
-
-    public function open_modal()
+    public function open_modal($id = null)
     {
+        $this->resetValidation();
+
+        if ($id) {
+            $this->selectedId = $id;
+            $data = Manhour::findOrFail($id);
+
+            $this->date        = Carbon::parse($data->date)->format('m-Y');
+            $this->entity_type = strtolower($data->company_category) === "contractor" ? "contractor" : "owner";
+            $this->company     = $data->company;
+            $this->department  = $data->department;
+            $this->dept_group  = $data->dept_group;
+
+            // isi jobclass sesuai data yang ada
+            $this->manhours[$data->job_class]  = $data->manhours;
+            $this->manpower[$data->job_class]  = $data->manpower;
+        } else {
+            $this->reset([
+                'date',
+                'entity_type',
+                'company',
+                'department',
+                'dept_group',
+                'manhours',
+                'manpower',
+                'hide',
+                'selectedId'
+            ]);
+        }
+
         $this->modalOpen = 'modal-open';
     }
 
@@ -109,32 +137,64 @@ class Index extends Component
         ]);
     }
 
-    public function store()
+    private function saveManhours($mode = 'create', $id = null)
     {
         $this->validate();
 
-        $company_category = $this->entity_type === "contractor" ? 'Contractor' : 'PT. Archi Indonesia';
+        $company_category = $this->entity_type === "contractor"
+            ? 'Contractor'
+            : 'PT. Archi Indonesia';
+
         $bulan = Carbon::createFromFormat('m-Y', $this->date)->startOfMonth();
 
         foreach ($this->jobclasses as $key => $label) {
-            // 🔹 Skip jika checkbox dicentang ATAU kedua field kosong
+            $query = Manhour::where('date', $bulan->format('Y/m/d'))
+                ->where('company', $this->company)
+                ->where('department', $this->department)
+                ->where('dept_group', $this->dept_group)
+                ->where('job_class', $label);
+
+            // 🔹 Jika checkbox dicentang atau kosong → hapus record lama
             if ($this->hide[$key] || (empty($this->manhours[$key]) && empty($this->manpower[$key]))) {
+                $query->delete();
                 continue;
             }
-            Manhour::create([
-                'date'             => $bulan->format('Y/m/d'),
-                'company_category' => $company_category,
-                'company'          => $this->company,
-                'department'       => $this->department,
-                'dept_group'       => $this->dept_group,
-                'job_class'        => $label,
-                'manhours'         => $this->hide[$key] ? null : $this->manhours[$key],
-                'manpower'         => $this->hide[$key] ? null : $this->manpower[$key],
-            ]);
+
+            // 🔹 Kalau create → buat baru
+            if ($mode === 'create') {
+                Manhour::create([
+                    'date'             => $bulan->format('Y/m/d'),
+                    'company_category' => $company_category,
+                    'company'          => $this->company,
+                    'department'       => $this->department,
+                    'dept_group'       => $this->dept_group,
+                    'job_class'        => $label,
+                    'manhours'         => $this->manhours[$key],
+                    'manpower'         => $this->manpower[$key],
+                ]);
+            }
+
+            // 🔹 Kalau update → updateOrCreate
+            if ($mode === 'update') {
+                Manhour::updateOrCreate(
+                    [
+                        'date'             => $bulan->format('Y/m/d'),
+                        'company_category' => $company_category,
+                        'company'          => $this->company,
+                        'department'       => $this->department,
+                        'dept_group'       => $this->dept_group,
+                        'job_class'        => $label,
+                    ],
+                    [
+                        'manhours'         => $this->manhours[$key],
+                        'manpower'         => $this->manpower[$key],
+                    ]
+                );
+            }
         }
 
         $this->dispatch('alert', [
-            'text'            => "Data berhasil di input!!!",
+            'text'            => $mode === 'create' ? "Data berhasil di input!!!" : "Data berhasil diperbarui!!!",
             'duration'        => 5000,
             'destination'     => '/contact',
             'newWindow'       => true,
@@ -143,6 +203,15 @@ class Index extends Component
         ]);
     }
 
+    public function store()
+    {
+        $this->saveManhours('create');
+    }
+
+    public function update($id)
+    {
+        $this->saveManhours('update', $id);
+    }
     public function paginationView()
     {
         return 'vendor.livewire.tailwind';
