@@ -105,22 +105,17 @@
                             <x-form.label label="Perusahaan" required />
                             <select wire:model.live="company" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                                 <option value="">-- Pilih --</option>
-
-                                {{-- Jika value dari DB tidak ada di daftar, tampilkan hidden option supaya tetap terpilih --}}
-                                @if($company && !collect($bu)->pluck('company_name')->contains($company) && $entity_type==="owner")
-                                <option value="{{ $company }}" selected hidden>{{ $company }}</option>
-                                @endif
-                                @if($company && !collect($cont)->pluck('contractor_name')->contains($company) && $entity_type==="contractor")
-                                <option value="{{ $company }}" selected hidden>{{ $company }}</option>
-                                @endif
-
                                 @if ($entity_type==="owner")
                                 @foreach ($bu as $comp)
-                                <option value="{{ $comp->company_name }}">{{ $comp->company_name }}</option>
+                                <option value="{{ $comp->company_name }}" @selected($company===$comp->company_name)>
+                                    {{ $comp->company_name }}
+                                </option>
                                 @endforeach
                                 @elseif($entity_type==="contractor")
                                 @foreach ($cont as $co)
-                                <option value="{{ $co->contractor_name }}">{{ $co->contractor_name }}</option>
+                                <option value="{{ $co->contractor_name }}" @selected($company===$co->contractor_name)>
+                                    {{ $co->contractor_name }}
+                                </option>
                                 @endforeach
                                 @endif
                             </select>
@@ -132,14 +127,6 @@
                             <x-form.label label="Department" required />
                             <select wire:model.live="department" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                                 <option value="">-- Pilih --</option>
-
-                                {{-- Hidden option jika department dari DB tidak ada di list --}}
-                                @if($department && $entity_type==="contractor" && !collect($custodian)->pluck('Departemen.department_name')->contains($department))
-                                <option value="{{ $department }}" selected hidden>{{ $department }}</option>
-                                @endif
-                                @if($department && $entity_type==="owner" && !collect($deptGroup)->pluck('Departemen.department_name')->contains($department))
-                                <option value="{{ $department }}" selected hidden>{{ $department }}</option>
-                                @endif
 
                                 @if($entity_type ==="contractor")
                                 @foreach ($custodian as $cust)
