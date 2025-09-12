@@ -198,6 +198,7 @@ class Index extends Component
                         'manpower'         => $this->manpower[$key],
                     ]
                 );
+                $this->close_modal();
             }
         }
 

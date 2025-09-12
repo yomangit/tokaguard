@@ -129,13 +129,13 @@
                                 <option value="">-- Pilih --</option>
                                 @if($entity_type === "contractor")
                                 @foreach ($custodian as $cust)
-                                <option value="{{ $cust->Departemen->department_name }}" @selected($department===$cust->Departemen->department_name)>
+                                <option value="{{ $cust->Departemen->department_name }}" @selected(strtolower(trim($department))===strtolower(trim($cust->Departemen->department_name)))>
                                     {{ $cust->Departemen->department_name }}
                                 </option>
                                 @endforeach
                                 @else
                                 @foreach ($deptGroup as $dg)
-                                <option value="{{ $dg->Departemen->department_name }}" @selected($department===$dg->Departemen->department_name)>
+                                <option value="{{ $dg->Departemen->department_name }}" @selected(strtolower(trim($department))===strtolower(trim($dg->Departemen->department_name)))>
                                     {{ $dg->Departemen->department_name }}
                                 </option>
                                 @endforeach
