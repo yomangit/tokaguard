@@ -83,6 +83,8 @@ class Index extends Component
             $this->company     = $data->company;
             $this->department  = $data->department;
             $this->dept_group  = $data->dept_group;
+            $this->updatedCompany();
+            $this->updatedDepartment();
             // reset dulu
             foreach ($this->jobclasses as $key => $label) {
                 $this->hide[$key]     = true;
