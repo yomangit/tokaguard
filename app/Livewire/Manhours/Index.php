@@ -109,7 +109,7 @@ class Index extends Component
                 }
             }
         }
-        $this->reset();
+       
     }
     public function close_modal()
     {
