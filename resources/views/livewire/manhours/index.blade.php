@@ -139,46 +139,46 @@
                         {{-- Supervisor --}}
                         <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
                             <legend class="text-sm font-semibold">Supervisor</legend>
-                            <div>
+                            <fieldset class="fieldset">
                                 <x-form.label label="Manhours" required />
                                 <input type="number" wire:model.live="manhours_supervisor" placeholder="Masukkan manhours..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
                                 <x-label-error :messages="$errors->get('manhours_supervisor')" />
-                            </div>
-                            <div class="mt-2">
+                            </fieldset>
+                            <fieldset class="fieldset mt-2">
                                 <x-form.label label="Manpower" required />
                                 <input type="number" wire:model.live="manpower_supervisor" placeholder="Masukkan manpower..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
                                 <x-label-error :messages="$errors->get('manpower_supervisor')" />
-                            </div>
+                            </fieldset>
                         </fieldset>
 
                         {{-- Operational --}}
                         <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
                             <legend class="text-sm font-semibold">Operational</legend>
-                            <div>
+                            <fieldset class="fieldset">
                                 <x-form.label label="Manhours" required />
                                 <input type="number" wire:model.live="manhours_operational" placeholder="Masukkan manhours..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
                                 <x-label-error :messages="$errors->get('manhours_operational')" />
-                            </div>
-                            <div class="mt-2">
+                            </fieldset>
+                            <fieldset class="fieldset mt-2">
                                 <x-form.label label="Manpower" required />
                                 <input type="number" wire:model.live="manpower_operational" placeholder="Masukkan manpower..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
                                 <x-label-error :messages="$errors->get('manpower_operational')" />
-                            </div>
+                            </fieldset>
                         </fieldset>
 
                         {{-- Administration --}}
                         <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
                             <legend class="text-sm font-semibold">Administration</legend>
-                            <div>
+                            <fieldset class="fieldset">
                                 <x-form.label label="Manhours" required />
                                 <input type="number" wire:model.live="manhours_administration" placeholder="Masukkan manhours..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
                                 <x-label-error :messages="$errors->get('manhours_administration')" />
-                            </div>
-                            <div class="mt-2">
+                            </fieldset>
+                            <fieldset class="fieldset mt-2">
                                 <x-form.label label="Manpower" required />
                                 <input type="number" wire:model.live="manpower_administration" placeholder="Masukkan manpower..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
                                 <x-label-error :messages="$errors->get('manpower_administration')" />
-                            </div>
+                            </fieldset>
                         </fieldset>
                     </div>
                 </fieldset>
