@@ -21,6 +21,7 @@ class Index extends Component
     public $custodian = [];
     public $deptGroup = [];
     public $selectedId = null;
+    public $confirmingDelete = false;
     // input umum
     public $date;
     public $entity_type;
@@ -219,6 +220,37 @@ class Index extends Component
     public function update($id)
     {
         $this->saveManhours('update', $id);
+    }
+    // Saat tombol hapus ditekan
+    public function showDelete($id)
+    {
+        $this->selectedId = $id;
+        $this->confirmingDelete = true; // buka modal konfirmasi
+    }
+
+    // Proses hapus data
+    public function delete()
+    {
+        if ($this->selectedId) {
+            Manhour::findOrFail($this->selectedId)->delete();
+
+            // reset
+            $this->selectedId = null;
+            $this->confirmingDelete = false;
+
+            // opsional: emit event untuk notifikasi / refresh tabel
+            $this->dispatch(
+                'alert',
+                [
+                    'text' => "Data berhasil di hapus!!!",
+                    'duration' => 5000,
+                    'destination' => '/contact',
+                    'newWindow' => true,
+                    'close' => true,
+                    'backgroundColor' => "linear-gradient(to right, #ff3333, #ff6666)",
+                ]
+            );
+        }
     }
     public function paginationView()
     {

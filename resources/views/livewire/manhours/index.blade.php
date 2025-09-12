@@ -187,6 +187,18 @@
                 </form>
             </div>
         </div>
+        {{-- Modal konfirmasi --}}
+        <flux:modal name="delete-bu" wire:model="confirmingDelete">
+            <div class="p-4 space-y-4">
+                <h2 class="text-lg font-semibold">Konfirmasi Hapus</h2>
+                <p>Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak bisa dibatalkan.</p>
+
+                <div class="flex justify-end gap-2">
+                    <flux:button wire:click="$set('confirmingDelete', false)" variant="subtle">Batal</flux:button>
+                    <flux:button wire:click="delete" variant="danger">Hapus</flux:button>
+                </div>
+            </div>
+        </flux:modal>
     </x-manhours.layout>
 
 
