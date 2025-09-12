@@ -133,6 +133,7 @@
                             @endif
                             <x-label-error :messages="$errors->get('department')" />
                         </fieldset>
+                        {{ $dept_group }}
                         {{-- Job Class --}}
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {{-- Supervisor --}}

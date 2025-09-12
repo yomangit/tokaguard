@@ -18,34 +18,29 @@ class Index extends Component
     public $modalOpen;
     public $custodian = [];
     public $deptGroup = [];
-
+    // input umum
     #[Validate('required|date')]
     public $date;
-
     #[Validate('required|string')]
     public $entity_type;
-
     #[Validate('required|string')]
     public $company;
-
     #[Validate('required|string')]
     public $department;
-
+    public $dept_group;
+    // input Supervisor
     #[Validate('required|numeric')]
     public $manhours_supervisor;
-
     #[Validate('required|numeric')]
     public $manpower_supervisor;
-
+    // input Operational
     #[Validate('required|numeric')]
     public $manhours_operational;
-
     #[Validate('required|numeric')]
     public $manpower_operational;
-
+    // input Administration
     #[Validate('required|numeric')]
     public $manhours_administration;
-
     #[Validate('required|numeric')]
     public $manpower_administration;
 
@@ -95,7 +90,10 @@ class Index extends Component
             $this->reset('department');
         }
     }
-
+    public function updatedDepartment(){
+        $dept_id = Department::where('department_name', 'LIKE', $this->department)->value('id') ?? null;
+        $this->dept_group = Department_group::where('department_id',$dept_id)->first()->Group->group_name;
+    }
     public function render()
     {
 
@@ -110,9 +108,36 @@ class Index extends Component
     {
         $this->validate();
         $bulan = Carbon::createFromFormat('m-Y', $this->date)->startOfMonth();
+        $data = [
+            [
+                'job_class' => 'Supervisor',
+                'manhours'  => $this->manhours_supervisor,
+                'manpower'  => $this->manpower_supervisor,
+            ],
+            [
+                'job_class' => 'Operational',
+                'manhours'  => $this->manhours_operational,
+                'manpower'  => $this->manpower_operational,
+            ],
+            [
+                'job_class' => 'Administration',
+                'manhours'  => $this->manhours_administration,
+                'manpower'  => $this->manpower_administration,
+            ],
+        ];
 
-        dd($bulan->format('Y/m/d'));
-
+        foreach ($data as $row) {
+            Manhour::create([
+                'date'             => $bulan->format('Y/m/d'),
+                'company_category' => $this->company_category,
+                'company'          => $this->company,
+                'department'       => $this->department,
+                'dept_group'       => $this->dept_group,
+                'job_class'        => $row['job_class'],
+                'manhours'         => $row['manhours'],
+                'manpower'         => $row['manpower'],
+            ]);
+        }
         $this->dispatch(
             'alert',
             [
