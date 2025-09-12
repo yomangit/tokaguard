@@ -21,8 +21,8 @@ default => 'fixed m-0 p-8 max-h-dvh min-h-dvh md:[:where(&)]:min-w-[25rem] overf
 'bare' => '',
 })
 ->add(match ($variant) {
-default => 'bg-white dark:bg-base-300 border border-transparent dark:border-zinc-700',
-'flyout' => 'bg-white dark:bg-base-300 border-transparent dark:border-zinc-700',
+default => 'bg-base-300 border-zinc-700',
+'flyout' => 'bg-base-300 border-zinc-700',
 'bare' => 'bg-transparent',
 });
 
