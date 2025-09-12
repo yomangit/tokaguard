@@ -83,6 +83,7 @@ class Index extends Component
             $this->company     = $data->company;
             $this->department  = $data->department;
             $this->dept_group  = $data->dept_group;
+            dd($this->entity_type, $this->department, $this->deptGroup, $this->custodian);
 
             // reset dulu
             foreach ($this->jobclasses as $key => $label) {
