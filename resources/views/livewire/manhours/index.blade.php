@@ -106,11 +106,11 @@
                             <select wire:model.live="company" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                                 <option value="">-- Pilih --</option>
 
-                                {{-- Hidden option agar tetap muncul kalau value dari DB tidak ada di list --}}
-                                @if($company && $entity_type==="owner" && !collect($bu)->pluck('company_name')->contains($company))
+                                {{-- Jika value dari DB tidak ada di daftar, tampilkan hidden option supaya tetap terpilih --}}
+                                @if($company && !collect($bu)->pluck('company_name')->contains($company) && $entity_type==="owner")
                                 <option value="{{ $company }}" selected hidden>{{ $company }}</option>
                                 @endif
-                                @if($company && $entity_type==="contractor" && !collect($cont)->pluck('contractor_name')->contains($company))
+                                @if($company && !collect($cont)->pluck('contractor_name')->contains($company) && $entity_type==="contractor")
                                 <option value="{{ $company }}" selected hidden>{{ $company }}</option>
                                 @endif
 
@@ -127,14 +127,13 @@
                             <x-label-error :messages="$errors->get('company')" />
                         </fieldset>
 
-
                         {{-- Departemen --}}
                         <fieldset class="fieldset">
                             <x-form.label label="Department" required />
                             <select wire:model.live="department" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                                 <option value="">-- Pilih --</option>
 
-                                {{-- Hidden option agar tetap muncul kalau value dari DB tidak ada di list --}}
+                                {{-- Hidden option jika department dari DB tidak ada di list --}}
                                 @if($department && $entity_type==="contractor" && !collect($custodian)->pluck('Departemen.department_name')->contains($department))
                                 <option value="{{ $department }}" selected hidden>{{ $department }}</option>
                                 @endif
@@ -154,7 +153,6 @@
                             </select>
                             <x-label-error :messages="$errors->get('department')" />
                         </fieldset>
-
 
                         {{-- Job Class --}}
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">

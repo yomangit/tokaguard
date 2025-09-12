@@ -71,7 +71,7 @@ class Index extends Component
     }
     public function open_modal($id = null)
     {
-        $this->modalOpen = 'modal-open';
+        $this->resetValidation();
 
         if ($id) {
             $this->selectedId = $id;
@@ -82,30 +82,27 @@ class Index extends Component
             $this->company     = $data->company;
             $this->department  = $data->department;
             $this->dept_group  = $data->dept_group;
-
-            // reset dulu
-            foreach ($this->jobclasses as $key => $label) {
-                $this->hide[$key]     = true;
-                $this->manhours[$key] = null;
-                $this->manpower[$key] = null;
-            }
-
-            // isi sesuai data yg ada di DB
-            $manhoursData = Manhour::where('date', $data->date)
-                ->where('company', $data->company)
-                ->where('department', $data->department)
-                ->where('dept_group', $data->dept_group)
-                ->get();
-
-            foreach ($manhoursData as $row) {
-                $key = array_search($row->job_class, $this->jobclasses);
-                if ($key !== false) {
-                    $this->hide[$key]     = false;
-                    $this->manhours[$key] = $row->manhours;
-                    $this->manpower[$key] = $row->manpower;
-                }
-            }
+            // 🔹 tambahkan ini supaya opsi perusahaan & departemen muncul
+            $this->updatedCompany();
+            $this->updatedDepartment();
+            // isi jobclass sesuai data yang ada
+            $this->manhours[$data->job_class]  = $data->manhours;
+            $this->manpower[$data->job_class]  = $data->manpower;
+        } else {
+            $this->reset([
+                'date',
+                'entity_type',
+                'company',
+                'department',
+                'dept_group',
+                'manhours',
+                'manpower',
+                'hide',
+                'selectedId'
+            ]);
         }
+
+        $this->modalOpen = 'modal-open';
     }
 
     public function close_modal()
