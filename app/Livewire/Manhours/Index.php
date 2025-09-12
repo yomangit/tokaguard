@@ -13,9 +13,11 @@ use App\Models\BusinessUnit;
 use Matrix\Operators\Division;
 use App\Models\Department_group;
 use Livewire\Attributes\Validate;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
     public $modalOpen;
     public $custodian = [];
     public $deptGroup = [];
