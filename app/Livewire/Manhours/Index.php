@@ -16,37 +16,65 @@ use Matrix\Operators\Division;
 class Index extends Component
 {
     public $modalOpen;
-    public $date;
-    public $entity_type;
-    public $company;
-    public $department;
-    public $custodian=[];
-    public $deptGroup=[];
+    public $custodian = [];
+    public $deptGroup = [];
 
-    // input Supervisor
+    #[Validate('required|date')]
+    public $date;
+
+    #[Validate('required|string')]
+    public $entity_type;
+
+    #[Validate('required|string')]
+    public $company;
+
+    #[Validate('required|string')]
+    public $department;
+
+    #[Validate('required|numeric')]
     public $manhours_supervisor;
+
+    #[Validate('required|numeric')]
     public $manpower_supervisor;
 
-    // input Operational
+    #[Validate('required|numeric')]
     public $manhours_operational;
+
+    #[Validate('required|numeric')]
     public $manpower_operational;
 
-    // input Administration
+    #[Validate('required|numeric')]
     public $manhours_administration;
+
+    #[Validate('required|numeric')]
     public $manpower_administration;
 
-    protected $rules = [
-        'date' => 'required',
-        'entity_type' => 'required|string',
-        'company' => 'required|string',
-        'department' => 'required|string',
+    // 🔹 Custom messages
+    protected $messages = [
+        'date.required' => 'Tanggal wajib diisi.',
+        'date.date' => 'Format tanggal tidak valid.',
 
-        'manhours_supervisor' => 'required|numeric',
-        'manpower_supervisor' => 'required|numeric',
-        'manhours_operational' => 'required|numeric',
-        'manpower_operational' => 'required|numeric',
-        'manhours_administration' => 'required|numeric',
-        'manpower_administration' => 'required|numeric',
+        'entity_type.required' => 'Tipe entitas wajib dipilih.',
+        'company.required' => 'Perusahaan wajib diisi.',
+        'department.required' => 'Departemen wajib diisi.',
+
+        'manhours_supervisor.required' => 'Manhours Supervisor wajib diisi.',
+        'manhours_supervisor.numeric'  => 'Manhours Supervisor harus berupa angka.',
+
+        'manpower_supervisor.required' => 'Manpower Supervisor wajib diisi.',
+        'manpower_supervisor.numeric'  => 'Manpower Supervisor harus berupa angka.',
+
+        'manhours_operational.required' => 'Manhours Operational wajib diisi.',
+        'manhours_operational.numeric'  => 'Manhours Operational harus berupa angka.',
+
+        'manpower_operational.required' => 'Manpower Operational wajib diisi.',
+        'manpower_operational.numeric'  => 'Manpower Operational harus berupa angka.',
+
+        'manhours_administration.required' => 'Manhours Administration wajib diisi.',
+        'manhours_administration.numeric'  => 'Manhours Administration harus berupa angka.',
+
+        'manpower_administration.required' => 'Manpower Administration wajib diisi.',
+        'manpower_administration.numeric'  => 'Manpower Administration harus berupa angka.',
     ];
     public function open_modal()
     {
@@ -60,12 +88,10 @@ class Index extends Component
     {
         if ($this->entity_type === "contractor") {
             $custodian = Contractor::where('contractor_name', 'LIKE', $this->company)->first()->id;
-            $this->custodian = Custodian::where('contractor_id','LIKE', $custodian)->get();
-        } 
-        elseif ($this->entity_type === "owner") {
+            $this->custodian = Custodian::where('contractor_id', 'LIKE', $custodian)->get();
+        } elseif ($this->entity_type === "owner") {
             $this->deptGroup = Department_group::get();
-        }
-        else {
+        } else {
             $this->reset('department');
         }
     }

@@ -86,6 +86,7 @@
                             <option value="contractor">Kontraktor</option>
 
                         </select>
+                        
                         <x-label-error :messages="$errors->get('entity_type')" />
                     </fieldset>
 
