@@ -19,7 +19,7 @@ class Index extends Component
     public $custodian = [];
     public $deptGroup = [];
     // input umum
-    #[Validate('required|date')]
+    #[Validate('required')]
     public $date;
     #[Validate('required|string')]
     public $entity_type;
@@ -47,7 +47,6 @@ class Index extends Component
     // 🔹 Custom messages
     protected $messages = [
         'date.required' => 'Tanggal wajib diisi.',
-        'date.date' => 'Format tanggal tidak valid.',
 
         'entity_type.required' => 'Tipe entitas wajib dipilih.',
         'company.required' => 'Perusahaan wajib diisi.',
@@ -90,9 +89,10 @@ class Index extends Component
             $this->reset('department');
         }
     }
-    public function updatedDepartment(){
+    public function updatedDepartment()
+    {
         $dept_id = Department::where('department_name', 'LIKE', $this->department)->value('id') ?? null;
-        $this->dept_group = Department_group::where('department_id',$dept_id)->first()->Group->group_name;
+        $this->dept_group = Department_group::where('department_id', $dept_id)->first()->Group->group_name;
     }
     public function render()
     {
@@ -107,6 +107,11 @@ class Index extends Component
     public function store()
     {
         $this->validate();
+        if ($this->entity_type === "contractor") {
+            $company_category = 'Contractor';
+        } else {
+            $company_category = 'PT. Archi Indonesia';
+        }
         $bulan = Carbon::createFromFormat('m-Y', $this->date)->startOfMonth();
         $data = [
             [
@@ -129,7 +134,7 @@ class Index extends Component
         foreach ($data as $row) {
             Manhour::create([
                 'date'             => $bulan->format('Y/m/d'),
-                'company_category' => $this->company_category,
+                'company_category' => $company_category,
                 'company'          => $this->company,
                 'department'       => $this->department,
                 'dept_group'       => $this->dept_group,
