@@ -3,7 +3,6 @@
 namespace App\Livewire\Manhours;
 
 use Carbon\Carbon;
-use App\Mail\TestMail;
 use App\Models\Company;
 use App\Models\Manhour;
 use Livewire\Component;
@@ -13,7 +12,7 @@ use App\Models\Department;
 use App\Models\BusinessUnit;
 use Livewire\WithPagination;
 use App\Models\Department_group;
-use Illuminate\Support\Facades\Mail;
+use App\Services\GraphMailService;
 
 class Index extends Component
 {
@@ -111,32 +110,31 @@ class Index extends Component
                 }
             }
         }
-       
     }
-public function close_modal()
-{
-    // Tutup modal
-    $this->reset('modalOpen', 'selectedId');
+    public function close_modal()
+    {
+        // Tutup modal
+        $this->reset('modalOpen', 'selectedId');
 
-    // Reset semua input form ke default
-    $this->reset([
-        'date',
-        'entity_type',
-        'company',
-        'department',
-        'dept_group',
-        'manhours',
-        'manpower',
-        'hide',
-    ]);
+        // Reset semua input form ke default
+        $this->reset([
+            'date',
+            'entity_type',
+            'company',
+            'department',
+            'dept_group',
+            'manhours',
+            'manpower',
+            'hide',
+        ]);
 
-    // Kalau perlu reset array jobclass manual
-    foreach ($this->jobclasses as $key => $label) {
-        $this->hide[$key]     = true;
-        $this->manhours[$key] = null;
-        $this->manpower[$key] = null;
+        // Kalau perlu reset array jobclass manual
+        foreach ($this->jobclasses as $key => $label) {
+            $this->hide[$key]     = true;
+            $this->manhours[$key] = null;
+            $this->manpower[$key] = null;
+        }
     }
-}
 
 
     public function updatedCompany()
@@ -226,9 +224,14 @@ public function close_modal()
             }
         }
 
-         Mail::to('Yoman.Banea@archimining.com')->send(new TestMail());
+        $graphMail = new GraphMailService();
 
-   
+        $graphMail->sendMail(
+            from: 'yoman.banea@archimining.com',
+            to: 'penerima@domain.com',
+            subject: 'Test Email via Microsoft Graph API',
+            body: '<h1>Halo!</h1><p>Email ini dikirim via Graph API Laravel.</p>'
+        );
 
         $this->dispatch('alert', [
             'text'            => $mode === 'create' ? "Data berhasil di input!!!" : "Data berhasil diperbarui!!!",
