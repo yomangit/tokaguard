@@ -16,10 +16,10 @@ class Department_group extends Model
 
     public function Departemen()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Department::class,'department_id');
     }
     public function Group()
     {
-        return $this->belongsTo(Group::class);
+        return $this->belongsTo(Group::class,'group_id');
     }
 }
