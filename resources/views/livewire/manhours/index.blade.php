@@ -27,9 +27,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                  @foreach ($manhours as $no => $manhour)
-                        <tr>
-                          <th>{{ $manhours->firstItem() + $no }}</th>
+                    @foreach ($manhours as $no => $manhour)
+                    <tr>
+                        <th>{{ $manhours->firstItem() + $no }}</th>
                         <td>{{ $manhour->date }}</td>
                         <td>{{ $manhour->company_category }}</td>
                         <td>{{ $manhour->company }}</td>
@@ -38,7 +38,7 @@
                         <td>{{ $manhour->job_class }}</td>
                         <td>{{ $manhour->manhours }}</td>
                         <td>{{ $manhour->manpower }}</td>
-                       <th class='flex justify-center flex-row gap-2'>
+                        <th class='flex justify-center flex-row gap-2'>
                             <flux:tooltip content="edit" position="top">
                                 <flux:button wire:click="open_modal({{ $manhour->id }})" size="xs" icon="pencil-square" variant="subtle"></flux:button>
                             </flux:tooltip>
@@ -49,14 +49,14 @@
                             </flux:modal.trigger>
                         </th>
                     </tr>
-                  @endforeach
-                   
+                    @endforeach
+
                 </tbody>
             </table>
         </div>
-      <div class="mt-4">{{ $manhours->links() }}</div>
+        <div class="mt-4">{{ $manhours->links() }}</div>
         <div class="modal {{ $modalOpen }}">
-           <div class="modal-box max-w-4xl w-11/12 max-h-[90vh] md:max-h-[85vh] lg:max-h-[80vh] overflow-y-auto">
+            <div class="modal-box max-w-4xl w-11/12 max-h-[90vh] md:max-h-[85vh] lg:max-h-[80vh] overflow-y-auto">
                 <form wire:submit.prevent="store">
                     <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border p-4 overflow-y-auto">
                         <legend class="fieldset-legend">Form Input Manhours & Manpower</legend>
@@ -86,7 +86,7 @@
                             </div>
                             <x-label-error :messages="$errors->get('date')" />
                         </fieldset>
-    
+
                         {{-- Kategori Perusahaan --}}
                         <fieldset class="fieldset">
                             <x-form.label label="Jenis Entitas" required />
@@ -94,17 +94,17 @@
                                 <option value="">-- Pilih --</option>
                                 <option value="owner">Perusahaan (Owner)</option>
                                 <option value="contractor">Kontraktor</option>
-    
+
                             </select>
-    
+
                             <x-label-error :messages="$errors->get('entity_type')" />
                         </fieldset>
-    
+
                         {{-- Perusahaan --}}
                         <fieldset class="fieldset">
                             <x-form.label label="perusahaan" required />
                             <select wire:model.live="company" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
-    
+
                                 @if ($entity_type==="owner")
                                 <option value="">-- Pilih --</option>
                                 @foreach ($bu as $company)
@@ -118,7 +118,7 @@
                                 @else
                                 <option value="">-- Pilih --</option>
                                 @endif
-    
+
                             </select>
                             <x-label-error :messages="$errors->get('company')" />
                         </fieldset>
@@ -146,7 +146,13 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {{-- Supervisor --}}
                             <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
-                                <legend class="text-sm font-semibold">Supervisor</legend>
+                                <legend class="text-sm font-semibold">
+                                    Supervisor
+                                    <label class="flex items-center space-x-1">
+                                        <input type="checkbox" wire:model.live="showOnlySelected" class="checkbox checkbox-xs">
+                                        <span class="text-xs">Hanya terpilih</span>
+                                    </label>
+                                </legend>
                                 <fieldset class="fieldset">
                                     <x-form.label label="Manhours" required />
                                     <input type="number" wire:model.live="manhours_supervisor" placeholder="Masukkan manhours..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
@@ -158,7 +164,7 @@
                                     <x-label-error :messages="$errors->get('manpower_supervisor')" />
                                 </fieldset>
                             </fieldset>
-    
+
                             {{-- Operational --}}
                             <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
                                 <legend class="text-sm font-semibold">Operational</legend>
@@ -173,7 +179,7 @@
                                     <x-label-error :messages="$errors->get('manpower_operational')" />
                                 </fieldset>
                             </fieldset>
-    
+
                             {{-- Administration --}}
                             <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
                                 <legend class="text-sm font-semibold">Administration</legend>
@@ -190,7 +196,7 @@
                             </fieldset>
                         </div>
                     </fieldset>
-    
+
                     {{-- Tombol Aksi --}}
                     <div class="flex justify-end gap-2 mt-4">
                         <flux:button size="xs" variant="danger" wire:click="$set('modalOpen', false)">Batal</flux:button>

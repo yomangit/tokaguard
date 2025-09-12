@@ -32,9 +32,9 @@ class Index extends Component
     public $department;
     public $dept_group;
     // input Supervisor
-    #[Validate('required|numeric')]
+    #[Validate('nullable|numeric')]
     public $manhours_supervisor;
-    #[Validate('required|numeric')]
+    #[Validate('nullable|numeric')]
     public $manpower_supervisor;
     // input Operational
     #[Validate('required|numeric')]
@@ -42,9 +42,9 @@ class Index extends Component
     #[Validate('required|numeric')]
     public $manpower_operational;
     // input Administration
-    #[Validate('required|numeric')]
+    #[Validate('nullable|numeric')]
     public $manhours_administration;
-    #[Validate('required|numeric')]
+    #[Validate('nullable|numeric')]
     public $manpower_administration;
 
     // 🔹 Custom messages
@@ -55,10 +55,10 @@ class Index extends Component
         'company.required' => 'Perusahaan wajib diisi.',
         'department.required' => 'Departemen wajib diisi.',
 
-        'manhours_supervisor.required' => 'Manhours Supervisor wajib diisi.',
+        'manhours_supervisor.nullable' => 'Manhours Supervisor wajib diisi.',
         'manhours_supervisor.numeric'  => 'Manhours Supervisor harus berupa angka.',
 
-        'manpower_supervisor.required' => 'Manpower Supervisor wajib diisi.',
+        'manpower_supervisor.nullable' => 'Manpower Supervisor wajib diisi.',
         'manpower_supervisor.numeric'  => 'Manpower Supervisor harus berupa angka.',
 
         'manhours_operational.required' => 'Manhours Operational wajib diisi.',
@@ -67,10 +67,10 @@ class Index extends Component
         'manpower_operational.required' => 'Manpower Operational wajib diisi.',
         'manpower_operational.numeric'  => 'Manpower Operational harus berupa angka.',
 
-        'manhours_administration.required' => 'Manhours Administration wajib diisi.',
+        'manhours_administration.nullable' => 'Manhours Administration wajib diisi.',
         'manhours_administration.numeric'  => 'Manhours Administration harus berupa angka.',
 
-        'manpower_administration.required' => 'Manpower Administration wajib diisi.',
+        'manpower_administration.nullable' => 'Manpower Administration wajib diisi.',
         'manpower_administration.numeric'  => 'Manpower Administration harus berupa angka.',
     ];
     public function open_modal()
