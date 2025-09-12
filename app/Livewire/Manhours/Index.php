@@ -111,10 +111,31 @@ class Index extends Component
         }
        
     }
-    public function close_modal()
-    {
-        $this->reset('modalOpen');
+public function close_modal()
+{
+    // Tutup modal
+    $this->reset('modalOpen', 'selectedId');
+
+    // Reset semua input form ke default
+    $this->reset([
+        'date',
+        'entity_type',
+        'company',
+        'department',
+        'dept_group',
+        'manhours',
+        'manpower',
+        'hide',
+    ]);
+
+    // Kalau perlu reset array jobclass manual
+    foreach ($this->jobclasses as $key => $label) {
+        $this->hide[$key]     = true;
+        $this->manhours[$key] = null;
+        $this->manpower[$key] = null;
     }
+}
+
 
     public function updatedCompany()
     {
