@@ -144,57 +144,33 @@
                         </fieldset>
                         {{-- Job Class --}}
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {{-- Supervisor --}}
+                            @foreach($jobclasses as $key => $label)
                             <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
                                 <legend class="text-xs font-semibold flex gap-2">
-                                   <span> Supervisor</span>
+                                    <span>{{ $label }}</span>
                                     <label class="flex items-center space-x-1">
-                                        <input type="checkbox" wire:model.live="showOnlySelected" class="checkbox checkbox-xs">
-                                        <span class="text-[8px] text-rose-500 capitalize">tidak ada Supervisor</span>
+                                        <input type="checkbox" wire:model.live="hide.{{ $key }}" class="checkbox checkbox-xs">
+                                        <span class="text-[8px] text-rose-500 capitalize">tidak ada {{ $label }}</span>
                                     </label>
                                 </legend>
-                                <fieldset class="fieldset">
-                                    <x-form.label label="Manhours" required />
-                                    <input type="number" wire:model.live="manhours_supervisor" placeholder="Masukkan manhours..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
-                                    <x-label-error :messages="$errors->get('manhours_supervisor')" />
-                                </fieldset>
-                                <fieldset class="fieldset mt-2">
-                                    <x-form.label label="Manpower" required />
-                                    <input type="number" wire:model.live="manpower_supervisor" placeholder="Masukkan manpower..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
-                                    <x-label-error :messages="$errors->get('manpower_supervisor')" />
-                                </fieldset>
-                            </fieldset>
 
-                            {{-- Operational --}}
-                            <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
-                                <legend class="text-sm font-semibold">Operational</legend>
+                                {{-- Manhours --}}
                                 <fieldset class="fieldset">
-                                    <x-form.label label="Manhours" required />
-                                    <input type="number" wire:model.live="manhours_operational" placeholder="Masukkan manhours..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
-                                    <x-label-error :messages="$errors->get('manhours_operational')" />
+                                    <x-form.label label="Manhours" :required="!$hide[$key]" />
+                                    <input type="number" wire:model.live="manhours.{{ $key }}" placeholder="Masukkan manhours..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" @disabled($hide[$key]) />
+                                    <x-label-error :messages="$errors->get('manhours.'.$key)" />
                                 </fieldset>
-                                <fieldset class="fieldset mt-2">
-                                    <x-form.label label="Manpower" required />
-                                    <input type="number" wire:model.live="manpower_operational" placeholder="Masukkan manpower..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
-                                    <x-label-error :messages="$errors->get('manpower_operational')" />
-                                </fieldset>
-                            </fieldset>
 
-                            {{-- Administration --}}
-                            <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
-                                <legend class="text-sm font-semibold">Administration</legend>
-                                <fieldset class="fieldset">
-                                    <x-form.label label="Manhours" required />
-                                    <input type="number" wire:model.live="manhours_administration" placeholder="Masukkan manhours..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
-                                    <x-label-error :messages="$errors->get('manhours_administration')" />
-                                </fieldset>
+                                {{-- Manpower --}}
                                 <fieldset class="fieldset mt-2">
-                                    <x-form.label label="Manpower" required />
-                                    <input type="number" wire:model.live="manpower_administration" placeholder="Masukkan manpower..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" />
-                                    <x-label-error :messages="$errors->get('manpower_administration')" />
+                                    <x-form.label label="Manpower" :required="!$hide[$key]" />
+                                    <input type="number" wire:model.live="manpower.{{ $key }}" placeholder="Masukkan manpower..." class="input input-bordered w-full input-xs focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden" @disabled($hide[$key]) />
+                                    <x-label-error :messages="$errors->get('manpower.'.$key)" />
                                 </fieldset>
                             </fieldset>
+                            @endforeach
                         </div>
+
                     </fieldset>
 
                     {{-- Tombol Aksi --}}
