@@ -150,7 +150,7 @@
                                    <span> Supervisor</span>
                                     <label class="flex items-center space-x-1">
                                         <input type="checkbox" wire:model.live="showOnlySelected" class="checkbox checkbox-xs">
-                                        <span class="text-[9px]">Hanya terpilih</span>
+                                        <span class="text-[8px] text-rose-500 capitalize">tidak ada Supervisor</span>
                                     </label>
                                 </legend>
                                 <fieldset class="fieldset">
