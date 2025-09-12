@@ -47,7 +47,7 @@
             </table>
         </div>
         <div class="modal {{ $modalOpen }}">
-            <div class="modal-box ">
+           <div class="modal-box max-w-4xl w-11/12 max-h-[90vh] md:max-h-[85vh] lg:max-h-[80vh] overflow-y-auto">
                 <form wire:submit.prevent="store">
                     <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border p-4 overflow-y-auto">
                         <legend class="fieldset-legend">Form Input Manhours & Manpower</legend>
