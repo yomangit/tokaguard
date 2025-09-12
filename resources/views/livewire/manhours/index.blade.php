@@ -27,9 +27,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($manhours as $no => $manhour)
+                    @foreach ($data_manhours as $no => $manhour)
                     <tr>
-                        <th>{{ $manhours->firstItem() + $no }}</th>
+                        <th>{{ $data_manhours->firstItem() + $no }}</th>
                         <td>{{ $manhour->date }}</td>
                         <td>{{ $manhour->company_category }}</td>
                         <td>{{ $manhour->company }}</td>
@@ -54,7 +54,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="mt-4">{{ $manhours->links() }}</div>
+        <div class="mt-4">{{ $data_manhours->links() }}</div>
         <div class="modal {{ $modalOpen }}">
             <div class="modal-box max-w-4xl w-11/12 max-h-[90vh] md:max-h-[85vh] lg:max-h-[80vh] overflow-y-auto">
                 <form wire:submit.prevent="store">

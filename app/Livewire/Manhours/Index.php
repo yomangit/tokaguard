@@ -105,7 +105,7 @@ class Index extends Component
             'cont'      => Contractor::all(),
             'departemen'=> Department::get(),
             'Companies' => Company::get(),
-            'manhours'  => Manhour::paginate(30),
+            'data_manhours'  => Manhour::paginate(30),
         ]);
     }
 
