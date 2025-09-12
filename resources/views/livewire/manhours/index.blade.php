@@ -146,11 +146,11 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {{-- Supervisor --}}
                             <fieldset class="fieldset border border-base-300 p-3 rounded-lg">
-                                <legend class="text-sm font-semibold flex">
+                                <legend class="text-xs font-semibold flex gap-2">
                                    <span> Supervisor</span>
                                     <label class="flex items-center space-x-1">
                                         <input type="checkbox" wire:model.live="showOnlySelected" class="checkbox checkbox-xs">
-                                        <span class="text-xs">Hanya terpilih</span>
+                                        <span class="text-[9px]">Hanya terpilih</span>
                                     </label>
                                 </legend>
                                 <fieldset class="fieldset">
