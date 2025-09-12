@@ -38,7 +38,16 @@
                         <td>{{ $manhour->job_class }}</td>
                         <td>{{ $manhour->manhours }}</td>
                         <td>{{ $manhour->manpower }}</td>
-                       
+                       <th class='flex justify-center flex-row gap-2'>
+                            <flux:tooltip content="edit" position="top">
+                                <flux:button wire:click="open_modal({{ $manhour->id }})" size="xs" icon="pencil-square" variant="subtle"></flux:button>
+                            </flux:tooltip>
+                            <flux:modal.trigger name="delete-bu">
+                                <flux:tooltip content="hapus" position="top">
+                                    <flux:button wire:click="showDelete({{ $manhour->id }})" size="xs" icon="trash" variant="danger"></flux:button>
+                                </flux:tooltip>
+                            </flux:modal.trigger>
+                        </th>
                     </tr>
                   @endforeach
                    
