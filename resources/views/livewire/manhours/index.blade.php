@@ -2,7 +2,6 @@
     <x-toast />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script>
-
     @include('partials.manhours')
     <div class="flex justify-between">
         <!-- You can open the modal using ID.showModal() method -->
@@ -16,36 +15,37 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Name</th>
-                        <th>Job</th>
-                        <th>company</th>
-                        <th>location</th>
-                        <th>Last Login</th>
-                        <th>Favorite Color</th>
+                        <th>Tanggal</th>
+                        <th>Jenis Entitas</th>
+                        <th>Perusahaan</th>
+                        <th>Departemen</th>
+                        <th>Departemen Group</th>
+                        <th>Job Class</th>
+                        <th>Manhour</th>
+                        <th>Manpower</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th>1</th>
-                        <td>Cy Ganderton</td>
-                        <td>Quality Control Specialist</td>
-                        <td>Littel, Schaden and Vandervort</td>
-                        <td>Canada</td>
-                        <td>12/16/2020</td>
-                        <td>Blue</td>
+                  @foreach ($manhours as $no => $manhour)
+                        <tr>
+                          <th>{{ $manhours->firstItem() + $no }}</th>
+                        <td>{{ $manhour->date }}</td>
+                        <td>{{ $manhour->company_category }}</td>
+                        <td>{{ $manhour->company }}</td>
+                        <td>{{ $manhour->department }}</td>
+                        <td>{{ $manhour->dept_group }}</td>
+                        <td>{{ $manhour->job_class }}</td>
+                        <td>{{ $manhour->manhours }}</td>
+                        <td>{{ $manhour->manpower }}</td>
+                       
                     </tr>
-                    <tr>
-                        <th>2</th>
-                        <td>Hart Hagerty</td>
-                        <td>Desktop Support Technician</td>
-                        <td>Zemlak, Daniel and Leannon</td>
-                        <td>United States</td>
-                        <td>12/5/2020</td>
-                        <td>Purple</td>
-                    </tr>
+                  @endforeach
+                   
                 </tbody>
             </table>
         </div>
+      <div class="mt-4">{{ $manhours->links() }}</div>
         <div class="modal {{ $modalOpen }}">
            <div class="modal-box max-w-4xl w-11/12 max-h-[90vh] md:max-h-[85vh] lg:max-h-[80vh] overflow-y-auto">
                 <form wire:submit.prevent="store">

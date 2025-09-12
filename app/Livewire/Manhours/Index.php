@@ -2,16 +2,17 @@
 
 namespace App\Livewire\Manhours;
 
-use App\Models\BusinessUnit;
 use Carbon\Carbon;
 use App\Models\Company;
-use App\Models\Contractor;
-use App\Models\Custodian;
+use App\Models\Manhour;
 use Livewire\Component;
+use App\Models\Custodian;
+use App\Models\Contractor;
 use App\Models\Department;
+use App\Models\BusinessUnit;
+use Matrix\Operators\Division;
 use App\Models\Department_group;
 use Livewire\Attributes\Validate;
-use Matrix\Operators\Division;
 
 class Index extends Component
 {
@@ -102,6 +103,7 @@ class Index extends Component
             'cont' => Contractor::all(),
             'departemen' => Department::get(),
             'Companies' => Company::get(),
+            'manhours' => Manhour::get(),
         ]);
     }
     public function store()
@@ -154,5 +156,9 @@ class Index extends Component
                 'backgroundColor' => "linear-gradient(to right, #06b6d4, #22c55e)",
             ]
         );
+    }
+    public function paginationView()
+    {
+        return 'vendor.livewire.tailwind';
     }
 }
