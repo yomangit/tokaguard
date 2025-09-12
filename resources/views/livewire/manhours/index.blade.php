@@ -102,46 +102,58 @@
 
                         {{-- Perusahaan --}}
                         <fieldset class="fieldset">
-                            <x-form.label label="perusahaan" required />
+                            <x-form.label label="Perusahaan" required />
                             <select wire:model.live="company" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
+                                <option value="">-- Pilih --</option>
+
+                                {{-- Jika value dari DB tidak ada di daftar, tampilkan hidden option supaya tetap terpilih --}}
+                                @if($company && !collect($bu)->pluck('company_name')->contains($company) && $entity_type==="owner")
+                                <option value="{{ $company }}" selected hidden>{{ $company }}</option>
+                                @endif
+                                @if($company && !collect($cont)->pluck('contractor_name')->contains($company) && $entity_type==="contractor")
+                                <option value="{{ $company }}" selected hidden>{{ $company }}</option>
+                                @endif
 
                                 @if ($entity_type==="owner")
-                                <option value="">-- Pilih --</option>
-                                @foreach ($bu as $company)
-                                <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
+                                @foreach ($bu as $comp)
+                                <option value="{{ $comp->company_name }}">{{ $comp->company_name }}</option>
                                 @endforeach
                                 @elseif($entity_type==="contractor")
-                                <option value="">-- Pilih --</option>
                                 @foreach ($cont as $co)
                                 <option value="{{ $co->contractor_name }}">{{ $co->contractor_name }}</option>
                                 @endforeach
-                                @else
-                                <option value="">-- Pilih --</option>
                                 @endif
-
                             </select>
                             <x-label-error :messages="$errors->get('company')" />
                         </fieldset>
+
                         {{-- Departemen --}}
                         <fieldset class="fieldset">
-                            <x-form.label label="department" required />
-                            @if($entity_type ==="contractor")
+                            <x-form.label label="Department" required />
                             <select wire:model.live="department" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
                                 <option value="">-- Pilih --</option>
+
+                                {{-- Hidden option jika department dari DB tidak ada di list --}}
+                                @if($department && $entity_type==="contractor" && !collect($custodian)->pluck('Departemen.department_name')->contains($department))
+                                <option value="{{ $department }}" selected hidden>{{ $department }}</option>
+                                @endif
+                                @if($department && $entity_type==="owner" && !collect($deptGroup)->pluck('Departemen.department_name')->contains($department))
+                                <option value="{{ $department }}" selected hidden>{{ $department }}</option>
+                                @endif
+
+                                @if($entity_type ==="contractor")
                                 @foreach ($custodian as $cust)
                                 <option value="{{ $cust->Departemen->department_name }}">{{ $cust->Departemen->department_name }}</option>
                                 @endforeach
-                            </select>
-                            @else
-                            <select wire:model.live="department" class="select select-xs md:select-xs select-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-none">
-                                <option value="">-- Pilih --</option>
+                                @else
                                 @foreach ($deptGroup as $dg)
                                 <option value="{{ $dg->Departemen->department_name }}">{{ $dg->Departemen->department_name }}</option>
                                 @endforeach
+                                @endif
                             </select>
-                            @endif
                             <x-label-error :messages="$errors->get('department')" />
                         </fieldset>
+
                         {{-- Job Class --}}
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             @foreach($jobclasses as $key => $label)
