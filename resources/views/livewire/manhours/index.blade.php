@@ -53,7 +53,9 @@
                 <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border p-4 overflow-y-auto">
                     <legend class="fieldset-legend">Form Input Manhours & Manpower</legend>
                     {{-- Bulan --}}
-                    <fieldset class="fieldset" x-data="{
+                    <fieldset class="fieldset">
+                        <x-form.label label="Bulan" required />
+                        <div x-data="{
                             fp: null,
                             initFlatpickr() {
                                 this.fp = flatpickr(this.$refs.input, {
@@ -72,8 +74,8 @@
                                 })
                             }
                         }" x-init="initFlatpickr()" x-effect="if($wire.date) fp.setDate($wire.date, true)" wire:ignore>
-                        <x-form.label label="Bulan" required />
-                        <input x-ref="input" type="text" wire:model.live="date" class="input input-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih bulan" />
+                            <input x-ref="input" type="text" wire:model.live="date" class="input input-bordered w-full md:max-w-md focus:ring-1 focus:border-info focus:ring-info focus:outline-hidden input-xs" placeholder="Pilih bulan" />
+                        </div>
                         <x-label-error :messages="$errors->get('date')" />
                     </fieldset>
 
@@ -86,7 +88,7 @@
                             <option value="contractor">Kontraktor</option>
 
                         </select>
-                        
+
                         <x-label-error :messages="$errors->get('entity_type')" />
                     </fieldset>
 
