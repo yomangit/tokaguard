@@ -74,6 +74,7 @@ class Index extends Component
     {
 
         return view('livewire.manhours.index', [
+            'bu'   => BusinessUnit::all(),
             'cont' => Contractor::all(),
             'departemen' => Department::get(),
             'Companies' => Company::get(),
