@@ -3,6 +3,7 @@
 namespace App\Livewire\Manhours;
 
 use Carbon\Carbon;
+use App\Mail\TestMail;
 use App\Models\Company;
 use App\Models\Manhour;
 use Livewire\Component;
@@ -10,8 +11,9 @@ use App\Models\Custodian;
 use App\Models\Contractor;
 use App\Models\Department;
 use App\Models\BusinessUnit;
-use App\Models\Department_group;
 use Livewire\WithPagination;
+use App\Models\Department_group;
+use Illuminate\Support\Facades\Mail;
 
 class Index extends Component
 {
@@ -223,6 +225,10 @@ public function close_modal()
                 $this->close_modal();
             }
         }
+
+    Mail::to('penerima@domain.com')->send(new TestMail());
+
+   
 
         $this->dispatch('alert', [
             'text'            => $mode === 'create' ? "Data berhasil di input!!!" : "Data berhasil diperbarui!!!",
