@@ -130,7 +130,7 @@
                                 @if($entity_type === "contractor")
                                 @foreach ($custodian as $cust)
                                 <option value="{{ $cust->Departemen->department_name }}" @selected(strtolower(trim($department))===strtolower(trim($cust->Departemen->department_name)))>
-                                    {{ $cust->Departemen->department_name }}
+                                    {{ $cust->Departemen->department_name }}-{{ strtolower(trim($department))===strtolower(trim($cust->Departemen->department_name)) }}
                                 </option>
                                 @endforeach
                                 @else
