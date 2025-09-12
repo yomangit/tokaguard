@@ -103,7 +103,7 @@ class Index extends Component
         return view('livewire.manhours.index', [
             'bu'        => BusinessUnit::all(),
             'cont'      => Contractor::all(),
-            'departemen'=> Department::get(),
+            'departemen' => Department::get(),
             'Companies' => Company::get(),
             'data_manhours'  => Manhour::paginate(30),
         ]);
@@ -117,6 +117,10 @@ class Index extends Component
         $bulan = Carbon::createFromFormat('m-Y', $this->date)->startOfMonth();
 
         foreach ($this->jobclasses as $key => $label) {
+            // 🔹 Skip jika checkbox dicentang ATAU kedua field kosong
+            if ($this->hide[$key] || (empty($this->manhours[$key]) && empty($this->manpower[$key]))) {
+                continue;
+            }
             Manhour::create([
                 'date'             => $bulan->format('Y/m/d'),
                 'company_category' => $company_category,
