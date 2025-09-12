@@ -30,7 +30,7 @@
                     @foreach ($data_manhours as $no => $manhour)
                     <tr>
                         <th>{{ $data_manhours->firstItem() + $no }}</th>
-                        <td>{{ \Carbon\Carbon::parse($manhour->date)->translatedFormat('F Y') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($manhour->date)->translatedFormat('mm-Y') }}</td>
                         <td>{{ $manhour->company_category }}</td>
                         <td>{{ $manhour->company }}</td>
                         <td>{{ $manhour->department }}</td>
